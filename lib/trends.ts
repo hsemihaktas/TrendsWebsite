@@ -18,16 +18,10 @@ import { CATEGORY_ORDER } from '@/lib/categories';
 export const TRENDS_DIR = path.join(process.cwd(), 'content/trends');
 
 /**
- * Geçerli kategori ID'lerinin tam listesi — doğrulama için kullanılır.
+ * Geçerli kategori ID'leri — CATEGORY_ORDER'dan türetilir.
+ * Yeni kategori eklendiğinde burası otomatik güncellenir.
  */
-const VALID_CATEGORIES: readonly CategoryId[] = [
-  'modern-populer',
-  'clean-professional',
-  'bold-expressive',
-  'dark-atmospheric',
-  'retro-nostalgic',
-  'artistic-creative',
-];
+const VALID_CATEGORIES: readonly CategoryId[] = CATEGORY_ORDER;
 
 /**
  * ISO 8601 tarih formatını doğrulayan regex (YYYY-MM-DD).
