@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { CATEGORIES, CATEGORY_ORDER } from '@/lib/categories';
-import type { CategoryId } from '@/types/trend';
+import { CATEGORIES, CATEGORY_ORDER } from "@/lib/categories";
+import type { CategoryId } from "@/types/trend";
 
 interface FilterBarProps {
   activeCategory: CategoryId | null;
@@ -44,10 +44,11 @@ export default function FilterBar({
           className={`
             inline-flex items-center whitespace-nowrap rounded-full px-4 text-sm font-medium
             min-h-[44px] transition-colors duration-150
+            focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
             ${
               isAllActive
-                ? 'bg-gray-900 text-white'
-                : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                ? "bg-gray-900 text-white"
+                : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
             }
           `}
         >
@@ -69,10 +70,11 @@ export default function FilterBar({
               className={`
                 inline-flex items-center whitespace-nowrap rounded-full px-4 text-sm font-medium
                 min-h-[44px] transition-colors duration-150
+                focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2
                 ${
                   isActive
-                    ? 'bg-gray-900 text-white'
-                    : 'bg-white text-gray-700 border border-gray-300 hover:bg-gray-50'
+                    ? "bg-gray-900 text-white"
+                    : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
                 }
               `}
             >

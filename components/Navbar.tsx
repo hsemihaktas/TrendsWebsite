@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import Link from 'next/link';
+import { useState } from "react";
+import Link from "next/link";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -16,7 +16,7 @@ export default function Navbar() {
           {/* Site adı / logo */}
           <Link
             href="/"
-            className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors min-h-[44px] min-w-[44px] flex items-center"
+            className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors min-h-[44px] min-w-[44px] flex items-center rounded focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
           >
             Design Trends
           </Link>
@@ -25,7 +25,7 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-2">
             <Link
               href="/"
-              className="min-h-[44px] min-w-[44px] flex items-center px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              className="min-h-[44px] min-w-[44px] flex items-center px-3 text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
             >
               Ana Sayfa
             </Link>
@@ -36,9 +36,9 @@ export default function Navbar() {
             type="button"
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
-            aria-label={isMenuOpen ? 'Menüyü kapat' : 'Menüyü aç'}
+            aria-label={isMenuOpen ? "Menüyü kapat" : "Menüyü aç"}
             onClick={() => setIsMenuOpen((prev) => !prev)}
-            className="md:hidden min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors"
+            className="md:hidden min-h-[44px] min-w-[44px] flex items-center justify-center rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
           >
             {isMenuOpen ? (
               <svg
@@ -85,7 +85,7 @@ export default function Navbar() {
             <Link
               href="/"
               onClick={() => setIsMenuOpen(false)}
-              className="flex items-center min-h-[44px] px-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors"
+              className="flex items-center min-h-[44px] px-3 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2"
             >
               Ana Sayfa
             </Link>
