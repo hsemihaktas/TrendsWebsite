@@ -25,3 +25,56 @@ body {
     text-wrap: balance;
   }
 }
+
+/* MDX içerik prose stilleri (Requirement 10.4) */
+.mdx-content h2 {
+  @apply text-2xl font-bold text-gray-900 mt-8 mb-3;
+}
+
+.mdx-content h3 {
+  @apply text-xl font-semibold text-gray-900 mt-6 mb-2;
+}
+
+.mdx-content h4 {
+  @apply text-lg font-semibold text-gray-900 mt-4 mb-2;
+}
+
+.mdx-content p {
+  @apply text-gray-700 leading-relaxed mb-4;
+}
+
+.mdx-content ul {
+  @apply list-disc pl-6 mb-4 space-y-1;
+}
+
+.mdx-content ol {
+  @apply list-decimal pl-6 mb-4 space-y-1;
+}
+
+.mdx-content li {
+  @apply text-gray-700 leading-relaxed;
+}
+
+.mdx-content a {
+  @apply text-indigo-600 underline underline-offset-2 hover:text-indigo-800 transition-colors;
+}
+
+.mdx-content blockquote {
+  @apply border-l-4 border-gray-300 pl-4 text-gray-600 italic my-4;
+}
+
+.mdx-content code:not(pre code) {
+  @apply font-mono text-sm bg-gray-100 text-gray-800 px-1.5 py-0.5 rounded;
+}
+
+.mdx-content pre {
+  @apply rounded-lg overflow-x-auto my-6 text-sm;
+}
+
+.mdx-content hr {
+  @apply border-gray-200 my-8;
+}
+
+.mdx-content strong {
+  @apply font-semibold text-gray-900;
+}
