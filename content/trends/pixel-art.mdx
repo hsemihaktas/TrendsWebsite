@@ -117,3 +117,13 @@ export function PixelCharacter() {
 ```
 
 Bu örnekte `box-shadow` zinciri ile piksel karakter oluşturma, `imageRendering: pixelated` ile keskin ölçekleme ve `outline` ile pixel-perfect kenarlıklar gösterilmektedir. Tailwind'in `gap-1` ve `w-4 h-4` sınıfları grid disiplinini destekler.
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a retro game UI or nostalgic product page in Pixel Art style. Grid unit: 8px (all elements snap to 8px grid, no exceptions). Create pixel sprites using CSS box-shadow technique: single 8x8px div element, then chain box-shadows at grid offsets: box-shadow: 8px 0 0 #color, 16px 0 0 #color, 0 8px 0 #color — build a heart/star/character pixel by pixel. Color palette: maximum 8 colors, inspired by NES palette (red #e63946, yellow #ffd700, green #2dc653, blue #4361ee, cyan #4cc9f0, pink #f72585, white, dark navy #1a1a2e). Apply CSS property image-rendering: pixelated to any scaled elements. Typography: pixel font (Press Start 2P) or monospace at integer sizes (8px, 16px, 24px). Health/progress bars: pixelated rectangles. Background: dark game sky #1a1a2e. Ground platform: alternating color blocks. The aesthetic must look like it's running on actual 8-bit hardware.
+```
