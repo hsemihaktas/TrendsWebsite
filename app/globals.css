@@ -35,7 +35,7 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 
-/* ── MDX prose — pure CSS, NO @apply ─────────────────────── */
+/* ── MDX prose ─────────────────────────────────────────────── */
 .mdx-content > * + * { margin-top: 1.125rem; }
 
 .mdx-content h2 {
@@ -113,21 +113,24 @@ body {
   color: var(--t3);
   font-style: italic;
 }
+
+/* Inline code: NOT inside pre */
 .mdx-content code:not(pre code) {
-  font-family: 'GeistMono', 'Fira Code', 'Courier New', monospace;
+  font-family: 'ui-monospace', 'SFMono-Regular', 'Menlo', 'Consolas', monospace;
   font-size: 0.8125rem;
   background: var(--bdr);
   color: var(--t1);
-  padding: 0.125rem 0.375rem;
+  padding: 0.1rem 0.35rem;
   border-radius: 4px;
 }
+
+/* pre — CodeBlock bileşeni tarafından override edilir, ancak fallback olarak burada */
 .mdx-content pre {
-  border-radius: 8px;
+  border-radius: 0;
   overflow-x: auto;
-  margin: 1.25rem 0;
-  font-size: 0.8125rem;
-  border: 1px solid var(--bdr);
+  margin: 0;
 }
+
 .mdx-content hr {
   border: none;
   border-top: 1px solid var(--bdr);
@@ -156,21 +159,22 @@ body {
 }
 .mdx-content tr:last-child td { border-bottom: none; }
 
-/* ── Shiki multi-theme CSS variable switching ─────────────── */
-/* rehype-pretty-code ile çift tema: light → github-light, dark → github-dark-dimmed */
-code[data-theme*=" "],
+/* ── Shiki dual-theme CSS variable switching ──────────────── */
+/*
+ * rehype-pretty-code theme: { light: 'github-light', dark: 'github-dark' }
+ * Spans alır: --shiki-light, --shiki-dark, --shiki-light-bg, --shiki-dark-bg
+ * Biz background'u kendi CodeBlock bileşenimizde yönetiyoruz.
+ */
 code[data-theme*=" "] span {
   color: var(--shiki-light);
-  background-color: var(--shiki-light-bg);
 }
-
-.dark code[data-theme*=" "],
 .dark code[data-theme*=" "] span {
   color: var(--shiki-dark);
-  background-color: var(--shiki-dark-bg);
 }
 
-/* Kod içi background'u şeffaf yap (wrapper bizim bg'ımızı kullanır) */
-.mdx-content pre code {
+/* code element'in kendi inline arka planını sıfırla */
+pre code,
+pre code[data-theme] {
   background: transparent !important;
+  background-color: transparent !important;
 }

@@ -65,7 +65,7 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
 
       <div className="border-t border-[#E6E3DC] dark:border-[#2C2A27] mb-8" />
 
-      {/* MDX — CodeBlock bileşeni pre elementini override eder */}
+      {/* MDX */}
       <div className="mdx-content mb-12">
         <MDXRemote
           source={trend.rawContent}
@@ -76,12 +76,17 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
                 [
                   rehypePrettyCode,
                   {
-                    // Çift tema: CSS vars ile runtime switching
+                    /*
+                     * Çift tema → CSS vars ile runtime switching.
+                     * github-light: #fff bg, koyu syntaks renkleri
+                     * github-dark:  #0d1117 bg, açık syntaks renkleri
+                     * keepBackground: false → arka planı biz yönetiyoruz (CodeBlock)
+                     */
                     theme: {
                       light: 'github-light',
-                      dark: 'github-dark-dimmed',
+                      dark: 'github-dark',
                     },
-                    keepBackground: false, // arka planı biz yönetiyoruz
+                    keepBackground: false,
                   },
                 ],
               ],

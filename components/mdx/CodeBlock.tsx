@@ -9,6 +9,7 @@ interface CodeBlockProps extends React.HTMLAttributes<HTMLPreElement> {
 export function CodeBlock({
   children,
   'data-language': lang,
+  style,   // shiki'nin inline style'ını intercept ediyoruz
   className,
   ...props
 }: CodeBlockProps) {
@@ -21,20 +22,33 @@ export function CodeBlock({
       await navigator.clipboard.writeText(text);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
-    } catch {
-      /* clipboard API not available */
-    }
+    } catch {}
   };
 
-  return (
-    <div className="group relative my-6 rounded-xl overflow-hidden border border-[#E6E3DC] dark:border-[#2C2A27]">
+  /*
+   * shiki'nin inline background-color'ını sil, renk değişkenlerini (color vars) koru.
+   * Arka planı biz CSS ile yönetiyoruz — GitHub'ın yaptığı gibi.
+   */
+  const cleanStyle = style
+    ? (Object.fromEntries(
+        Object.entries(style).filter(([k]) => k !== 'backgroundColor' && k !== 'background')
+      ) as React.CSSProperties)
+    : undefined;
 
-      {/* ── Header bar ────────────────────────────────── */}
-      <div className="flex items-center justify-between px-4 h-9
-                      bg-[#ECEAE3] dark:bg-[#222120]
-                      border-b border-[#E6E3DC] dark:border-[#2C2A27]">
+  return (
+    <div
+      className="relative group my-5 rounded-lg overflow-hidden
+                 border border-[#d0d7de] dark:border-[#30363d]
+                 text-[13px]"
+    >
+      {/* ── GitHub-style header bar ─────────────────────── */}
+      <div
+        className="flex items-center justify-between px-4 h-10
+                   bg-[#f6f8fa] dark:bg-[#161b22]
+                   border-b border-[#d0d7de] dark:border-[#30363d]"
+      >
         {/* Language label */}
-        <span className="text-[10px] font-mono font-semibold uppercase tracking-widest text-[#A8A49C] dark:text-[#5C5A57] select-none">
+        <span className="font-mono text-[11px] font-medium text-[#57606a] dark:text-[#8b949e] select-none">
           {lang ?? 'code'}
         </span>
 
@@ -44,26 +58,25 @@ export function CodeBlock({
           onClick={copy}
           aria-label={copied ? 'Kopyalandı' : 'Kopyala'}
           className="flex items-center gap-1.5 h-6 px-2 rounded text-[11px] font-medium
-                     text-[#9B9890] dark:text-[#5C5A57]
-                     hover:text-[#6B6860] dark:hover:text-[#9B9890]
-                     hover:bg-[#E6E3DC] dark:hover:bg-[#2C2A27]
+                     text-[#57606a] dark:text-[#8b949e]
+                     hover:bg-[#e9ecef] dark:hover:bg-[#21262d]
+                     hover:text-[#24292f] dark:hover:text-[#c9d1d9]
                      transition-all duration-150
-                     focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#111110] dark:focus-visible:ring-[#EDEDE8]"
+                     focus-visible:outline-none focus-visible:ring-1
+                     focus-visible:ring-[#0969da] dark:focus-visible:ring-[#388bfd]"
         >
           {copied ? (
             <>
-              {/* Check icon */}
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <path d="M1.5 6.5 L4.5 9.5 L10.5 3" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                <path d="M1.5 7 L5 10.5 L11.5 2.5" stroke="#1a7f37" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
-              <span>Kopyalandı</span>
+              <span className="text-[#1a7f37]">Kopyalandı</span>
             </>
           ) : (
             <>
-              {/* Copy icon */}
-              <svg width="12" height="12" viewBox="0 0 12 12" fill="none" aria-hidden="true">
-                <rect x="4" y="4" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
-                <path d="M8 4V2.5A1.5 1.5 0 006.5 1h-4A1.5 1.5 0 001 2.5v4A1.5 1.5 0 002.5 8H4" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
+              <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true">
+                <rect x="4.5" y="4.5" width="7" height="7" rx="1.5" stroke="currentColor" strokeWidth="1.3" />
+                <path d="M8.5 4.5V3A1.5 1.5 0 007 1.5H3A1.5 1.5 0 001.5 3v4A1.5 1.5 0 003 8.5H4.5" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
               </svg>
               <span>Kopyala</span>
             </>
@@ -71,13 +84,19 @@ export function CodeBlock({
         </button>
       </div>
 
-      {/* ── Code area ─────────────────────────────────── */}
+      {/* ── Code area — tam GitHub gibi ─────────────────── */}
       <pre
         ref={preRef}
         {...props}
-        className={`overflow-x-auto p-5 text-[13px] leading-6 tabular-nums
-                    bg-[#F5F3EE] dark:bg-[#161513]
-                    ${className ?? ''}`}
+        style={cleanStyle}  /* background temizlendi, renk vars korundu */
+        className={[
+          'overflow-x-auto',
+          'px-5 py-4',          /* GitHub: 16px yatay, 16px dikey — sıkışık ama nefes alan */
+          'leading-[1.6]',
+          'm-0',
+          'bg-white dark:bg-[#0d1117]',  /* GitHub'ın tam renkleri */
+          className ?? '',
+        ].join(' ')}
       >
         {children}
       </pre>
