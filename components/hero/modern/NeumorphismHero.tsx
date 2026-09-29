@@ -1,57 +1,60 @@
-export interface HeroInnerProps {
-  className?: string;
-}
-
-export default function NeumorphismHero({ className }: HeroInnerProps) {
+export default function NeumorphismHero({ className }: { className?: string }) {
+  const S = { background:'#e0e5ec', boxShadow:'6px 6px 12px #b8bec7,-6px -6px 12px #ffffff' };
+  const I = { background:'#e0e5ec', boxShadow:'inset 4px 4px 8px #b8bec7,inset -4px -4px 8px #ffffff' };
   return (
     <div className={`w-full h-full ${className ?? ''}`}>
-      {/* Uniform neumorphic surface */}
-      <div
-        className="w-full h-full bg-[#e0e0e0] flex flex-col items-center justify-center gap-8 p-6"
-        aria-hidden="true"
-      >
-        {/* Raised element — positive shadow (yüzeyden yükselen) */}
-        <div
-          className="rounded-2xl bg-[#e0e0e0] px-8 py-5 flex flex-col items-center gap-2 motion-reduce:transition-none"
-          style={{
-            boxShadow: '5px 5px 10px #bebebe, -5px -5px 10px #ffffff',
-          }}
-        >
-          <div
-            className="w-10 h-10 rounded-full bg-[#e0e0e0]"
-            style={{
-              boxShadow: '3px 3px 6px #bebebe, -3px -3px 6px #ffffff',
-            }}
-          />
-          <div className="h-2 w-20 rounded-full bg-[#c8c8c8]" />
-          <div className="h-2 w-14 rounded-full bg-[#d0d0d0]" />
+      <div className="w-full h-full flex flex-col items-center justify-center gap-5 p-6" style={{ background:'#e0e5ec' }} aria-hidden="true">
+
+        {/* Music player card */}
+        <div className="w-full max-w-[200px] rounded-2xl p-4" style={S}>
+          <div className="text-[9px] font-medium text-center mb-3" style={{ color:'#8a9bb0' }}>Now Playing</div>
+
+          {/* Album art */}
+          <div className="w-16 h-16 rounded-2xl mx-auto mb-4" style={{ ...S, background:'linear-gradient(135deg,#a0b4cc,#c8d4e0)' }}>
+            <div className="w-full h-full rounded-2xl flex items-center justify-center">
+              <div className="w-6 h-6 rounded-full" style={{ background:'#e0e5ec', boxShadow:'inset 2px 2px 4px #b8bec7,inset -2px -2px 4px #ffffff' }} />
+            </div>
+          </div>
+
+          {/* Title */}
+          <div className="text-center mb-3">
+            <div className="text-[11px] font-semibold mb-0.5" style={{ color:'#4a5568' }}>Soft UI Design</div>
+            <div className="text-[9px]" style={{ color:'#8a9bb0' }}>The Future</div>
+          </div>
+
+          {/* Progress */}
+          <div className="h-1.5 w-full rounded-full mb-3" style={I}>
+            <div className="h-full w-2/5 rounded-full" style={{ background:'linear-gradient(90deg,#74b9ff,#a29bfe)' }} />
+          </div>
+
+          {/* Controls */}
+          <div className="flex items-center justify-center gap-4">
+            {['⏮','▶','⏭'].map((icon, i) => (
+              <div key={i}
+                className="flex items-center justify-center rounded-full text-[10px]"
+                style={{
+                  width:i===1?36:26, height:i===1?36:26,
+                  color:'#4a5568',
+                  ...(i===1
+                    ? { background:'linear-gradient(145deg,#e9eef5,#d1d9e0)', boxShadow:'4px 4px 8px #b8bec7,-4px -4px 8px #ffffff' }
+                    : S
+                  )
+                }}
+              >{icon}</div>
+            ))}
+          </div>
         </div>
 
-        {/* Pressed / inset element — simulated toggle switch */}
-        <div
-          className="rounded-2xl bg-[#e0e0e0] px-6 py-4 flex items-center gap-4 motion-reduce:transition-none"
-          style={{
-            boxShadow:
-              'inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff',
-          }}
-        >
-          {/* Toggle track (inset) */}
-          <div
-            className="relative w-14 h-7 rounded-full bg-[#e0e0e0] flex items-center px-1"
-            style={{
-              boxShadow:
-                'inset 3px 3px 6px #bebebe, inset -3px -3px 6px #ffffff',
-            }}
-          >
-            {/* Toggle thumb (raised) */}
-            <div
-              className="w-5 h-5 rounded-full bg-[#e0e0e0] ml-auto motion-reduce:transition-none"
-              style={{
-                boxShadow: '2px 2px 4px #bebebe, -2px -2px 4px #ffffff',
-              }}
-            />
-          </div>
-          <div className="h-2 w-16 rounded-full bg-[#c8c8c8]" />
+        {/* Toggle row */}
+        <div className="flex gap-3 w-full max-w-[200px]">
+          {['WiFi','BT','DND'].map((label, i) => (
+            <div key={label} className="flex-1 rounded-xl p-2 flex flex-col items-center gap-1" style={i===0?{...S,background:'linear-gradient(145deg,#6c5ce7,#a29bfe)',boxShadow:S.boxShadow}:S}>
+              <div className="text-[11px]" style={{ color: i===0?'white':'#8a9bb0' }}>
+                {label==='WiFi'?'📶':label==='BT'?'🔵':'🔕'}
+              </div>
+              <div className="text-[8px] font-medium" style={{ color: i===0?'rgba(255,255,255,0.8)':'#8a9bb0' }}>{label}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

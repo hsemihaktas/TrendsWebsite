@@ -1,193 +1,80 @@
-// Pixel art rendered entirely via CSS box-shadows (no images).
-// Each "pixel" is an 8×8 unit created by a box-shadow on a tiny reference div.
+const P = 7; // px per pixel
 
-const PIXEL = 8; // 8 px per logical pixel
+type PD = [number, number, string];
 
-type PixelDef = [number, number, string]; // [col, row, color]
+const C = { R:'#e63946',W:'#f8f9fa',Y:'#ffd700',G:'#2dc653',B:'#4361ee',C:'#4cc9f0',P:'#f72585',K:'#111' };
 
-// ── Palette (max 8 colors) ─────────────────────────────────────────────────
-const C = {
-  RED: '#e63946',
-  WHT: '#f8f9fa',
-  YEL: '#ffd700',
-  GRN: '#2dc653',
-  BLU: '#4361ee',
-  CYN: '#4cc9f0',
-  PNK: '#f72585',
-  GRY: '#6c757d',
-} as const;
-
-// ── Pixel Heart (8 cols × 6 rows, top-left at reference) ──────────────────
-const HEART: PixelDef[] = [
-  // row 0
-  [1, 0, C.RED], [2, 0, C.RED],                   [5, 0, C.RED], [6, 0, C.RED],
-  // row 1
-  [0, 1, C.RED], [1, 1, C.RED], [2, 1, C.RED], [3, 1, C.RED],
-  [4, 1, C.RED], [5, 1, C.RED], [6, 1, C.RED], [7, 1, C.RED],
-  // row 2
-  [0, 2, C.RED], [1, 2, C.WHT], [2, 2, C.RED], [3, 2, C.RED],
-  [4, 2, C.RED], [5, 2, C.RED], [6, 2, C.RED], [7, 2, C.RED],
-  // row 3
-  [1, 3, C.RED], [2, 3, C.RED], [3, 3, C.RED],
-  [4, 3, C.RED], [5, 3, C.RED], [6, 3, C.RED],
-  // row 4
-  [2, 4, C.RED], [3, 4, C.RED], [4, 4, C.RED], [5, 4, C.RED],
-  // row 5
-  [3, 5, C.RED], [4, 5, C.RED],
+const HEART: PD[] = [
+  [1,0,C.R],[2,0,C.R],[5,0,C.R],[6,0,C.R],
+  [0,1,C.R],[1,1,C.R],[2,1,C.R],[3,1,C.R],[4,1,C.R],[5,1,C.R],[6,1,C.R],[7,1,C.R],
+  [0,2,C.R],[1,2,C.W],[2,2,C.R],[3,2,C.R],[4,2,C.R],[5,2,C.R],[6,2,C.R],[7,2,C.R],
+  [1,3,C.R],[2,3,C.R],[3,3,C.R],[4,3,C.R],[5,3,C.R],[6,3,C.R],
+  [2,4,C.R],[3,4,C.R],[4,4,C.R],[5,4,C.R],
+  [3,5,C.R],[4,5,C.R],
 ];
 
-// ── Pixel Star (5×5) ──────────────────────────────────────────────────────
-const STAR: PixelDef[] = [
-  [2, 0, C.YEL],
-  [1, 1, C.YEL], [2, 1, C.YEL], [3, 1, C.YEL],
-  [0, 2, C.YEL], [1, 2, C.YEL], [2, 2, C.YEL], [3, 2, C.YEL], [4, 2, C.YEL],
-  [1, 3, C.YEL], [2, 3, C.YEL], [3, 3, C.YEL],
-  [0, 4, C.YEL], [2, 4, C.YEL], [4, 4, C.YEL],
+const STAR: PD[] = [
+  [2,0,C.Y],
+  [1,1,C.Y],[2,1,C.Y],[3,1,C.Y],
+  [0,2,C.Y],[1,2,C.Y],[2,2,C.Y],[3,2,C.Y],[4,2,C.Y],
+  [1,3,C.Y],[2,3,C.Y],[3,3,C.Y],
+  [0,4,C.Y],[2,4,C.Y],[4,4,C.Y],
 ];
 
-// ── Pixel Coin (6×6) ──────────────────────────────────────────────────────
-const COIN: PixelDef[] = [
-  [1, 0, C.YEL], [2, 0, C.YEL], [3, 0, C.YEL], [4, 0, C.YEL],
-  [0, 1, C.YEL], [1, 1, C.WHT], [2, 1, C.YEL], [3, 1, C.YEL], [4, 1, C.YEL], [5, 1, C.YEL],
-  [0, 2, C.YEL], [1, 2, C.YEL], [2, 2, C.GRY], [3, 2, C.YEL], [4, 2, C.YEL], [5, 2, C.YEL],
-  [0, 3, C.YEL], [1, 3, C.YEL], [2, 3, C.YEL], [3, 3, C.YEL], [4, 3, C.YEL], [5, 3, C.YEL],
-  [1, 4, C.YEL], [2, 4, C.YEL], [3, 4, C.YEL], [4, 4, C.YEL],
+const CHAR: PD[] = [
+  [1,0,C.Y],[2,0,C.Y],[3,0,C.Y],
+  [0,1,C.Y],[1,1,C.W],[2,1,C.Y],[3,1,C.B],[4,1,C.Y],
+  [0,2,C.Y],[1,2,C.Y],[2,2,C.Y],[3,2,C.Y],[4,2,C.Y],
+  [1,3,C.B],[2,3,C.R],[3,3,C.B],
+  [0,4,C.B],[1,4,C.B],[2,4,C.R],[3,4,C.B],[4,4,C.B],
+  [1,5,C.B],[3,5,C.B],
+  [1,6,C.K],[3,6,C.K],
 ];
 
-function makeBoxShadow(pixels: PixelDef[]): string {
-  return pixels
-    .map(([col, row, color]) => `${col * PIXEL}px ${row * PIXEL}px 0 0 ${color}`)
-    .join(', ');
+const MUSHROOM: PD[] = [
+  [2,0,C.R],[3,0,C.R],[4,0,C.R],
+  [1,1,C.R],[2,1,C.W],[3,1,C.R],[4,1,C.R],[5,1,C.R],
+  [0,2,C.R],[1,2,C.R],[2,2,C.R],[3,2,C.R],[4,2,C.R],[5,2,C.R],[6,2,C.R],
+  [0,3,C.R],[1,3,C.R],[2,3,C.R],[3,3,C.R],[4,3,C.R],[5,3,C.R],[6,3,C.R],
+  [1,4,C.W],[2,4,C.W],[4,4,C.W],[5,4,C.W],
+  [2,5,C.W],[3,5,C.W],[4,5,C.W],
+];
+
+function makeShadow(pixels: PD[], offsetX = 0, offsetY = 0): string {
+  return pixels.map(([c, r, color]) =>
+    `${(c + offsetX) * P}px ${(r + offsetY) * P}px 0 0 ${color}`
+  ).join(',');
 }
 
-// ── Ground platform strip ──────────────────────────────────────────────────
-const PLATFORM: PixelDef[] = Array.from({ length: 14 }, (_, i) => [
-  i,
-  0,
-  i % 2 === 0 ? C.GRN : C.BLU,
-] as PixelDef);
-
-// ── Simple hero character (5 cols × 7 rows) ────────────────────────────────
-const HERO_CHAR: PixelDef[] = [
-  // head
-  [1, 0, C.YEL], [2, 0, C.YEL], [3, 0, C.YEL],
-  [0, 1, C.YEL], [1, 1, C.WHT], [2, 1, C.YEL], [3, 1, C.BLU], [4, 1, C.YEL],
-  [0, 2, C.YEL], [1, 2, C.YEL], [2, 2, C.YEL], [3, 2, C.YEL], [4, 2, C.YEL],
-  // body
-  [1, 3, C.BLU], [2, 3, C.RED], [3, 3, C.BLU],
-  [0, 4, C.BLU], [1, 4, C.BLU], [2, 4, C.RED], [3, 4, C.BLU], [4, 4, C.BLU],
-  // legs
-  [1, 5, C.BLU], [3, 5, C.BLU],
-  [1, 6, C.GRY], [3, 6, C.GRY],
-];
+const GROUND: PD[] = Array.from({ length: 20 }, (_, i) => [i, 0, i % 2 === 0 ? C.G : C.B] as PD);
 
 export default function PixelArtHero({ className }: { className?: string }) {
   return (
     <div className={`w-full h-full ${className ?? ''}`}>
-      <div
-        aria-hidden="true"
-        className="w-full h-full relative overflow-hidden bg-[#1a1a2e]"
-        style={{ imageRendering: 'pixelated' }}
-      >
-        {/* Background dots / stars */}
-        {[
-          [12, 15], [35, 8], [65, 20], [82, 12],
-          [20, 35], [55, 30], [88, 40], [10, 55],
-        ].map(([left, top], i) => (
-          <div
-            key={i}
-            aria-hidden="true"
-            className="absolute"
-            style={{
-              left: `${left}%`,
-              top: `${top}%`,
-              width: PIXEL,
-              height: PIXEL,
-              background: i % 2 === 0 ? C.WHT : C.CYN,
-              opacity: 0.5,
-            }}
-          />
+      <div className="relative w-full h-full bg-[#1a1a2e] overflow-hidden" style={{ imageRendering:'pixelated' }} aria-hidden="true">
+        {/* Stars bg */}
+        {[[12,15],[35,8],[65,20],[82,12],[20,35],[55,30],[88,40]].map(([l,t],i)=>(
+          <div key={i} className="absolute bg-white" style={{ left:`${l}%`,top:`${t}%`,width:P,height:P,opacity:0.4 }} />
         ))}
 
-        {/* ── Hero character ────────────────────────────────────── */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            left: 24,
-            top: 30,
-            width: PIXEL,
-            height: PIXEL,
-            background: 'transparent',
-            boxShadow: makeBoxShadow(HERO_CHAR),
-          }}
-        />
+        {/* Ground */}
+        <div className="absolute" style={{ left:8,bottom:16,width:P,height:P,background:'transparent',boxShadow:makeShadow(GROUND) }} />
 
-        {/* ── Pixel coin ────────────────────────────────────────── */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            left: 90,
-            top: 30,
-            width: PIXEL,
-            height: PIXEL,
-            background: 'transparent',
-            boxShadow: makeBoxShadow(COIN),
-          }}
-        />
+        {/* Character */}
+        <div className="absolute" style={{ left:16,bottom:16+P,width:P,height:P,background:'transparent',boxShadow:makeShadow(CHAR) }} />
 
-        {/* ── Pixel star ────────────────────────────────────────── */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            right: 24,
-            top: 28,
-            width: PIXEL,
-            height: PIXEL,
-            background: 'transparent',
-            boxShadow: makeBoxShadow(STAR),
-          }}
-        />
+        {/* Mushroom */}
+        <div className="absolute" style={{ left:80,bottom:16+P,width:P,height:P,background:'transparent',boxShadow:makeShadow(MUSHROOM) }} />
 
-        {/* ── Pixel heart ───────────────────────────────────────── */}
-        <div
-          aria-hidden="true"
-          className="absolute left-1/2"
-          style={{
-            top: 24,
-            marginLeft: -32, // center the 8-col heart (8×8 = 64px wide → -32)
-            width: PIXEL,
-            height: PIXEL,
-            background: 'transparent',
-            boxShadow: makeBoxShadow(HEART),
-          }}
-        />
+        {/* Heart */}
+        <div className="absolute left-1/2 -translate-x-1/2" style={{ top:12,width:P,height:P,background:'transparent',boxShadow:makeShadow(HEART) }} />
 
-        {/* ── Ground platform ───────────────────────────────────── */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            bottom: 28,
-            left: 16,
-            width: PIXEL,
-            height: PIXEL,
-            background: 'transparent',
-            boxShadow: makeBoxShadow(PLATFORM),
-          }}
-        />
+        {/* Star */}
+        <div className="absolute" style={{ right:16,top:8,width:P,height:P,background:'transparent',boxShadow:makeShadow(STAR) }} />
 
-        {/* "PRESS START" text row */}
-        <div
-          aria-hidden="true"
-          className="absolute bottom-2 left-0 right-0 flex justify-center"
-        >
-          <span
-            className="text-[9px] font-mono tracking-widest motion-reduce:animate-none animate-pulse"
-            style={{ color: C.WHT, textShadow: `0 0 6px ${C.CYN}` }}
-          >
+        {/* Press start */}
+        <div className="absolute bottom-2 left-0 right-0 flex justify-center">
+          <span className="text-[8px] font-mono tracking-widest text-white animate-pulse motion-reduce:animate-none" style={{ textShadow:`0 0 6px #4cc9f0` }}>
             PRESS START
           </span>
         </div>

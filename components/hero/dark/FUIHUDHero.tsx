@@ -1,77 +1,57 @@
-export interface HeroInnerProps {
-  className?: string;
-}
-
-export default function FUIHUDHero({ className }: HeroInnerProps) {
+export default function FUIHUDHero({ className }: { className?: string }) {
   return (
     <div className={`w-full h-full ${className ?? ''}`}>
-      {/* Dark blue-black background */}
-      <div
-        className="relative w-full h-full bg-[#050810] flex items-center justify-center overflow-hidden"
-        aria-hidden="true"
-      >
-        {/* Thin horizontal line diagrams */}
-        <div className="absolute top-6 left-4 right-4 h-px bg-[#00ffff]/20" />
-        <div className="absolute top-8 left-4 w-16 h-px bg-[#00ffff]/30" />
-        <div className="absolute bottom-6 left-4 right-4 h-px bg-[#00ffff]/20" />
+      <div className="relative w-full h-full bg-[#020b14] overflow-hidden" aria-hidden="true">
+        {/* Grid background */}
+        <div className="absolute inset-0 opacity-10" style={{
+          backgroundImage:'linear-gradient(rgba(0,200,255,0.4) 1px,transparent 1px),linear-gradient(90deg,rgba(0,200,255,0.4) 1px,transparent 1px)',
+          backgroundSize:'20px 20px',
+        }} />
 
-        {/* Thin vertical lines */}
-        <div className="absolute left-8 top-4 bottom-4 w-px bg-[#00ffff]/15" />
-        <div className="absolute right-8 top-4 bottom-4 w-px bg-[#00ffff]/15" />
+        {/* Horizontal lines */}
+        <div className="absolute top-5 left-4 right-4 h-px bg-[#00c8ff]/20" />
+        <div className="absolute bottom-5 left-4 right-4 h-px bg-[#00c8ff]/20" />
+        <div className="absolute left-6 top-4 bottom-4 w-px bg-[#00c8ff]/10" />
+        <div className="absolute right-6 top-4 bottom-4 w-px bg-[#00c8ff]/10" />
 
-        {/* Left panel — telemetry */}
-        <div className="absolute left-3 top-1/2 -translate-y-1/2 flex flex-col gap-1">
-          <span className="font-mono text-[8px] text-[#00ff88] tracking-wider">ALT 3240</span>
-          <span className="font-mono text-[8px] text-[#00ffff] tracking-wider">VEL 0.82</span>
-          <span className="font-mono text-[8px] text-[#00ff88] tracking-wider">HDG 270°</span>
-          <span className="font-mono text-[8px] text-[#00ffff] tracking-wider">PWR 91%</span>
-        </div>
+        {/* SVG Gauge */}
+        <svg className="absolute left-4 top-1/2 -translate-y-1/2" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="28" fill="none" stroke="rgba(0,200,255,0.15)" strokeWidth="4" />
+          <circle cx="36" cy="36" r="28" fill="none" stroke="#00c8ff" strokeWidth="4"
+            strokeDasharray="175.93" strokeDashoffset="52.78" strokeLinecap="round"
+            transform="rotate(-90 36 36)" style={{ filter:'drop-shadow(0 0 6px #00c8ff)' }} />
+          <circle cx="36" cy="36" r="18" fill="none" stroke="rgba(0,200,255,0.1)" strokeWidth="1" />
+          <text x="36" y="39" textAnchor="middle" fill="#00c8ff" fontSize="11" fontFamily="monospace" fontWeight="bold">74%</text>
+        </svg>
 
-        {/* Centre — circular gauge */}
-        <div className="relative flex items-center justify-center">
-          {/* Outer ring */}
-          <div className="w-20 h-20 rounded-full border-2 border-[#00ffff]/30 flex items-center justify-center">
-            {/* Inner progress arc — simulated with border trick */}
-            <div
-              className="absolute w-20 h-20 rounded-full border-2 border-transparent"
-              style={{
-                borderTopColor: '#00ffff',
-                borderRightColor: '#00ffff',
-                transform: 'rotate(-30deg)',
-                boxShadow: '0 0 8px #00ffff66',
-              }}
-            />
-            {/* Mid ring */}
-            <div className="w-12 h-12 rounded-full border border-[#00ffff]/20 flex items-center justify-center">
-              <span
-                className="font-mono text-[10px] font-bold text-[#00ffff]"
-                style={{ textShadow: '0 0 6px #00ffff' }}
-              >
-                74%
-              </span>
+        {/* Telemetry right */}
+        <div className="absolute right-4 top-1/2 -translate-y-1/2 space-y-1.5">
+          {[['ALT','3240 m'],['VEL','0.82 M'],['HDG','270°'],['PWR','91%']].map(([k,v])=>(
+            <div key={k} className="flex gap-2">
+              <div className="text-[8px] font-mono text-[#00c8ff]/50 w-8">{k}</div>
+              <div className="text-[8px] font-mono text-[#00c8ff]" style={{ textShadow:'0 0 4px #00c8ff' }}>{v}</div>
             </div>
-          </div>
+          ))}
         </div>
 
-        {/* Right panel — semi-transparent data block */}
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 bg-[#00ffff]/10 border border-[#00ffff]/30 px-2 py-2 flex flex-col gap-1">
-          <span className="font-mono text-[8px] text-[#00ffff]/80 tracking-wider">SIG ████░</span>
-          <span className="font-mono text-[8px] text-[#00ff88]/80 tracking-wider">TMP 37.2</span>
-          <span className="font-mono text-[8px] text-[#00ffff]/80 tracking-wider">LAT 48.8°</span>
+        {/* Center data */}
+        <div className="absolute left-1/2 -translate-x-1/2 bottom-7 flex gap-1 font-mono text-[7px] text-[#00c8ff]/30">
+          0x4F · 0xB2 · 0x9E · 0x12
         </div>
 
-        {/* Bottom data stream */}
-        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 font-mono text-[8px] text-[#00ffff]/40 tracking-[0.15em] whitespace-nowrap">
-          0x4F3A · 0xB2C1 · 0x9E7D · 0x12FA
-        </div>
-
-        {/* Top label */}
-        <div
-          className="absolute top-3 left-1/2 -translate-x-1/2 font-mono text-[9px] text-[#00ffff] tracking-[0.3em] uppercase"
-          style={{ textShadow: '0 0 6px #00ffff' }}
-        >
+        {/* Title */}
+        <div className="absolute top-7 left-1/2 -translate-x-1/2 font-mono text-[9px] tracking-[0.3em] uppercase text-[#00c8ff]" style={{ textShadow:'0 0 6px #00c8ff' }}>
           HUD v2.4
         </div>
+
+        {/* Secondary gauge */}
+        <svg className="absolute right-4 bottom-8" width="36" height="36" viewBox="0 0 36 36">
+          <circle cx="18" cy="18" r="12" fill="none" stroke="rgba(0,255,136,0.2)" strokeWidth="3" />
+          <circle cx="18" cy="18" r="12" fill="none" stroke="#00ff88" strokeWidth="3"
+            strokeDasharray="75.4" strokeDashoffset="30" strokeLinecap="round"
+            transform="rotate(-90 18 18)" style={{ filter:'drop-shadow(0 0 4px #00ff88)' }} />
+          <text x="18" y="21" textAnchor="middle" fill="#00ff88" fontSize="6" fontFamily="monospace">60%</text>
+        </svg>
       </div>
     </div>
   );

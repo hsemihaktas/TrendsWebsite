@@ -1,40 +1,29 @@
-export default function TypeFirstHero({
-  className,
-}: {
-  className?: string;
-}) {
+export default function TypeFirstHero({ className }: { className?: string }) {
   return (
     <div className={`w-full h-full ${className ?? ''}`}>
-      <div
-        className="relative w-full h-full overflow-hidden bg-white flex flex-col items-center justify-center px-4"
-        aria-hidden="true"
-      >
-        {/* Primary visual: large bold type — the design IS the type */}
+      <div className="w-full h-full bg-white flex flex-col items-start justify-center px-6 overflow-hidden" aria-hidden="true">
+        {/* Outline text */}
         <div
-          className="text-center z-10 motion-reduce:transition-none"
-          aria-hidden="true"
+          className="text-[72px] font-black leading-none select-none mb-0"
+          style={{ color:'transparent', WebkitTextStroke:'2px #111', letterSpacing:'-3px' }}
         >
-          <span className="block text-7xl font-black leading-none tracking-tighter text-black select-none">
-            TYPE
-          </span>
-          <span className="block text-7xl font-black leading-none tracking-tighter text-black select-none">
-            FIRST
-          </span>
+          TYPE
         </div>
-
-        {/* Minimal horizontal rule — the only decoration allowed */}
+        {/* Filled text */}
         <div
-          className="mt-3 w-16 h-[2px] bg-black z-10 motion-reduce:transition-none"
-          aria-hidden="true"
-        />
-
-        {/* Minimal label — very small, subordinate */}
-        <p
-          className="mt-2 text-[10px] font-medium tracking-[0.3em] uppercase text-gray-500 z-10 motion-reduce:transition-none select-none"
-          aria-hidden="true"
+          className="text-[72px] font-black leading-none select-none -mt-2"
+          style={{ color:'#111', letterSpacing:'-3px' }}
         >
-          Design
-        </p>
+          FIRST
+        </div>
+        {/* Accent bar */}
+        <div className="w-20 h-1 bg-black mt-4 mb-4" />
+        {/* Subtext */}
+        <div className="text-[11px] tracking-[0.2em] uppercase text-gray-400">
+          Typography as Design
+        </div>
+        {/* Floating text */}
+        <div className="absolute right-5 top-5 text-[80px] font-black opacity-[0.04] select-none" style={{ color:'#000', letterSpacing:'-4px' }}>TY</div>
       </div>
     </div>
   );

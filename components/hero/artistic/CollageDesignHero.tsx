@@ -1,127 +1,22 @@
-export default function CollageDesignHero({
-  className,
-}: {
-  className?: string;
-}) {
+export default function CollageDesignHero({ className }: { className?: string }) {
   return (
     <div className={`w-full h-full ${className ?? ''}`}>
-      {/* Off-white collage background */}
-      <div
-        aria-hidden="true"
-        className="relative w-full h-full overflow-hidden bg-[#f8f8f8]"
-      >
-        {/* Fragment 1 — large teal block, rotated */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '55%',
-            height: '55%',
-            top: '-8%',
-            left: '-6%',
-            background: '#2dd4bf',
-            transform: 'rotate(3deg)',
-            opacity: 0.9,
-            zIndex: 1,
-          }}
-        />
+      <div className="relative w-full h-full overflow-hidden bg-[#f5f2ee]" aria-hidden="true">
+        {/* Fragments */}
+        <div className="absolute" style={{ width:'58%',height:'60%',top:'-10%',left:'-8%',background:'#2dd4bf',transform:'rotate(3deg)',opacity:0.9,zIndex:1 }} />
+        <div className="absolute" style={{ width:'48%',height:'52%',top:'8%',right:'-6%',background:'#ef4444',transform:'rotate(-5deg) skewX(2deg)',opacity:0.85,zIndex:2 }} />
+        <div className="absolute" style={{ width:'42%',height:'44%',bottom:'-7%',left:'4%',background:'#fbbf24',transform:'rotate(-3deg) skewY(1deg)',opacity:0.88,zIndex:3 }} />
+        <div className="absolute" style={{ width:'36%',height:'40%',bottom:'4%',right:'4%',background:'#1e293b',transform:'rotate(4deg)',opacity:0.92,zIndex:2 }} />
+        <div className="absolute" style={{ width:'32%',height:'36%',top:'28%',left:'34%',background:'rgba(255,255,255,0.78)',transform:'rotate(-2deg)',zIndex:4,borderLeft:'3px solid rgba(0,0,0,0.15)',borderTop:'2px solid rgba(0,0,0,0.1)' }} />
+        <div className="absolute" style={{ width:'24%',height:'30%',top:'16%',left:'26%',background:'#7c3aed',transform:'rotate(6deg)',opacity:0.8,zIndex:5 }} />
+        <div className="absolute" style={{ width:'62%',height:'8px',top:'46%',left:'8%',background:'#f472b6',transform:'rotate(-1.5deg)',zIndex:6 }} />
 
-        {/* Fragment 2 — coral/red block, skewed */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '45%',
-            height: '50%',
-            top: '10%',
-            right: '-4%',
-            background: '#ef4444',
-            transform: 'rotate(-5deg) skewX(2deg)',
-            opacity: 0.85,
-            zIndex: 2,
-          }}
-        />
-
-        {/* Fragment 3 — yellow block, overlapping */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '40%',
-            height: '42%',
-            bottom: '-5%',
-            left: '5%',
-            background: '#fbbf24',
-            transform: 'rotate(-3deg) skewY(1deg)',
-            opacity: 0.88,
-            zIndex: 3,
-          }}
-        />
-
-        {/* Fragment 4 — dark navy block */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '35%',
-            height: '38%',
-            bottom: '5%',
-            right: '5%',
-            background: '#1e293b',
-            transform: 'rotate(4deg)',
-            opacity: 0.92,
-            zIndex: 2,
-          }}
-        />
-
-        {/* Fragment 5 — semi-transparent white overlay for torn-paper effect */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '30%',
-            height: '35%',
-            top: '30%',
-            left: '35%',
-            background: 'rgba(255,255,255,0.75)',
-            transform: 'rotate(-2deg) skewX(-1deg)',
-            zIndex: 4,
-            borderLeft: '3px solid rgba(0,0,0,0.15)',
-            borderTop: '2px solid rgba(0,0,0,0.1)',
-          }}
-        />
-
-        {/* Fragment 6 — violet accent, high z-index for visual tension */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '22%',
-            height: '28%',
-            top: '18%',
-            left: '28%',
-            background: '#7c3aed',
-            transform: 'rotate(6deg)',
-            opacity: 0.8,
-            zIndex: 5,
-          }}
-        />
-
-        {/* Fragment 7 — thin pink strip */}
-        <div
-          aria-hidden="true"
-          className="absolute"
-          style={{
-            width: '60%',
-            height: '8px',
-            top: '48%',
-            left: '10%',
-            background: '#f472b6',
-            transform: 'rotate(-1.5deg)',
-            zIndex: 6,
-            opacity: 0.9,
-          }}
-        />
+        {/* Collage label */}
+        <div className="absolute z-10" style={{ top:'5%',right:'5%' }}>
+          <div className="text-[8px] font-black uppercase tracking-wider text-white bg-black px-2 py-1" style={{ transform:'rotate(3deg)' }}>
+            COLLAGE
+          </div>
+        </div>
       </div>
     </div>
   );

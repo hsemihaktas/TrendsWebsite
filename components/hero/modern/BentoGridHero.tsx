@@ -1,46 +1,34 @@
-export interface HeroInnerProps {
-  className?: string;
-}
-
-export default function BentoGridHero({ className }: HeroInnerProps) {
+export default function BentoGridHero({ className }: { className?: string }) {
   return (
     <div className={`w-full h-full ${className ?? ''}`}>
-      {/* Bento grid container — fills entire hero area */}
-      <div
-        className="w-full h-full bg-gray-100 p-3"
-        aria-hidden="true"
-      >
-        <div
-          className="w-full h-full grid gap-2"
-          style={{
-            gridTemplateColumns: 'repeat(3, 1fr)',
-            gridTemplateRows: 'repeat(3, 1fr)',
-          }}
-        >
-          {/* 2×2 large tile — text block */}
-          <div
-            className="rounded-xl bg-[#1c1c1e] flex flex-col justify-end p-3"
-            style={{ gridColumn: 'span 2', gridRow: 'span 2' }}
-          >
-            <div className="h-2 bg-white/30 rounded w-3/4 mb-1" />
-            <div className="h-2 bg-white/20 rounded w-1/2" />
+      <div className="w-full h-full bg-[#F5F5F7] p-3" aria-hidden="true">
+        <div className="w-full h-full grid gap-2.5" style={{ gridTemplateColumns:'repeat(3,1fr)', gridTemplateRows:'repeat(3,1fr)' }}>
+          {/* 2×2 hero tile */}
+          <div className="rounded-2xl bg-[#1C1C1E] p-4 flex flex-col justify-end" style={{ gridColumn:'span 2', gridRow:'span 2' }}>
+            <div className="text-[8px] text-white/40 uppercase tracking-widest mb-1">Featured</div>
+            <div className="text-[16px] font-bold text-white leading-tight">Design<br/>Trends</div>
+            <div className="mt-2 w-12 h-0.5 bg-white/20" />
           </div>
 
-          {/* 1×1 tile — color area */}
-          <div className="rounded-xl bg-[#FF6B6B]" />
-
-          {/* 1×1 tile — icon/shape */}
-          <div className="rounded-xl bg-[#4ECDC4] flex items-center justify-center">
-            <div className="w-6 h-6 rounded-full bg-white/60" />
+          {/* 1×1 purple */}
+          <div className="rounded-2xl flex flex-col items-center justify-center gap-1" style={{ background:'linear-gradient(135deg,#7c3aed,#a855f7)' }}>
+            <div className="text-[16px]">🎨</div>
+            <div className="text-[8px] text-white font-medium">Style</div>
           </div>
 
-          {/* 1×2 wide tile — content bar */}
-          <div
-            className="rounded-xl bg-[#FFE66D] flex items-center px-3 gap-2"
-            style={{ gridColumn: 'span 2' }}
-          >
-            <div className="w-5 h-5 rounded-md bg-yellow-600/30 flex-shrink-0" />
-            <div className="h-2 bg-yellow-800/30 rounded flex-1" />
+          {/* 1×1 coral */}
+          <div className="rounded-2xl flex flex-col items-center justify-center gap-1" style={{ background:'linear-gradient(135deg,#f97316,#fb923c)' }}>
+            <div className="text-[18px] font-black text-white">33</div>
+            <div className="text-[7px] text-white/80">Trends</div>
+          </div>
+
+          {/* 2×1 teal */}
+          <div className="rounded-2xl flex items-center gap-3 px-4" style={{ gridColumn:'span 2', background:'linear-gradient(135deg,#0891b2,#22d3ee)' }}>
+            <div className="w-7 h-7 rounded-xl bg-white/20 flex items-center justify-center text-[12px]">→</div>
+            <div>
+              <div className="text-[9px] text-white/70">New</div>
+              <div className="text-[11px] font-semibold text-white">Explore All</div>
+            </div>
           </div>
         </div>
       </div>
