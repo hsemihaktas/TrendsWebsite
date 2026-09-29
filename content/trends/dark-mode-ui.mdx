@@ -126,5 +126,15 @@ export function DarkModeElevationCard() {
 Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
 
 ```text
-Design an app dashboard with proper Dark Mode UI following Google Material Design dark theme specifications. Surface elevation color system: dp0 #121212 (page base), dp1 #1e1e1e (cards), dp2 #242424 (dropdowns), dp3 #2c2c2c (tooltips), dp4+ #383838 (floating). Text opacity hierarchy: high emphasis rgba(255,255,255,0.87), medium emphasis rgba(255,255,255,0.60), disabled rgba(255,255,255,0.38). Dividers: rgba(255,255,255,0.12). Accent color: desaturated version of brand color (reduce saturation by 20% from light mode). No pure black backgrounds (#000). No pure white text (#fff) — use 87% opacity. Shadows don't show on dark surfaces — use surface elevation instead. Bar chart bars at 25% opacity for inactive state. Icons: 60% white opacity. The design must be comfortable for extended night-time reading.
+Design a [app/dashboard/content platform] with a proper Dark Mode UI system.
+
+Dark Mode is not simply "the light version but with dark colors." Done correctly, it's a completely separate surface system tuned for comfortable reading in low-light environments — which means thinking about surface elevation instead of shadows.
+
+The core insight: on a dark background, shadows become invisible. So surface hierarchy is communicated through slightly lighter surface colors — a card is barely lighter than the page background, a modal is barely lighter than the card below it. The elevation system lives in the background colors themselves.
+
+Text uses opacity rather than pure white: high-emphasis text at ~87%, medium at ~60%, disabled at ~38%. This creates a breathing hierarchy that's gentler on the eyes than white text on black.
+
+Accent colors should be slightly desaturated compared to their light mode versions — the same hue reads more intensely on dark surfaces and doesn't need as much saturation.
+
+Design my [component/page] as a complete dark mode system. My accent/brand color is [your color]. The result should be comfortable for extended reading in a dark room.
 ```

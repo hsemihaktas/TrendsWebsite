@@ -125,5 +125,15 @@ Bu örnekte `box-shadow` zinciri ile piksel karakter oluşturma, `imageRendering
 Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
 
 ```text
-Design a retro game UI or nostalgic product page in Pixel Art style. Grid unit: 8px (all elements snap to 8px grid, no exceptions). Create pixel sprites using CSS box-shadow technique: single 8x8px div element, then chain box-shadows at grid offsets: box-shadow: 8px 0 0 #color, 16px 0 0 #color, 0 8px 0 #color — build a heart/star/character pixel by pixel. Color palette: maximum 8 colors, inspired by NES palette (red #e63946, yellow #ffd700, green #2dc653, blue #4361ee, cyan #4cc9f0, pink #f72585, white, dark navy #1a1a2e). Apply CSS property image-rendering: pixelated to any scaled elements. Typography: pixel font (Press Start 2P) or monospace at integer sizes (8px, 16px, 24px). Health/progress bars: pixelated rectangles. Background: dark game sky #1a1a2e. Ground platform: alternating color blocks. The aesthetic must look like it's running on actual 8-bit hardware.
+Design a [game/retro product/nostalgic interface] in Pixel Art style.
+
+Pixel art is the oldest form of digital graphic design — born from hardware limitations that became aesthetic choices. Modern pixel art keeps those constraints by choice: every pixel is a deliberate decision, nothing is anti-aliased, and the grid is always visible.
+
+The discipline: snap every element to a consistent pixel grid (typically 8px or 16px). This grid must be respected absolutely — no sub-pixel positioning, no fractional values, no anti-aliasing. The result is an image that looks equally sharp whether viewed at native size or scaled up by an integer factor.
+
+Color is rationed: traditional pixel art uses 4, 8, or 16 colors maximum. The constraint forces creative economy — every color must earn its place, and color transitions are handled through dithering (alternating pixels) rather than gradients.
+
+Characters follow simple proportion rules: the head is approximately the same width as the body for classic RPG sprites.
+
+Design this for my [game/product]. Include at least one pixel character sprite, a background scene, and a UI element (health bar, score display, etc.). Keep the palette to [number] colors maximum.
 ```

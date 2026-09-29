@@ -80,5 +80,15 @@ Aşağıdaki örnek, Neumorphism tekniğiyle raised ve pressed durum bileşenler
 Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
 
 ```text
-Design a music player or control panel UI in Neumorphism / Soft UI style. Base background: #E0E5EC (light gray-blue). Raised elements use dual shadow: box-shadow: 6px 6px 12px #b8bec7, -6px -6px 12px #ffffff. Pressed/active elements use inset: box-shadow: inset 6px 6px 12px #b8bec7, inset -6px -6px 12px #ffffff. All colors stay within the same monochromatic gray-blue tone — no color variation except subtle accent. Border-radius: 12-24px on all elements. Show: circular play button (raised), volume slider (inset track + raised thumb), toggle switches, and a card panel. Tactile, soft, three-dimensional without being skeuomorphic. No flat shadows, no transparency.
+Design a [music player/control panel/settings interface] in Neumorphism style.
+
+This style asks: what if a UI element were physically extruded from the surface it sits on — like clay pressed outward? The answer is a dual-shadow technique.
+
+Every raised element has two shadows: one dark shadow on the bottom-right (the side away from the light source) and one light shadow on the top-left (where light hits). The element and its background are the exact same color — only the shadows create the illusion of depth. This is the style's defining constraint.
+
+Pressed/active states simply invert the shadows to inset, making the element appear to sink inward when activated. This creates a satisfying tactile quality for toggles, sliders, and buttons.
+
+The entire palette is monochromatic — no color variety except a single subtle accent on active states. Everything is the same gray-blue or warm beige tone.
+
+Design my [component] using this as the base surface. Show at least one raised state and one pressed state to demonstrate the depth technique.
 ```
