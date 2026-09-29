@@ -49,7 +49,7 @@ function CopyButton({
   );
 }
 
-/* ── AI Prompt block — lang="text" ────────────────────────────── */
+/* ── AI Prompt block ────────────────────────────────────────── */
 function PromptBlock({
   children,
   preRef,
@@ -64,12 +64,11 @@ function PromptBlock({
   return (
     <div className="my-6 rounded-xl overflow-hidden border border-violet-200 dark:border-violet-900/60">
 
-      {/* ── Header ─────────────────────────────────────── */}
+      {/* Header */}
       <div className="flex items-center justify-between px-4 h-10
                       bg-violet-50 dark:bg-violet-950/40
                       border-b border-violet-200 dark:border-violet-900/60">
         <div className="flex items-center gap-2">
-          {/* Sparkle icon */}
           <svg width="13" height="13" viewBox="0 0 14 14" fill="none" aria-hidden="true"
                className="text-violet-500 dark:text-violet-400 flex-shrink-0">
             <path d="M7 1 L7.8 5.2 L12 7 L7.8 8.8 L7 13 L6.2 8.8 L2 7 L6.2 5.2 Z" fill="currentColor" />
@@ -81,10 +80,10 @@ function PromptBlock({
         <CopyButton copied={copied} handleCopy={triggerCopy} variant="prompt" />
       </div>
 
-      {/* ── Prompt text — wraps, not monospace ─────────── */}
+      {/* Prompt text */}
       <pre
         ref={preRef}
-        className="m-0 px-5 pt-4 pb-0
+        className="m-0 px-5 py-4
                    text-[13.5px] leading-[1.8]
                    text-[#3D3C38] dark:text-[#C9D1D9]
                    bg-violet-50/40 dark:bg-violet-950/20
@@ -94,22 +93,12 @@ function PromptBlock({
         {children}
       </pre>
 
-      {/* ── Customize note ─────────────────────────────── */}
-      <div className="px-5 py-3
-                      bg-violet-50/40 dark:bg-violet-950/20
-                      border-t border-violet-100 dark:border-violet-900/40
-                      flex items-start gap-2">
-        {/* Info icon */}
-        <svg width="13" height="13" viewBox="0 0 13 13" fill="none" aria-hidden="true"
-             className="mt-[1px] flex-shrink-0 text-violet-400 dark:text-violet-500">
-          <circle cx="6.5" cy="6.5" r="5.5" stroke="currentColor" strokeWidth="1.2" />
-          <path d="M6.5 5.5V9" stroke="currentColor" strokeWidth="1.3" strokeLinecap="round" />
-          <circle cx="6.5" cy="3.8" r="0.7" fill="currentColor" />
-        </svg>
-        <p className="text-[12px] text-violet-500 dark:text-violet-400 leading-relaxed">
-          Renk kodları, boyutlar ve component isimleri örnek değerlerdir.{' '}
-          <strong className="font-semibold">Kendi projenize göre uyarlayın</strong>{' '}
-          — hangi UI kütüphanesi veya AI aracını kullandığınızı da prompt&apos;a eklemeyi unutmayın.
+      {/* Subtle one-line note */}
+      <div className="px-4 py-2.5
+                      bg-violet-50/60 dark:bg-violet-950/30
+                      border-t border-violet-100 dark:border-violet-900/40">
+        <p className="text-[11.5px] text-violet-400/80 dark:text-violet-500/70 leading-relaxed">
+          ✦ Renk kodları, boyutlar ve bileşen isimleri örnektir — kendi projenize göre uyarlayın.
         </p>
       </div>
 
@@ -137,7 +126,6 @@ export function CodeBlock({
     } catch {}
   };
 
-  /* text language → özel AI Prompt bloğu */
   if (lang === 'text') {
     return (
       <PromptBlock preRef={preRef} copied={copied} triggerCopy={copy}>
@@ -146,7 +134,6 @@ export function CodeBlock({
     );
   }
 
-  /* Diğer diller → GitHub-style code block */
   const cleanStyle = style
     ? (Object.fromEntries(
         Object.entries(style).filter(([k]) => k !== 'backgroundColor' && k !== 'background')
@@ -155,7 +142,6 @@ export function CodeBlock({
 
   return (
     <div className="relative group my-5 rounded-lg overflow-hidden border border-[#d0d7de] dark:border-[#30363d] text-[13px]">
-      {/* Header */}
       <div className="flex items-center justify-between px-4 h-10
                       bg-[#f6f8fa] dark:bg-[#161b22]
                       border-b border-[#d0d7de] dark:border-[#30363d]">
@@ -164,8 +150,6 @@ export function CodeBlock({
         </span>
         <CopyButton copied={copied} handleCopy={copy} />
       </div>
-
-      {/* Code */}
       <pre
         ref={preRef}
         {...props}

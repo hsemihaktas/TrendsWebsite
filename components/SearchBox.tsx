@@ -18,9 +18,9 @@ export default function SearchBox({ value, onChange }: SearchBoxProps) {
   }, [local, onChange]);
 
   return (
-    <div role="search" className="relative w-full max-w-sm">
+    <div role="search" className="relative w-full sm:w-64">
       <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A49C] dark:text-[#5C5A57] pointer-events-none"
+        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A49C] dark:text-[#5C5A57] pointer-events-none flex-shrink-0"
         viewBox="0 0 16 16" fill="none" aria-hidden="true"
       >
         <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.4" />

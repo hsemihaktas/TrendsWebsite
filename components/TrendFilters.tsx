@@ -40,23 +40,32 @@ export function TrendFilters({ allTrends }: TrendFiltersProps): JSX.Element {
     [router, pathname],
   );
 
-  const handleSearch = useCallback((v: string) => updateUrl(v, activeCategory), [updateUrl, activeCategory]);
+  const handleSearch  = useCallback((v: string) => updateUrl(v, activeCategory), [updateUrl, activeCategory]);
   const handleCategory = useCallback((c: CategoryId | null) => updateUrl(searchTerm, c), [updateUrl, searchTerm]);
-  const handleReset = useCallback(() => router.replace(pathname), [router, pathname]);
+  const handleReset   = useCallback(() => router.replace(pathname), [router, pathname]);
 
   return (
-    <div className="space-y-6">
-      {/* Controls row */}
-      <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
-        <FilterBar
-          activeCategory={activeCategory}
-          onCategoryChange={handleCategory}
-          matchCounts={matchCounts}
-        />
-        <SearchBox value={searchTerm} onChange={handleSearch} />
+    <div className="space-y-5">
+      {/*
+       * Mobile: SearchBox üstte (full width), FilterBar altında (scroll)
+       * Desktop: FilterBar solda (flex-1), SearchBox sağda (max-w-sm)
+       */}
+      <div className="flex flex-col gap-3 sm:gap-0 sm:flex-row sm:items-end sm:justify-between">
+        {/* Search — mobile: full width, desktop: sabit sağda */}
+        <div className="order-1 sm:order-2 sm:flex-shrink-0">
+          <SearchBox value={searchTerm} onChange={handleSearch} />
+        </div>
+
+        {/* Filter tabs — mobile: scroll, desktop: flex */}
+        <div className="order-2 sm:order-1 sm:flex-1 sm:min-w-0 sm:mr-4">
+          <FilterBar
+            activeCategory={activeCategory}
+            onCategoryChange={handleCategory}
+            matchCounts={matchCounts}
+          />
+        </div>
       </div>
 
-      {/* Result count — screen reader */}
       <div aria-live="polite" aria-atomic="true" className="sr-only">
         {filteredTrends.length} trend bulundu
       </div>

@@ -18,16 +18,9 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    /*
-     * suppressHydrationWarning: sunucu HTML'i ve istemci JS'i arasındaki
-     * class farkını (dark/light) bastırır — no-flash script'in zorunlu yan etkisi.
-     */
     <html lang="tr" className={geistSans.variable} suppressHydrationWarning>
       <head>
-        {/*
-         * No-flash theme script: render öncesi çalışır,
-         * localStorage'dan veya sistem tercihinden dark class'ını ayarlar.
-         */}
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){try{var t=localStorage.getItem('theme');var m=window.matchMedia('(prefers-color-scheme:dark)').matches;if(t==='dark'||(t===null&&m)){document.documentElement.classList.add('dark');}}catch(e){}})();`,
@@ -36,7 +29,8 @@ export default function RootLayout({
       </head>
       <body className="min-h-screen bg-[#F8F7F4] dark:bg-[#111110] transition-colors duration-200">
         <Navbar />
-        <main className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 py-10">
+        {/* px-4 mobile, px-6 sm, px-8 md, px-10 lg — yatay kaymayı önler */}
+        <main className="max-w-6xl mx-auto px-4 sm:px-6 md:px-8 lg:px-10 py-6 sm:py-10">
           {children}
         </main>
       </body>

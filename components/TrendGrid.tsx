@@ -12,12 +12,12 @@ interface TrendGridProps {
 export function TrendGrid({ trends, onResetFilters }: TrendGridProps): JSX.Element {
   if (trends.length === 0) {
     return (
-      <div role="status" className="flex flex-col items-center justify-center py-24 text-center">
+      <div role="status" className="flex flex-col items-center justify-center py-20 text-center">
         <p className="text-[15px] text-[#6B6860] dark:text-[#9B9890] mb-4">Sonuç bulunamadı.</p>
         <button
           type="button"
           onClick={onResetFilters}
-          className="text-[13px] font-medium text-[#111110] dark:text-[#EDEDE8] underline underline-offset-2 hover:opacity-60 transition-opacity"
+          className="text-[13px] font-medium text-[#111110] dark:text-[#EDEDE8] underline underline-offset-2 hover:opacity-60 transition-opacity min-h-[44px] px-2"
         >
           Filtreleri sıfırla
         </button>
@@ -26,7 +26,7 @@ export function TrendGrid({ trends, onResetFilters }: TrendGridProps): JSX.Eleme
   }
 
   return (
-    <div className="space-y-14">
+    <div className="space-y-12 sm:space-y-14">
       {CATEGORY_ORDER.map((categoryId: CategoryId) => {
         const cat = trends.filter(t => t.category === categoryId);
         if (cat.length === 0) return null;
@@ -34,13 +34,15 @@ export function TrendGrid({ trends, onResetFilters }: TrendGridProps): JSX.Eleme
 
         return (
           <section key={categoryId} aria-labelledby={headingId}>
-            <div className="flex items-baseline gap-3 mb-6">
-              <h2 id={headingId} className="text-[12px] font-semibold uppercase tracking-widest text-[#A8A49C] dark:text-[#5C5A57]">
+            <div className="flex items-baseline gap-3 mb-4 sm:mb-6">
+              <h2 id={headingId}
+                  className="text-[11px] sm:text-[12px] font-semibold uppercase tracking-widest text-[#A8A49C] dark:text-[#5C5A57]">
                 {CATEGORIES[categoryId].name}
               </h2>
               <span className="text-[11px] text-[#C4BFB4] dark:text-[#3D3A36]">{cat.length}</span>
             </div>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {/* 1 col mobile, 2 col tablet, 3 col desktop */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
               {cat.map(trend => (
                 <TrendCard key={trend.slug} trend={trend} />
               ))}
