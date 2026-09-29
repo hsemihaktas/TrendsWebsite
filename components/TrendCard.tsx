@@ -18,30 +18,23 @@ export function TrendCard({ trend }: TrendCardProps): JSX.Element {
                  motion-reduce:hover:transform-none
                  focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111110] focus-visible:ring-offset-2"
     >
-      {/* Hero preview — takes ~55% of card height */}
-      <div className="relative">
-        <HeroPreview
-          slug={trend.slug}
-          label={`${trend.title} Hero Önizleme`}
-          minHeight="min-h-[180px]"
-        />
-      </div>
+      {/* Hero — sabit 200px, tüm kartlarda aynı yükseklik */}
+      <HeroPreview
+        slug={trend.slug}
+        label={`${trend.title} Hero Önizleme`}
+        height="h-[200px]"
+      />
 
       {/* Card info */}
-      <div className="px-4 py-4">
-        {/* Category */}
-        <div className="mb-2">
+      <div className="px-4 pt-3 pb-4">
+        <div className="mb-1.5">
           <CategoryBadge category={trend.category} />
         </div>
-
-        {/* Title */}
-        <h3 className="text-[15px] font-semibold text-[#111110] leading-snug truncate mb-1.5 group-hover:opacity-80 transition-opacity">
+        <h3 className="text-[14px] font-semibold text-[#111110] leading-snug truncate mb-1.5 group-hover:opacity-70 transition-opacity">
           {trend.title}
         </h3>
-
-        {/* Description */}
-        <p className="text-[13px] text-[#6B6860] leading-relaxed line-clamp-2">
-          {truncateDescription(trend.description, 120)}
+        <p className="text-[12px] text-[#6B6860] leading-relaxed line-clamp-2">
+          {truncateDescription(trend.description, 110)}
         </p>
       </div>
     </Link>

@@ -37,20 +37,17 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
       {/* Breadcrumb + back */}
       <div className="flex items-center justify-between mb-6">
         <BreadcrumbNav categoryName={categoryName} trendTitle={trend.title} />
-        <Link
-          href="/"
-          className="text-[12px] text-[#A8A49C] hover:text-[#6B6860] transition-colors"
-        >
+        <Link href="/" className="text-[12px] text-[#A8A49C] hover:text-[#6B6860] transition-colors">
           ← Geri
         </Link>
       </div>
 
-      {/* Hero preview */}
+      {/* Hero — detay sayfasında daha büyük, yine de sabit yükseklik */}
       <div className="rounded-xl overflow-hidden border border-[#E6E3DC] mb-8">
         <HeroPreview
           slug={slug}
           label={`${trend.title} Hero Önizleme`}
-          minHeight="min-h-[280px]"
+          height="h-[300px]"
         />
       </div>
 
@@ -72,7 +69,6 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
         </p>
       </div>
 
-      {/* Divider */}
       <div className="border-t border-[#E6E3DC] mb-8" />
 
       {/* MDX content */}
@@ -88,19 +84,14 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
         />
       </div>
 
-      {/* Related trends */}
+      {/* Related */}
       <section aria-labelledby="related-heading" className="border-t border-[#E6E3DC] pt-8 mb-8">
         <h2 id="related-heading" className="text-[12px] font-semibold uppercase tracking-widest text-[#A8A49C] mb-5">
           İlişkili Akımlar
         </h2>
-        <RelatedTrends
-          currentSlug={trend.slug}
-          currentCategory={trend.category}
-          allTrends={allTrends}
-        />
+        <RelatedTrends currentSlug={trend.slug} currentCategory={trend.category} allTrends={allTrends} />
       </section>
 
-      {/* Prev / next */}
       <div className="border-t border-[#E6E3DC] pt-6">
         <TrendNavigation currentSlug={trend.slug} allTrends={allTrends} />
       </div>
