@@ -1,0 +1,86 @@
+---
+title: "Corporate Memphis"
+slug: "corporate-memphis"
+category: "yeni-guncel"
+tags: ["corporate-memphis", "alegria", "flat", "illustration", "saas"]
+description: "Uzun bacaklı, orantısız figürlerin bolca gülümsediği flat vektör illüstrasyon stili — on yıl boyunca her SaaS şirketinin kullandığı (ve artık sorgulanan) estetik."
+publishedAt: "2023-08-20"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Corporate Memphis (Alegria olarak da bilinir), 2018 yılında ajans Buck'ın Facebook için yarattığı bir illüstrasyon stiliyle başladı. Kısa sürede SaaS şirketleri, fintech uygulamaları ve her türden teknoloji startupı bu stili benimsedi — çünkü çeşitliliği kolayca temsil ediyordu (figürlerin farklı cilt tonları kolayca değiştirilebilir), neşeli ve güven verici görünüyordu ve teknik bilgi gerektirmeden hızlıca üretilebiliyordu.
+
+2021'de bu stil geniş çaplı bir eleştiriye maruz kaldı: her şirketin aynı görünmesi, özgünlük ve marka ayrışımı açısından sorun yaratıyordu.
+
+### Orantısız Figürler
+
+Corporate Memphis figürlerinin ayırt edici özelliği uzun, ince kollar ve bacaklar, küçük başlar, ve abartılı hareketlerdir. Bu kasıtlı orantısızlık, figürleri "gerçekçi" olmayan ama "insancıl" bir yere yerleştirir — tehdit edici değil, neşeli.
+
+### Düz Renk ve Sıfır Gölge
+
+Gerçek Corporate Memphis'te gölge yoktur — figürler ve nesneler düz renk bloklarından oluşur. Renk paleti genellikle canlı ama sıcak: sarı, turuncu, teal, pembe.
+
+### Çeşitlilik ve Kapsayıcılık
+
+Stilin büyük avantajlarından biri cilt tonu ve beden çeşitliliğini kolayca temsil edebilmesidir — bir figürün cilt rengini değiştirmek tek bir renk değişikliğidir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: SaaS Onboarding Görselleri
+
+Yeni kullanıcıyı karşılayan ekranlarda, ürünün "işbirliği", "verimlilik" veya "başarı" temalarını destekleyen Corporate Memphis figürleri sezgisel anlayış sağlar. Neşeli figürler ürkütücü form doldurmayı azaltır.
+
+### Senaryo 2: Boş Durum (Empty State) ve Hata Sayfaları
+
+404 sayfası, boş liste veya başarı ekranları için Corporate Memphis'in neşeli karakterleri, olumsuz bir deneyimi yumuşatır. "Henüz içerik yok" mesajının yanında gülümseyen bir figür, kullanıcının sayfayı terk etme olasılığını azaltır.
+
+## Tailwind CSS ile Illüstrasyon Entegrasyonu
+
+```tsx
+// Empty state component — Corporate Memphis style
+export function EmptyState({ title, description }: { title: string; description: string }) {
+  return (
+    <div className="flex flex-col items-center justify-center py-16 text-center">
+      {/* Inline SVG figür placeholder */}
+      <div className="w-40 h-40 mb-6 flex items-center justify-center">
+        <svg viewBox="0 0 120 120" fill="none" className="w-full h-full">
+          {/* Basit Corporate Memphis figür */}
+          <circle cx="60" cy="30" r="18" fill="#FFB347" />
+          <rect x="52" y="48" width="16" height="30" rx="8" fill="#4ECDC4" />
+          {/* Kollar */}
+          <path d="M52 60 Q35 50 30 65" stroke="#4ECDC4" strokeWidth="8" strokeLinecap="round" />
+          <path d="M68 60 Q85 50 90 65" stroke="#4ECDC4" strokeWidth="8" strokeLinecap="round" />
+          {/* Bacaklar */}
+          <path d="M56 78 Q52 95 48 100" stroke="#FF6B6B" strokeWidth="8" strokeLinecap="round" />
+          <path d="M64 78 Q68 95 72 100" stroke="#FF6B6B" strokeWidth="8" strokeLinecap="round" />
+        </svg>
+      </div>
+      <h3 className="text-lg font-semibold text-gray-900 mb-2">{title}</h3>
+      <p className="text-sm text-gray-500 max-w-xs">{description}</p>
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Create an illustration in Corporate Memphis / Alegria style for my [onboarding screen/empty state/feature explanation].
+
+Corporate Memphis is the flat vector illustration style that dominated SaaS design from 2018-2024. You've seen it everywhere — and that's both its strength and weakness. Use it deliberately, knowing its cultural baggage.
+
+The visual rules: human figures with deliberately disproportionate limbs (long arms and legs, small heads), always in active, positive poses — collaborating, celebrating, working. Zero shadows, zero gradients — pure flat color fills only. Bright, warm palette: coral, teal, yellow, lavender, peach.
+
+The diversity principle: always include figures of different skin tones and body types. The style makes this easy — just vary the fill color of the face/hands/legs.
+
+Supporting objects (laptops, phones, charts, plants) follow the same flat, slightly geometric style.
+
+Create this for my [context]: [describe what you're illustrating — team collaboration, data analysis, empty inbox, successful completion, etc.]. The figures should be in [describe the action]. Use [describe your brand's color palette or preferred colors — these will become the clothing/object colors].
+
+Important: avoid the most generic Corporate Memphis poses (people pointing at a whiteboard or high-fiving) — choose something more specific to your actual use case.
+```

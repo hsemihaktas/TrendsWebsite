@@ -1,0 +1,84 @@
+---
+title: "Liquid Glass"
+slug: "liquid-glass"
+category: "yeni-guncel"
+tags: ["liquid-glass", "apple", "ios26", "material", "dynamic"]
+description: "Apple'ın 2025'te tanıttığı tasarım materyali: cam gibi görünüp ışığı kıran, içeriğe ve harekete uyum sağlayan dinamik arayüz yüzeyi."
+publishedAt: "2025-06-10"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Liquid Glass, Apple'ın Haziran 2025'te WWDC'de duyurduğu iOS 26 ve macOS Tahoe ile birlikte tanıttığı yeni tasarım materyalidir. Şirkete göre bu, "sadece görsel bir güncelleme değil, arayüzün fiziksel bir madde gibi davranmaya başlaması"dır.
+
+Glassmorphism'den çok daha ileri giden Liquid Glass; cam görünümünü statik bir stil olarak değil, dinamik bir material sistemi olarak ele alır. Arkasındaki içeriği sadece bulanıklaştırmakla kalmaz — kırar, renklendirir ve hareketle birlikte şeklini değiştirir.
+
+### Işık Kırma ve Refraksiyon
+
+Liquid Glass, `backdrop-filter` ile elde edilen basit blur'ün ötesinde bir optik simülasyon yapar. Cam yüzeyin kenarları ışığı kırarak altındaki içeriği hafifçe bozar. Bu etki, `backdrop-filter: blur() saturate() brightness()` kombinasyonu ve SVG/CSS filter zinciriyle yaklaşık olarak elde edilebilir.
+
+### İçeriğe ve Bağlama Uyum
+
+Arayüz elemanları hangi içeriğin üzerinde durduğuna göre görünümlerini değiştirir: açık bir arka plan üzerinde daha şeffaf, karanlık bir arka plan üzerinde daha yoğun bir cam etkisi verir. Bu uyum, JavaScript ile arka plan rengini okuyarak CSS değişkenlerini güncellemeyle sağlanabilir.
+
+### Hareket Entegrasyonu
+
+Cam elementler, kullanıcı etkileşimiyle cevap verir — toggle'lar dönüşürken, kaydırıcılar sürüklenirken cam yüzey esner, akar, geri döner. Bu "sıvı" kalite, spring animasyon easing'i ile simüle edilir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: iOS/macOS Tarzı Mobil Uygulama
+
+Navigation bar, tab bar ve kontrol grupları için Liquid Glass materyali kullanmak, Apple ekosistemiyle uyumlu ve modern bir his verir. Her UI elemanı arkasındaki içeriği gösterir ama bunu şeffaflık değil, cam kalitesiyle yapar.
+
+### Senaryo 2: Premium Web Arayüzü
+
+Dashboard veya medya uygulamalarında overlay paneller ve floating controls için Liquid Glass; kullanıcının altındaki içeriği kaybetmeden üst katmanı görmesini sağlar. Derinlik hissi yaratır, karmaşıklık hissini azaltır.
+
+## Tailwind CSS Yaklaşımı
+
+```tsx
+// Liquid Glass panel — CSS ile en yakın simülasyon
+export function LiquidGlassPanel({ children }: { children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-3xl overflow-hidden"
+      style={{
+        background: 'rgba(255,255,255,0.07)',
+        backdropFilter: 'blur(40px) saturate(180%) brightness(1.05)',
+        WebkitBackdropFilter: 'blur(40px) saturate(180%) brightness(1.05)',
+        border: '1px solid rgba(255,255,255,0.18)',
+        boxShadow: [
+          '0 20px 60px rgba(0,0,0,0.3)',
+          'inset 0 1px 0 rgba(255,255,255,0.2)',
+          'inset 0 -1px 0 rgba(0,0,0,0.1)',
+        ].join(', '),
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a UI component using Apple's Liquid Glass material (iOS 26 / macOS Tahoe style).
+
+Liquid Glass goes beyond Glassmorphism — the surface doesn't just blur the background, it optically refracts it, bends it, and responds to motion. Key properties:
+
+The glass material: semi-transparent fill (5-10% white opacity), very strong backdrop blur (30-50px), high saturation filter, subtle brightness boost. The border simulates the edge of glass catching light: top edge is brighter (1px rgba(255,255,255,0.25)), bottom edge slightly darker.
+
+The depth: multiple glass layers at different elevations — a sticky header, a floating panel, a bottom tab bar. Each layer has slightly different opacity and blur intensity, creating convincing three-dimensional space.
+
+Dynamic adaptation: the glass appearance should subtly change based on what's behind it. Over dark content: more opaque, cooler tint. Over light content: more transparent, warmer.
+
+Place this over a rich, colorful background (gradient or imagery) — the glass effect only becomes visible with color to refract behind it.
+
+Apply this to my [navigation/card/modal/tab bar] for my [app type]. The result should feel like the UI is made of physical glass floating above the content, not painted on top of it.
+```

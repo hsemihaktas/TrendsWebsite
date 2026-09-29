@@ -1,0 +1,80 @@
+---
+title: "Anti-Design"
+slug: "anti-design"
+category: "yeni-guncel"
+tags: ["anti-design", "broken-grid", "chaos", "rule-breaking", "experimental"]
+description: "Tasarım kurallarına kasıtlı karşı çıkış: asimetrik düzenler, çakışan elementler, bilerek 'çirkin' görsel kararlar — yapay zeka estetiğine tepki olarak yükselen akım."
+publishedAt: "2024-11-01"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Anti-Design, 2024'te güçlü bir dalga olarak web tasarımına girdi — AI araçlarının ürettiği mükemmel, temiz, ama ruhsuz tasarımlara karşı bir tepki olarak. Eğer her araç aynı kalıplarda "iyi" tasarım üretebiliyorsa, "kötü" tasarım yapmak birer tercih ve ifade biçimi haline gelir.
+
+Tarihsel olarak 1960'ların İtalyan Anti-Design hareketinden (Ettore Sottsass ve Memphis Grubu gibi isimlerin öncüsü olduğu) beslenin bu yaklaşım, kurallara kasıtlı karşı çıkmayı sanatsal bir tutum olarak ele alır.
+
+### Bozuk Grid
+
+Standart grid'i çiğnemek Anti-Design'ın temel tekniğidir: elementler hizalanmaz, taşar, çakışır. Okuma akışı bozulur — ama kasıtlı olarak. Bu kaos, ziyaretçiye "bu site bir AI tarafından üretilmedi" mesajını verir.
+
+### Kasıtlı Gerilim
+
+Renk paletleri çarpışır: soğuk mavi ile sıcak sarı, serif ile monospace. Boyut hiyerarşisi tutarsız: küçük öğeler büyük öğelerden daha öne çıkar. Her "hata" aslında bir kural ihlalidir.
+
+### Ham Dürüstlük
+
+Anti-Design, Brutalism'le örtüşür ama daha radikaldir: sadece süslemeyi reddetmez, güzel olmayı da reddeder. Bir şey hem işlevsel hem de kasıtlı olarak konforsuz görünebilir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Yaratıcı Ajans Portfolyosu
+
+"Biz sıradan değiliz" mesajını vermek isteyen bir tasarım ajansı için Anti-Design, hem kendini söyleyen hem de göstererek kanıtlayan bir seçimdir. Ziyaretçi siteye girdiğinde "bu farklı bir şey" hisseder, küçük bir konforsuzluk yaşar ve bu yüzden hatırlar.
+
+### Senaryo 2: Sanat ve Kültür Yayınları
+
+Edgy müzik, underground sanat veya deneysel kültür yayınları için Anti-Design, içeriğin yapısını yansıtır. Tasarım, içerikten ayrı bir "çerçeve" değil — içeriğin kendisi kadar temsil edici ve sert.
+
+## Tailwind CSS Örneği
+
+```tsx
+// Kasıtlı bozuk grid — elementler çakışıyor
+export function AntiGrid() {
+  return (
+    <div className="relative min-h-screen bg-white overflow-hidden">
+      {/* Overflowing headline */}
+      <h1 className="text-[120px] font-black leading-none -ml-4 -mt-2 text-black select-none z-10 relative">
+        ANTI
+      </h1>
+
+      {/* Misaligned block */}
+      <div className="absolute top-16 right-0 w-2/3 bg-black text-white p-8 rotate-1">
+        <p className="font-mono text-sm">Everything designed to be "correct" is designed to be forgotten.</p>
+      </div>
+
+      {/* Bleeding element */}
+      <div className="absolute bottom-0 left-1/3 w-40 h-40 bg-red-600 translate-y-1/2" />
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a [website/portfolio/brand identity] in Anti-Design style.
+
+Anti-Design is a deliberate refusal of conventional "good design" — it breaks grids, clashes colors, misaligns elements, and makes decisions that would fail every UX audit. But it does this with intention and skill. The chaos is composed.
+
+Why this works: in a world where AI tools produce endless streams of clean, perfectly balanced, soulless interfaces, deliberate imperfection becomes a signal of human authorship and genuine personality.
+
+The approach: start with standard grid and typography, then systematically violate it. Let the headline overflow its container. Stack elements at conflicting angles. Use typography that fights itself (serif colliding with monospace, multiple sizes on the same line). Let red and blue live next to each other without a neutral to mediate.
+
+The key rule: every violation must be deliberate. Anti-Design is not accidental ugliness — it's the most carefully composed "mess" you've ever seen.
+
+Design for my [context/brand]: [describe what you're making and what personality you want to convey — rebellious, underground, experimental, anti-corporate, etc.]. The result should make the viewer slightly uncomfortable and then immediately fascinated.
+```

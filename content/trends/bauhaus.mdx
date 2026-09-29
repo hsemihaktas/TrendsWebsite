@@ -1,0 +1,78 @@
+---
+title: "Bauhaus"
+slug: "bauhaus"
+category: "bold-expressive"
+tags: ["bauhaus", "geometric", "functional", "primary-colors", "modernism"]
+description: "1919'da Almanya'da kurulan sanat okulu: geometrik formlar, birincil renkler ve 'form işlevi takip eder' ilkesiyle modern tasarımın temellerini attı."
+publishedAt: "2024-07-01"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Bauhaus, 1919'da Walter Gropius tarafından Weimar'da kuruldu ve 1933'e kadar Dessau ile Berlin'de eğitim verdi. "İnşa evi" anlamına gelen bu okul, sanat ve zanaatı birleştirmeyi hedefledi — bir mobilya hem güzel hem de fonksiyonel olmak zorundaydı.
+
+Okul; Kandinsky, Klee, Moholy-Nagy gibi sanatçıları bünyesinde barındırdı. Geometrik formların evrensel bir görsel dil oluşturabileceği inancıyla çalıştılar. Birincil renkler (kırmızı, sarı, mavi) ve temel geometrik şekiller (daire, kare, üçgen) bu dilin alfabesiydi.
+
+### Form İşlevi Takip Eder
+
+Bauhaus tasarımının temel ilkesi: bir nesnenin görünümü onun işlevinden çıkmalıdır. Süsleme, nesnenin işlevini desteklemiyorsa gereksizdir. Bu radikal yaklaşım, günümüzün minimal ve işlevsel tasarımının doğrudan atası sayılır.
+
+### Geometrik Grid Sistemi
+
+Bauhaus tasarımları kesin geometrik ilişkilere dayanır — daire, kare ve üçgen birbirine matematiksel oranlarla bağlıdır. Bu grid anlayışı, sonraki on yıllarda grafik tasarımın standart çalışma yöntemi haline geldi.
+
+### Renge Psikolojik Anlam Yükleme
+
+Kandinsky'nin renk teorisine göre: sarı üçgen (saldırgan, aktif), mavi daire (derin, sessiz), kırmızı kare (ağır, sakin). Bu psikolojik renk atamalarına dayanan sistem, Bauhaus işlerini kolayca tanınır kılar.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Kurumsal Kimlik Tasarımı
+
+Bir teknoloji veya eğitim şirketinin marka kimliği için Bauhaus estetiği; güven, zekanın, işlevselliği ön plana koyar. Logo, geometrik formların basit bir kombinasyonu olarak oluşturulur. Tipografi güçlü ve sistematiktir.
+
+### Senaryo 2: Eğitim ve Kültür Kurumları
+
+Müzeler, okullar ve araştırma kurumları için Bauhaus stili, kurumun bilimsel ve kültürel otoritesini görsel olarak destekler. Her şey yerli yerinde, her şeyin bir nedeni var.
+
+## Tailwind CSS Örneği
+
+```tsx
+export function BauhausCard() {
+  return (
+    <div className="bg-white p-8 border border-black relative overflow-hidden">
+      {/* Primary shapes */}
+      <div className="absolute top-4 right-4 w-16 h-16 rounded-full bg-[#E8231C]" aria-hidden="true" />
+      <div className="absolute bottom-4 right-20 w-12 h-12 bg-[#1C3BE8]" aria-hidden="true" />
+      <div className="absolute bottom-4 right-4 w-0 h-0 border-l-[24px] border-r-[24px] border-b-[40px] border-l-transparent border-r-transparent border-b-[#F7D000]" aria-hidden="true" />
+
+      <h2 className="text-2xl font-black text-black uppercase tracking-widest relative z-10">
+        Bauhaus
+      </h2>
+      <p className="text-sm text-gray-600 mt-2 max-w-xs relative z-10">
+        Form follows function. Geometry as universal language.
+      </p>
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a [component/layout/brand element] in Bauhaus style, following the principles of the 1919 German design school.
+
+Bauhaus believed that all visual problems could be solved through geometry, primary colors, and the principle that form must serve function. There is no decoration for its own sake — every visual element either communicates something or structures the space.
+
+The visual system: three primary colors (red, yellow, blue) and three basic shapes (circle, square, triangle). These map to each other — Kandinsky's theory assigned yellow to triangle (active, aggressive), blue to circle (passive, deep), red to square (stable, heavy). Use this mapping if you want to be rigorous about it, or simply use the palette and shapes freely.
+
+Grid is visible and mathematical. Typography is heavy and geometric — Futura, Helvetica, or any geometric sans-serif at extreme weights. All caps for labels and headings.
+
+The composition is asymmetric but balanced through deliberate visual weight relationships — a large shape balanced by a field of negative space, a heavy headline balanced by fine typography.
+
+Design my [component] for [use case]. Use primary colors and geometric shapes as the primary visual elements. The result should feel authoritative, intelligent, and timeless — like it was designed to still be relevant in 100 years.
+```

@@ -1,0 +1,92 @@
+---
+title: "Art Deco"
+slug: "art-deco"
+category: "bold-expressive"
+tags: ["art-deco", "luxury", "geometric", "gold", "1920s"]
+description: "1920'lerin lüksünü simgeleyen simetrik geometri, altın vurgular ve stepped formlar — premium marka deneyimleri için zamansız bir estetik."
+publishedAt: "2024-07-15"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Art Deco, 1910'ların sonunda Paris'te ortaya çıktı ve 1920-1940 arasında dünya genelinde yayıldı. New York'un Chrysler Binası ve Empire State Binası bu dönemin ikonik örnekleridir. Hız çağının, makine estetiğinin ve lüksün görsel ifadesiydi.
+
+Art Nouveau'nun kıvırcık organik çizgilerine tepki olarak doğan Art Deco; düz çizgiler, simetri ve geometrik tekrarlar üzerine kuruluydu. Sanayi çağının vaadiyle — hız, güç, refah — görsel bir dil oluşturdu.
+
+### Stepped Formlar ve Simetri
+
+Art Deco'nun en tanımlayıcı özelliği, kademeli olarak daralan veya genişleyen adımlı formlar ve mükemmel simetridir. Bina cepheleri, kuyumculuk tasarımları ve grafik baskılarda bu stepped pattern tekrar eder.
+
+### Metalik ve Lüks Palet
+
+Altın, gümüş, siyah ve koyu yeşil Art Deco'nun renk kimliğidir. Metalik yüzeyler ve zengin dokular dönemin refahını yansıtır. Dijitalde bu; altın gradient'ler, koyu arka planlar ve parlak vurgularla simüle edilir.
+
+### Güneş Işını Motifi
+
+Art Deco'nun en ikonik elementidir: merkezi bir noktadan dışa doğru yayılan çizgiler veya şeritler. Güneş enerjisi, iyimserlik ve modernite sembolüdür.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Lüks Marka ve Otel
+
+Yüksek kaliteli restoran, otel veya lüks perakende için Art Deco tasarımı, kurumun tarihsel derinliğini ve zarafetini iletir. Menü tasarımından ambalaja, digitale kadar tutarlı bir premium his yaratır.
+
+### Senaryo 2: Özel Etkinlik ve Davet
+
+Gala gecesi, wedding veya ödül töreni için Art Deco estetiği; olayın büyüklüğünü ve özel niteliğini görsel olarak vurgular. Davetiye tipografisi, etkinlik websitesi ve dijital menü aynı dili konuşur.
+
+## Tailwind CSS Örneği
+
+```tsx
+export function ArtDecoCard() {
+  return (
+    <div
+      className="relative p-8 text-center overflow-hidden"
+      style={{ background: '#1a1410', border: '1px solid rgba(201,168,76,0.3)' }}
+    >
+      {/* Corner brackets */}
+      <div className="absolute top-3 left-3 w-6 h-6 border-t-2 border-l-2" style={{ borderColor: '#C9A84C' }} />
+      <div className="absolute top-3 right-3 w-6 h-6 border-t-2 border-r-2" style={{ borderColor: '#C9A84C' }} />
+      <div className="absolute bottom-3 left-3 w-6 h-6 border-b-2 border-l-2" style={{ borderColor: '#C9A84C' }} />
+      <div className="absolute bottom-3 right-3 w-6 h-6 border-b-2 border-r-2" style={{ borderColor: '#C9A84C' }} />
+
+      <p className="text-xs uppercase tracking-[0.5em] mb-3" style={{ color: 'rgba(201,168,76,0.6)' }}>
+        Est. 1925
+      </p>
+      <h2
+        className="text-3xl font-black uppercase tracking-[0.2em] mb-2"
+        style={{ color: '#C9A84C', fontFamily: 'Georgia, serif' }}
+      >
+        MAISON
+      </h2>
+      <div className="flex items-center gap-3">
+        <div className="flex-1 h-px" style={{ background: 'rgba(201,168,76,0.4)' }} />
+        <span style={{ color: 'rgba(201,168,76,0.5)' }}>◆</span>
+        <div className="flex-1 h-px" style={{ background: 'rgba(201,168,76,0.4)' }} />
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a [luxury product page/premium brand identity/event invitation] in Art Deco style.
+
+Art Deco was the visual language of the 1920s-30s — it communicated power, speed, luxury, and modernism through strict geometric symmetry, metallic surfaces, and stepped architectural forms.
+
+The palette: dark backgrounds (deep black or midnight navy), gold as the primary accent (use gradients to simulate metallic — light gold to dark gold), white for text. Secondary accents can include silver, deep jade green, or rich burgundy.
+
+The composition is always symmetrical along the vertical axis — what appears on the left mirrors the right. Corner bracket decorations (L-shapes) frame the central content. Horizontal rules divide sections with precision.
+
+Typography is geometric sans-serif (Futura) or strong serif, all caps, widely tracked. The headline is always centered and accompanied by thin decorative rules.
+
+Motifs to include: the sunburst (radiating lines from a central point), stepped/tiered shapes that narrow as they ascend, repeated diamond or chevron patterns as borders.
+
+Design for my [luxury brand/event/product]: [describe what you're creating]. The result should feel like it belongs on the wall of a 1930s New York skyscraper lobby — powerful, symmetrical, and unmistakably premium.
+```

@@ -1,0 +1,83 @@
+---
+title: "Kinetik Tipografi"
+slug: "kinetic-typography"
+category: "yeni-guncel"
+tags: ["kinetic", "typography", "animation", "motion", "type"]
+description: "Metin hareketinin kendisi tasarım öğesi haline gelir — harfler, kelimeler ve satırlar scroll, hover veya zamana bağlı animasyonlarla hayata geçer."
+publishedAt: "2024-09-15"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Kinetik tipografi (kinetic typography) 1960'larda film jeneriği tasarımcılarının hareket eden başlıklar deneyiyle başladı. Saul Bass'ın Hitchcock filmleri için tasarladığı jeneriğe atıfta bulunulan bu teknik, 2000'lerde After Effects ile animasyon stüdyolarına taşındı.
+
+Web'deki kinetik tipografi ise 2020'lerin başında CSS animasyonlarının, Intersection Observer API'nin ve scroll-driven animations'ın olgunlaşmasıyla ana akıma girdi. Framer Motion ve GSAP gibi kütüphaneler, her geliştiricinin film kalitesinde tipografi animasyonları oluşturmasını mümkün kıldı.
+
+### Scroll-Driven Animasyon
+
+En güçlü kinetik tipografi efekti, metni kullanıcının scroll etme hızına ve pozisyonuna bağlamakla elde edilir. Harfler sayfa ilerledikçe sahneye girer, ölçek değiştirir, renk geçişi yapar. CSS'teki yeni `animation-timeline: scroll()` özelliği bu etkiyi JavaScript olmadan sağlar.
+
+### Variable Font Ekseni Animasyonu
+
+Variable fontların ağırlık (`wght`) ve genişlik (`wdth`) eksenlerini CSS animasyonuyla değiştirmek, tek bir tipografik elemanı sonsuz biçime dönüştürür. Bir başlık nefes alıyor gibi ultra-light ile ultra-bold arasında geçiş yapabilir.
+
+### Metin Maskeleme ve Reveal
+
+`clip-path` veya `overflow: hidden` + `translateY` animasyonu ile harflerin sanki alttan çıkıyormuş gibi görünmesi sağlanır. Bu "reveal" efekti, özellikle splash sayfalarında dramatik bir first impression yaratır.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Brand Splash Sayfası
+
+Ürün lansmanı veya marka yenileme sayfalarında kinetik başlık, kullanıcının ilk 3 saniyesini tamamen kontrol altına alır. Harflerin tek tek sahneye girmesi veya kelimelerin ölçek değiştirmesi, sayfa hızla aşağı kaydırılsa bile marka isminin hafızada kalmasını sağlar.
+
+### Senaryo 2: Parallax Editoryal Sayfası
+
+Uzun-form içerik veya yıllık rapor sayfalarında her bölümün başlığı scroll hızına bağlı olarak farklı bir hızda hareket eder. Bu parallax tipografi efekti, içeriğe editöryal dergi kalitesi katar.
+
+## Tailwind + CSS Kod Örneği
+
+```tsx
+// Kelime kelime reveal animasyonu
+export function RevealHeading({ text }: { text: string }) {
+  return (
+    <h1 className="overflow-hidden">
+      {text.split(' ').map((word, i) => (
+        <span
+          key={i}
+          className="inline-block animate-[slideUp_0.6s_ease_forwards] opacity-0"
+          style={{ animationDelay: `${i * 0.1}s` }}
+        >
+          {word}&nbsp;
+        </span>
+      ))}
+    </h1>
+  );
+}
+
+// globals.css veya tailwind config'e ekle:
+// @keyframes slideUp {
+//   from { transform: translateY(100%); opacity: 0; }
+//   to   { transform: translateY(0);    opacity: 1; }
+// }
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a [hero section/landing page/campaign page] using Kinetic Typography as the primary design element.
+
+In kinetic typography, the movement of text IS the design — not a decoration added afterward, but the central visual experience. How text enters, transforms, and exits communicates the brand's personality before a word is consciously read.
+
+The approach: choose one primary interaction trigger — scroll position, page load timing, or hover state. Build the headline animation around that trigger. Words or letters should enter the viewport with intentional choreography: staggered by 80-120ms per element, with easing that reflects your brand's energy (bouncy for playful, smooth deceleration for premium, sharp snap for technical).
+
+Techniques to consider: text reveal from below (overflow hidden + translateY), character-by-character scale entrance, outline-to-filled text transition, variable font weight animation (ultra-light to ultra-bold), or text that physically responds to cursor position.
+
+Supporting elements should be minimal — the animation needs room to breathe. One thin horizontal rule, one small label, one subtle CTA. Everything else is typography in motion.
+
+Apply this to my [brand/product]. My headline is: [your headline]. My brand's movement personality is [smooth/bouncy/sharp/organic]. The result should make the visitor pause — motion as communication.
+```

@@ -1,0 +1,78 @@
+---
+title: "Spatial UI"
+slug: "spatial-ui"
+category: "yeni-guncel"
+tags: ["spatial", "3d", "depth", "visionpro", "immersive"]
+description: "Apple Vision Pro ve spatial computing ile gündeme gelen derinlik-farkında arayüzler: paneller z-ekseninde konumlanıyor, gölgeler yükseklik bilgisi taşıyor."
+publishedAt: "2024-02-10"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Apple Vision Pro'nun Şubat 2024'te piyasaya sürülmesiyle birlikte "spatial computing" kavramı tasarımcıların gündemine girdi. Yıllardır VR/AR üzerine çalışmalar yapılmış olsa da, Vision Pro bunu mainstream bir tasarım dili haline getirdi.
+
+Spatial UI'ın temeli şudur: ekran artık düz bir yüzey değil, üç boyutlu bir alan. Paneller ve pencereler havada dururlar, kullanıcı etraflarında dolaşabilir, gözle veya elle interact edebilir.
+
+### Derinlik ile Hiyerarşi
+
+Flat UI'da hiyerarşi renk ve boyutla kurulurdu. Spatial UI'da hiyerarşi z-ekseninde kurulur: en önemli panel en yakın, bağlam bilgisi en uzakta. CSS `perspective()` ve `translateZ()` ile ekran dışı bir derinlik hissi yaratılabilir.
+
+### Glass Windows
+
+Vision Pro'nun pencereleri, Liquid Glass materyalinin spatial versiyonudur: ortam ışığını yansıtır, arkasındaki gerçek dünyayı gösterir, derinliğine göre opaklığı değişir.
+
+### Passthrough ve Çevre Entegrasyonu
+
+Spatial UI'ın en zorlu kısmı: UI'ın kullanıcının gerçek ortamıyla bütünleşmesi. Web'de bu, beyaz yerine şeffaf (rgba) arka planlar ve ortam rengini hesaba katan renkler kullanmakla simüle edilir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Spatial Video Player
+
+Film veya içerik izleme uygulaması, video penceresini merkeze alır, kontroller ve metadata panelleri etrafında orbiting ederek konumlanır. Kullanıcı başını çevirdiğinde farklı paneller görünür alanına girer.
+
+### Senaryo 2: Productivity Suite
+
+Not uygulaması, takvim ve e-posta farklı spatial pozisyonlarda eş zamanlı açık durabilir. Kullanıcı fiziksel olarak bir adım sağa giderek farklı bir "workspace"e geçebilir.
+
+## Tailwind CSS ile Simülasyon
+
+```tsx
+// Spatial panel — perspektif derinliği
+export function SpatialPanel({ depth = 0, children }: { depth?: number; children: React.ReactNode }) {
+  return (
+    <div
+      className="rounded-3xl overflow-hidden"
+      style={{
+        transform: `perspective(800px) translateZ(${depth * 20}px)`,
+        background: `rgba(255,255,255,${0.05 + depth * 0.03})`,
+        backdropFilter: `blur(${20 + depth * 8}px)`,
+        border: '1px solid rgba(255,255,255,0.15)',
+        boxShadow: `0 ${10 + depth * 15}px ${30 + depth * 20}px rgba(0,0,0,${0.2 + depth * 0.1})`,
+      }}
+    >
+      {children}
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a [app interface/dashboard/media player] in Spatial UI style, inspired by Apple Vision Pro's design language.
+
+Spatial UI treats the screen as a three-dimensional space, not a flat surface. Elements exist at different depths — this depth communicates hierarchy, relationship, and importance in a way that flat UI cannot.
+
+Key principles: The most important content sits at the highest z-level (closest to the viewer), supporting panels at medium depth, contextual information at lowest depth. This creates a natural reading order through space, not just left-to-right or top-to-bottom.
+
+Surfaces are made of glass (semi-transparent, blurred) — they reveal the environment or content behind them rather than covering it completely. Dark backgrounds work best because the glass panels create contrast.
+
+Motion is essential: panels don't appear and disappear — they float in and out from their spatial position. When a panel is dismissed, it recedes into the distance (scale down + translate away), not just fade out.
+
+Design my [component/interface] with 3 depth layers: primary content (closest), secondary panels (middle), contextual hints (farthest). Use dark bg #0a0a14, glass surfaces, and shadows that intensify with elevation. The result should feel like you could reach out and rearrange the panels in physical space.
+```

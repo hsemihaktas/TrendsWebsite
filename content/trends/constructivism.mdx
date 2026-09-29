@@ -1,0 +1,84 @@
+---
+title: "Konstrüktivizm"
+slug: "constructivism"
+category: "bold-expressive"
+tags: ["constructivism", "soviet", "diagonal", "propaganda", "red-black"]
+description: "1920'ler Sovyet grafik tasarımı: diyagonal dinamizm, kırmızı-siyah palet ve güçlü tipografi — sanat ve siyasi mesajın kesişim noktası."
+publishedAt: "2024-08-01"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Sovyet Konstrüktivizmi, 1917 Rus Devrimi'nin ardından ortaya çıktı. Alexander Rodchenko, El Lissitzky ve Varvara Stepanova bu akımın öncü isimleridir. Sanat artık seçkinlerin zevk aracı değil, devrimin ve toplumsal dönüşümün hizmetinde bir araçtı.
+
+Bu anlayış, dönemin grafik tasarımında kendini diyagonal kompozisyonlar, kırmızı-siyah palet, güçlü geometrik formlar ve fotoğraf-tipografi montajı (fotomontaj) olarak gösterdi.
+
+### Diyagonal Dinamizm
+
+Konstrüktivizmin en belirgin görsel kararı diyagonal eksendir. Yatay ve dikey hizalar statiklik ve düzeni ifade ederken, diyagonal enerji, hareket ve devrimi simgeler. Her kompozisyon bir şeyin hareket halinde olduğunu ima eder.
+
+### Kırmızı-Siyah-Beyaz Üçlüsü
+
+Konstrüktivisttasarımlarda renk paleti sınırlıydı — çünkü baskı ucuz olmalıydı ve kitleye ulaşmalıydı. Kırmızı devrim ve kanı, siyah gücü, beyaz ise sayfayı ve negatif alanı temsil eder.
+
+### Tipografinin Görsel Araç Olarak Kullanımı
+
+Yazı tipi yalnızca okunan bir şey değil, görülen bir şeydi. Büyük punto harfler, görsel bir şekil gibi kompozisyona dahil edildi. Metin hem okunabilir hem de vizüel bir bileşen olarak işlev gördü.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Bağımsız Yayın ve Manifest
+
+Sanat dergisi, bağımsız kültür yayını veya aktivist kampanya için Konstrüktivizm; markanın radikal, kararlı ve yapay kibarlıklardan arınmış duruşunu görsel olarak ifade eder.
+
+### Senaryo 2: Hareketli Grafik ve Açılış Animasyonları
+
+Motion graphics'te Konstrüktivisttasarım; diyagonal giriş animasyonları, kırmızı-siyah geçişler ve güçlü tipografi çerçeveleme ile güçlü bir açılış anı yaratır.
+
+## Tailwind CSS Örneği
+
+```tsx
+export function ConstructivistHero() {
+  return (
+    <div className="relative min-h-screen bg-[#F5F0E8] overflow-hidden">
+      {/* Diagonal red bar */}
+      <div
+        className="absolute bg-[#CC1A1A]"
+        style={{ width: '140%', height: '45%', top: '15%', left: '-20%', transform: 'rotate(-15deg)' }}
+        aria-hidden="true"
+      />
+
+      {/* Content */}
+      <div className="relative z-10 p-12">
+        <div className="text-[80px] font-black text-black uppercase leading-none">
+          FOR<br/>
+          <span className="text-white">THE</span><br/>
+          PEOPLE
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+---
+
+## AI Prompt
+
+Bu tasarım stilini yapay zekayla uygulamak için aşağıdaki prompt'u kopyalayın:
+
+```text
+Design a [poster/brand identity/editorial page] in Soviet Constructivist style.
+
+Constructivism was the visual language of the 1917 Russian Revolution — design as political energy, art as social tool. Every element communicates urgency, momentum, and force.
+
+The composition rules: dominant diagonal elements (bars, typography, geometric shapes) that cut through the page at 15-30 degree angles. Nothing is static — everything implies motion. Asymmetric but powerfully balanced through visual weight.
+
+Color palette: red #CC1A1A (revolution, action), black (power, contrast), off-white or cream (the paper/page). Occasionally a second strong color, but never more than three total.
+
+Typography: bold, condensed, geometric sans-serif or heavy slab serif. All caps. Large. Treated as a visual shape, not just readable text. The headline should be placed so it interacts with the geometric elements — overlapping, cutting through, being cut by the diagonal bars.
+
+Photomontage feeling: if including imagery, it should feel collaged in — bold graphic treatment, not photographic realism.
+
+Design for my [manifesto/publication/campaign]: [describe your content and message]. The result should feel urgent and decisive — like a broadside printed in 1920 Moscow, but for your contemporary context.
+```
