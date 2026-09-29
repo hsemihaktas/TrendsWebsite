@@ -10,6 +10,7 @@ import CategoryBadge from '@/components/CategoryBadge';
 import { BreadcrumbNav } from '@/components/detail/BreadcrumbNav';
 import { RelatedTrends } from '@/components/detail/RelatedTrends';
 import { TrendNavigation } from '@/components/detail/TrendNavigation';
+import { CodeBlock } from '@/components/mdx/CodeBlock';
 
 export async function generateStaticParams() {
   const trends = await getAllTrends();
@@ -64,14 +65,26 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
 
       <div className="border-t border-[#E6E3DC] dark:border-[#2C2A27] mb-8" />
 
-      {/* MDX */}
+      {/* MDX — CodeBlock bileşeni pre elementini override eder */}
       <div className="mdx-content mb-12">
         <MDXRemote
           source={trend.rawContent}
+          components={{ pre: CodeBlock }}
           options={{
             mdxOptions: {
-              // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              rehypePlugins: [[rehypePrettyCode, { theme: { light: 'github-light', dark: 'github-dark' } }]] as any,
+              rehypePlugins: [
+                [
+                  rehypePrettyCode,
+                  {
+                    // Çift tema: CSS vars ile runtime switching
+                    theme: {
+                      light: 'github-light',
+                      dark: 'github-dark-dimmed',
+                    },
+                    keepBackground: false, // arka planı biz yönetiyoruz
+                  },
+                ],
+              ],
             },
           }}
         />

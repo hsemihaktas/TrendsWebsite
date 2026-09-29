@@ -155,3 +155,22 @@ body {
   color: var(--t2);
 }
 .mdx-content tr:last-child td { border-bottom: none; }
+
+/* ── Shiki multi-theme CSS variable switching ─────────────── */
+/* rehype-pretty-code ile çift tema: light → github-light, dark → github-dark-dimmed */
+code[data-theme*=" "],
+code[data-theme*=" "] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+.dark code[data-theme*=" "],
+.dark code[data-theme*=" "] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Kod içi background'u şeffaf yap (wrapper bizim bg'ımızı kullanır) */
+.mdx-content pre code {
+  background: transparent !important;
+}
