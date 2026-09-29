@@ -33,66 +33,59 @@ export default async function TrendDetailPage({ params }: { params: { slug: stri
 
   return (
     <article className="max-w-3xl mx-auto">
-
       {/* Breadcrumb + back */}
       <div className="flex items-center justify-between mb-6">
         <BreadcrumbNav categoryName={categoryName} trendTitle={trend.title} />
-        <Link href="/" className="text-[12px] text-[#A8A49C] hover:text-[#6B6860] transition-colors">
+        <Link href="/" className="text-[12px] text-[#A8A49C] dark:text-[#5C5A57] hover:text-[#6B6860] dark:hover:text-[#9B9890] transition-colors">
           ← Geri
         </Link>
       </div>
 
-      {/* Hero — detay sayfasında daha büyük, yine de sabit yükseklik */}
-      <div className="rounded-xl overflow-hidden border border-[#E6E3DC] mb-8">
-        <HeroPreview
-          slug={slug}
-          label={`${trend.title} Hero Önizleme`}
-          height="h-[300px]"
-        />
+      {/* Hero */}
+      <div className="rounded-xl overflow-hidden border border-[#E6E3DC] dark:border-[#2C2A27] mb-8">
+        <HeroPreview slug={slug} label={`${trend.title} Hero Önizleme`} height="h-[300px]" />
       </div>
 
       {/* Title block */}
       <div className="mb-8">
         <div className="flex items-center gap-3 mb-3">
           <CategoryBadge category={trend.category} />
-          <time dateTime={trend.publishedAt} className="text-[11px] text-[#A8A49C]">
-            {new Date(trend.publishedAt + 'T00:00:00').toLocaleDateString('tr-TR', {
-              year: 'numeric', month: 'long',
-            })}
+          <time dateTime={trend.publishedAt} className="text-[11px] text-[#A8A49C] dark:text-[#5C5A57]">
+            {new Date(trend.publishedAt + 'T00:00:00').toLocaleDateString('tr-TR', { year: 'numeric', month: 'long' })}
           </time>
         </div>
-        <h1 className="text-3xl font-semibold text-[#111110] tracking-tight leading-snug mb-3">
+        <h1 className="text-3xl font-semibold text-[#111110] dark:text-[#EDEDE8] tracking-tight leading-snug mb-3">
           {trend.title}
         </h1>
-        <p className="text-[15px] text-[#6B6860] leading-relaxed">
+        <p className="text-[15px] text-[#6B6860] dark:text-[#9B9890] leading-relaxed">
           {trend.description}
         </p>
       </div>
 
-      <div className="border-t border-[#E6E3DC] mb-8" />
+      <div className="border-t border-[#E6E3DC] dark:border-[#2C2A27] mb-8" />
 
-      {/* MDX content */}
+      {/* MDX */}
       <div className="mdx-content mb-12">
         <MDXRemote
           source={trend.rawContent}
           options={{
             mdxOptions: {
               // eslint-disable-next-line @typescript-eslint/no-explicit-any
-              rehypePlugins: [[rehypePrettyCode, { theme: 'github-light' }]] as any,
+              rehypePlugins: [[rehypePrettyCode, { theme: { light: 'github-light', dark: 'github-dark' } }]] as any,
             },
           }}
         />
       </div>
 
       {/* Related */}
-      <section aria-labelledby="related-heading" className="border-t border-[#E6E3DC] pt-8 mb-8">
-        <h2 id="related-heading" className="text-[12px] font-semibold uppercase tracking-widest text-[#A8A49C] mb-5">
+      <section aria-labelledby="related-heading" className="border-t border-[#E6E3DC] dark:border-[#2C2A27] pt-8 mb-8">
+        <h2 id="related-heading" className="text-[12px] font-semibold uppercase tracking-widest text-[#A8A49C] dark:text-[#5C5A57] mb-5">
           İlişkili Akımlar
         </h2>
         <RelatedTrends currentSlug={trend.slug} currentCategory={trend.category} allTrends={allTrends} />
       </section>
 
-      <div className="border-t border-[#E6E3DC] pt-6">
+      <div className="border-t border-[#E6E3DC] dark:border-[#2C2A27] pt-6">
         <TrendNavigation currentSlug={trend.slug} allTrends={allTrends} />
       </div>
     </article>

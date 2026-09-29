@@ -13,13 +13,12 @@ export default function FilterBar({ activeCategory, onCategoryChange, matchCount
   const totalCount = CATEGORY_ORDER.reduce((s, id) => s + (matchCounts[id] ?? 0), 0);
   const isAll = activeCategory === null;
 
-  const btnBase = `
-    whitespace-nowrap text-[13px] font-medium pb-2.5 pt-1 px-0
-    border-b-2 transition-all duration-150
-    focus-visible:outline-none
-  `;
-  const active = `border-[#111110] text-[#111110]`;
-  const inactive = `border-transparent text-[#A8A49C] hover:text-[#6B6860] hover:border-[#E6E3DC]`;
+  const base = `whitespace-nowrap text-[13px] font-medium pb-2.5 pt-1 px-0
+    border-b-2 transition-all duration-150 focus-visible:outline-none`;
+  const active = `border-[#111110] dark:border-[#EDEDE8] text-[#111110] dark:text-[#EDEDE8]`;
+  const inactive = `border-transparent text-[#A8A49C] dark:text-[#5C5A57]
+    hover:text-[#6B6860] dark:hover:text-[#9B9890]
+    hover:border-[#E6E3DC] dark:hover:border-[#2C2A27]`;
 
   return (
     <div
@@ -27,30 +26,20 @@ export default function FilterBar({ activeCategory, onCategoryChange, matchCount
       aria-label="Kategoriye göre filtrele"
       className="overflow-x-auto -mb-px"
     >
-      <div className="flex gap-6 min-w-max border-b border-[#E6E3DC]">
-        <button
-          type="button"
-          aria-pressed={isAll}
-          onClick={() => onCategoryChange(null)}
-          className={`${btnBase} ${isAll ? active : inactive}`}
-        >
+      <div className="flex gap-6 min-w-max border-b border-[#E6E3DC] dark:border-[#2C2A27]">
+        <button type="button" aria-pressed={isAll} onClick={() => onCategoryChange(null)}
+          className={`${base} ${isAll ? active : inactive}`}>
           Tümü
-          <span className="ml-1.5 text-[11px] opacity-60">({totalCount})</span>
+          <span className="ml-1.5 text-[11px] opacity-50">({totalCount})</span>
         </button>
 
         {CATEGORY_ORDER.map((id) => {
           const isActive = activeCategory === id;
-          const count = matchCounts[id] ?? 0;
           return (
-            <button
-              key={id}
-              type="button"
-              aria-pressed={isActive}
-              onClick={() => onCategoryChange(id)}
-              className={`${btnBase} ${isActive ? active : inactive}`}
-            >
+            <button key={id} type="button" aria-pressed={isActive} onClick={() => onCategoryChange(id)}
+              className={`${base} ${isActive ? active : inactive}`}>
               {CATEGORIES[id].name}
-              <span className="ml-1.5 text-[11px] opacity-60">({count})</span>
+              <span className="ml-1.5 text-[11px] opacity-50">({matchCounts[id] ?? 0})</span>
             </button>
           );
         })}

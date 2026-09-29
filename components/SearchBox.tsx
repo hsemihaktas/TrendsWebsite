@@ -20,7 +20,7 @@ export default function SearchBox({ value, onChange }: SearchBoxProps) {
   return (
     <div role="search" className="relative w-full max-w-sm">
       <svg
-        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A49C] pointer-events-none"
+        className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#A8A49C] dark:text-[#5C5A57] pointer-events-none"
         viewBox="0 0 16 16" fill="none" aria-hidden="true"
       >
         <circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" strokeWidth="1.4" />
@@ -32,9 +32,12 @@ export default function SearchBox({ value, onChange }: SearchBoxProps) {
         value={local}
         onChange={e => setLocal(e.target.value)}
         placeholder="Trend ara..."
-        className="w-full h-9 pl-9 pr-4 text-[13px] text-[#111110] placeholder-[#A8A49C]
-                   bg-white border border-[#E6E3DC] rounded-md
-                   focus:outline-none focus:border-[#111110] focus:ring-0
+        className="w-full h-9 pl-9 pr-4 text-[13px]
+                   text-[#111110] dark:text-[#EDEDE8]
+                   placeholder-[#A8A49C] dark:placeholder-[#5C5A57]
+                   bg-white dark:bg-[#1C1B19]
+                   border border-[#E6E3DC] dark:border-[#2C2A27] rounded-md
+                   focus:outline-none focus:border-[#111110] dark:focus:border-[#EDEDE8]
                    transition-colors"
       />
     </div>

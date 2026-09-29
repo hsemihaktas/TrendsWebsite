@@ -7,21 +7,17 @@ export default async function HomePage() {
 
   return (
     <>
-      {/* Page header */}
-      <header className="mb-10 pb-8 border-b border-[#E6E3DC]">
-        <h1 className="text-2xl font-semibold text-[#111110] mb-2 tracking-tight">
+      <header className="mb-10 pb-8 border-b border-[#E6E3DC] dark:border-[#2C2A27]">
+        <h1 className="text-2xl font-semibold text-[#111110] dark:text-[#EDEDE8] mb-2 tracking-tight">
           UI/UX Tasarım Akımları
         </h1>
-        <p className="text-[14px] text-[#6B6860] max-w-xl leading-relaxed">
+        <p className="text-[14px] text-[#6B6860] dark:text-[#9B9890] max-w-xl leading-relaxed">
           {allTrends.length} farklı tasarım akımı — her biri için görsel önizleme,
           tarihsel bağlam ve projelerinizde nasıl uygulayacağınıza dair rehber.
         </p>
       </header>
 
-      {/* Filters + grid */}
-      <Suspense fallback={
-        <div className="text-[13px] text-[#A8A49C]">Yükleniyor…</div>
-      }>
+      <Suspense fallback={<div className="text-[13px] text-[#A8A49C] dark:text-[#5C5A57]">Yükleniyor…</div>}>
         <TrendFilters allTrends={allTrends} />
       </Suspense>
     </>
