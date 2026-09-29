@@ -11,145 +11,87 @@ import { BreadcrumbNav } from '@/components/detail/BreadcrumbNav';
 import { RelatedTrends } from '@/components/detail/RelatedTrends';
 import { TrendNavigation } from '@/components/detail/TrendNavigation';
 
-/**
- * SSG: tüm 33 trend slug'ı build zamanında üretilir.
- * Requirements: 10.3, 14.1
- */
 export async function generateStaticParams() {
   const trends = await getAllTrends();
-  return trends.map((trend) => ({ slug: trend.slug }));
+  return trends.map(t => ({ slug: t.slug }));
 }
 
-/**
- * Her detay sayfası için dinamik metadata üretir.
- */
-export async function generateMetadata({
-  params,
-}: {
-  params: { slug: string };
-}): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
   const trend = await getTrendBySlug(params.slug);
   return {
-    title: `${trend.title} | Design Trends Showcase`,
+    title: `${trend.title} — Design Trends`,
     description: trend.description,
   };
 }
 
-/**
- * Detay sayfası — Server Component, SSG ile statik olarak üretilir.
- *
- * - getTrendBySlug: dosya yoksa otomatik olarak notFound() tetikler (Req 9.9)
- * - HeroPreview: min 240px yükseklikte sayfa üstünde (Req 9.6)
- * - MDXRemote + rehype-pretty-code: syntax highlighting (Req 9.4, 10.4, 10.5)
- * - BreadcrumbNav + geri bağlantı (Req 9.7, 12.3)
- * - RelatedTrends: en az 2 ilişkili trend (Req 9.8)
- * - TrendNavigation: önceki/sonraki bağlantılar (Req 12.4, 12.5)
- *
- * Requirements: 9.1–9.9, 10.3–10.5, 12.3–12.5, 14.1, 15.2
- */
-export default async function TrendDetailPage({
-  params,
-}: {
-  params: { slug: string };
-}) {
+export default async function TrendDetailPage({ params }: { params: { slug: string } }) {
   const { slug } = params;
-
-  // getTrendBySlug calls notFound() on ENOENT — no manual 404 handling needed
-  const [trend, allTrends] = await Promise.all([
-    getTrendBySlug(slug),
-    getAllTrends(),
-  ]);
+  const [trend, allTrends] = await Promise.all([getTrendBySlug(slug), getAllTrends()]);
 
   const categoryConfig = CATEGORIES[trend.category];
   const categoryName = categoryConfig?.name ?? trend.category;
 
-  // Publish date formatted for display
-  const publishedDate = new Date(trend.publishedAt + 'T00:00:00').toLocaleDateString(
-    'tr-TR',
-    { year: 'numeric', month: 'long', day: 'numeric' },
-  );
-
   return (
-    <article className="max-w-4xl mx-auto">
-      {/* ────────────────────────────────────────────────────────────
-          Hero Önizleme — min-h-[240px], sayfanın üst bölümü (Req 9.6)
-      ──────────────────────────────────────────────────────────── */}
-      <HeroPreview
-        slug={slug}
-        label={`${trend.title} Hero Önizleme`}
-        minHeight="min-h-[240px]"
-      />
+    <article className="max-w-3xl mx-auto">
 
-      {/* ────────────────────────────────────────────────────────────
-          Breadcrumb + Ana sayfaya dönüş bağlantısı (Req 9.7, 12.3)
-      ──────────────────────────────────────────────────────────── */}
-      <div className="mt-6 mb-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
+      {/* Breadcrumb + back */}
+      <div className="flex items-center justify-between mb-6">
         <BreadcrumbNav categoryName={categoryName} trendTitle={trend.title} />
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 transition-colors focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded min-h-[44px] sm:min-h-0"
+          className="text-[12px] text-[#A8A49C] hover:text-[#6B6860] transition-colors"
         >
-          <span aria-hidden="true">←</span>
-          Ana Sayfaya Dön
+          ← Geri
         </Link>
       </div>
 
-      {/* ────────────────────────────────────────────────────────────
-          Trend başlığı, kategori rozeti ve yayın tarihi (Req 9.2)
-      ──────────────────────────────────────────────────────────── */}
-      <section aria-labelledby="trend-title" className="mt-6 mb-8">
-        <h1
-          id="trend-title"
-          className="text-4xl font-bold text-gray-900 leading-tight mb-4"
-        >
-          {trend.title}
-        </h1>
+      {/* Hero preview */}
+      <div className="rounded-xl overflow-hidden border border-[#E6E3DC] mb-8">
+        <HeroPreview
+          slug={slug}
+          label={`${trend.title} Hero Önizleme`}
+          minHeight="min-h-[280px]"
+        />
+      </div>
 
-        <div className="flex flex-wrap items-center gap-3 mb-4">
+      {/* Title block */}
+      <div className="mb-8">
+        <div className="flex items-center gap-3 mb-3">
           <CategoryBadge category={trend.category} />
-          <time
-            dateTime={trend.publishedAt}
-            className="text-sm text-gray-500"
-          >
-            {publishedDate}
+          <time dateTime={trend.publishedAt} className="text-[11px] text-[#A8A49C]">
+            {new Date(trend.publishedAt + 'T00:00:00').toLocaleDateString('tr-TR', {
+              year: 'numeric', month: 'long',
+            })}
           </time>
         </div>
-
-        <p className="text-lg text-gray-600 leading-relaxed">
+        <h1 className="text-3xl font-semibold text-[#111110] tracking-tight leading-snug mb-3">
+          {trend.title}
+        </h1>
+        <p className="text-[15px] text-[#6B6860] leading-relaxed">
           {trend.description}
         </p>
-      </section>
+      </div>
 
-      {/* ────────────────────────────────────────────────────────────
-          MDX içeriği — rehype-pretty-code ile syntax highlighting
-          (Req 9.3, 9.4, 10.4, 10.5)
-      ──────────────────────────────────────────────────────────── */}
-      <section aria-label="Trend içeriği" className="mt-8 mb-12">
-        <div className="mdx-content">
-          <MDXRemote
-            source={trend.rawContent}
-            options={{
-              mdxOptions: {
-                // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                rehypePlugins: [[rehypePrettyCode, { theme: 'github-dark' }]] as any,
-              },
-            }}
-          />
-        </div>
-      </section>
+      {/* Divider */}
+      <div className="border-t border-[#E6E3DC] mb-8" />
 
-      {/* ────────────────────────────────────────────────────────────
-          İlişkili trendler (Req 9.8)
-      ──────────────────────────────────────────────────────────── */}
-      <section
-        aria-labelledby="related-trends-heading"
-        className="mt-4 pt-8 border-t border-gray-200"
-      >
-        <h2
-          id="related-trends-heading"
-          className="text-2xl font-bold text-gray-900 mb-6"
-        >
-          İlişkili Trendler
+      {/* MDX content */}
+      <div className="mdx-content mb-12">
+        <MDXRemote
+          source={trend.rawContent}
+          options={{
+            mdxOptions: {
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
+              rehypePlugins: [[rehypePrettyCode, { theme: 'github-light' }]] as any,
+            },
+          }}
+        />
+      </div>
+
+      {/* Related trends */}
+      <section aria-labelledby="related-heading" className="border-t border-[#E6E3DC] pt-8 mb-8">
+        <h2 id="related-heading" className="text-[12px] font-semibold uppercase tracking-widest text-[#A8A49C] mb-5">
+          İlişkili Akımlar
         </h2>
         <RelatedTrends
           currentSlug={trend.slug}
@@ -158,10 +100,8 @@ export default async function TrendDetailPage({
         />
       </section>
 
-      {/* ────────────────────────────────────────────────────────────
-          Önceki / Sonraki navigasyon (Req 12.4, 12.5)
-      ──────────────────────────────────────────────────────────── */}
-      <div className="mt-12 pt-8 border-t border-gray-200">
+      {/* Prev / next */}
+      <div className="border-t border-[#E6E3DC] pt-6">
         <TrendNavigation currentSlug={trend.slug} allTrends={allTrends} />
       </div>
     </article>

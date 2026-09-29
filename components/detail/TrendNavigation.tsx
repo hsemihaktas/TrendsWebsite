@@ -1,72 +1,54 @@
-import Link from "next/link";
-import { getTrendNavigation } from "@/lib/trends";
-import type { Trend } from "@/types/trend";
+import Link from 'next/link';
+import { getTrendNavigation } from '@/lib/trends';
+import type { Trend } from '@/types/trend';
 
 interface TrendNavigationProps {
   currentSlug: string;
   allTrends: Trend[];
 }
 
-/**
- * Anasayfadaki sıralama esas alınarak önceki / sonraki trend bağlantılarını
- * render eder. Liste başında prev=null, sonunda next=null olduğunda ilgili
- * düğme aria-disabled="true" ile devre dışı görünür.
- * Requirements: 12.4, 12.5, 15.4
- */
-export function TrendNavigation({
-  currentSlug,
-  allTrends,
-}: TrendNavigationProps) {
+export function TrendNavigation({ currentSlug, allTrends }: TrendNavigationProps) {
   const { prev, next } = getTrendNavigation(currentSlug, allTrends);
 
   return (
-    <nav
-      aria-label="Trend navigasyonu"
-      className="flex justify-between items-center gap-4"
-    >
-      {/* Önceki trend */}
-      {prev ? (
-        <Link
-          href={`/trends/${prev.slug}`}
-          className="flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors min-h-[44px] py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded"
-        >
-          <span aria-hidden="true">←</span>
-          <span className="max-w-[160px] sm:max-w-[220px] truncate">
-            {prev.title}
+    <nav aria-label="Trend navigasyonu" className="flex items-center justify-between">
+      <div>
+        {prev ? (
+          <Link
+            href={`/trends/${prev.slug}`}
+            className="group flex flex-col gap-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111110] focus-visible:ring-offset-2 rounded"
+          >
+            <span className="text-[11px] uppercase tracking-wide text-[#A8A49C] group-hover:text-[#6B6860] transition-colors">← Önceki</span>
+            <span className="text-[14px] font-medium text-[#6B6860] group-hover:text-[#111110] transition-colors max-w-[200px] truncate">
+              {prev.title}
+            </span>
+          </Link>
+        ) : (
+          <span aria-disabled="true" className="flex flex-col gap-0.5 opacity-30 cursor-not-allowed">
+            <span className="text-[11px] uppercase tracking-wide text-[#A8A49C]">← Önceki</span>
+            <span className="text-[14px] font-medium text-[#6B6860]">—</span>
           </span>
-        </Link>
-      ) : (
-        <span
-          role="link"
-          aria-disabled="true"
-          className="flex items-center gap-2 text-sm text-gray-400 cursor-not-allowed select-none min-h-[44px] py-2"
-        >
-          <span aria-hidden="true">←</span>
-          <span>Önceki Trend</span>
-        </span>
-      )}
+        )}
+      </div>
 
-      {/* Sonraki trend */}
-      {next ? (
-        <Link
-          href={`/trends/${next.slug}`}
-          className="flex items-center gap-2 text-sm font-medium text-indigo-600 hover:text-indigo-800 transition-colors min-h-[44px] py-2 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 rounded text-right"
-        >
-          <span className="max-w-[160px] sm:max-w-[220px] truncate">
-            {next.title}
+      <div className="text-right">
+        {next ? (
+          <Link
+            href={`/trends/${next.slug}`}
+            className="group flex flex-col gap-0.5 items-end focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111110] focus-visible:ring-offset-2 rounded"
+          >
+            <span className="text-[11px] uppercase tracking-wide text-[#A8A49C] group-hover:text-[#6B6860] transition-colors">Sonraki →</span>
+            <span className="text-[14px] font-medium text-[#6B6860] group-hover:text-[#111110] transition-colors max-w-[200px] truncate">
+              {next.title}
+            </span>
+          </Link>
+        ) : (
+          <span aria-disabled="true" className="flex flex-col gap-0.5 items-end opacity-30 cursor-not-allowed">
+            <span className="text-[11px] uppercase tracking-wide text-[#A8A49C]">Sonraki →</span>
+            <span className="text-[14px] font-medium text-[#6B6860]">—</span>
           </span>
-          <span aria-hidden="true">→</span>
-        </Link>
-      ) : (
-        <span
-          role="link"
-          aria-disabled="true"
-          className="flex items-center gap-2 text-sm text-gray-400 cursor-not-allowed select-none min-h-[44px] py-2"
-        >
-          <span>Sonraki Trend</span>
-          <span aria-hidden="true">→</span>
-        </span>
-      )}
+        )}
+      </div>
     </nav>
   );
 }

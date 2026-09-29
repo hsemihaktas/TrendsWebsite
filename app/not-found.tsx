@@ -1,19 +1,18 @@
-// app/not-found.tsx
 import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-6">
-      <p className="text-6xl font-black text-gray-200 mb-4">404</p>
-      <h1 className="text-2xl font-bold text-gray-900 mb-2">Sayfa Bulunamadı</h1>
-      <p className="text-gray-500 mb-8 max-w-md">
-        Aradığınız sayfa mevcut değil ya da kaldırılmış olabilir.
+    <div className="min-h-[50vh] flex flex-col items-center justify-center text-center">
+      <p className="text-[72px] font-semibold text-[#E6E3DC] leading-none mb-4 select-none">404</p>
+      <h1 className="text-lg font-semibold text-[#111110] mb-2">Sayfa bulunamadı</h1>
+      <p className="text-[14px] text-[#6B6860] mb-6">
+        Aradığınız sayfa mevcut değil.
       </p>
       <Link
         href="/"
-        className="px-6 py-3 bg-gray-900 text-white text-sm font-semibold rounded-lg hover:bg-gray-700 transition-colors"
+        className="text-[13px] font-medium text-[#111110] underline underline-offset-2 decoration-[#C4BFB4] hover:decoration-[#111110] transition-colors"
       >
-        Ana Sayfaya Dön
+        Ana sayfaya dön
       </Link>
     </div>
   );

@@ -8,29 +8,20 @@ const geistSans = localFont({
   variable: "--font-geist-sans",
   weight: "100 900",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
 
 export const metadata: Metadata = {
-  title: "Design Trends Showcase",
-  description: "33 UI/UX tasarım akımını keşfet",
+  title: "Design Trends",
+  description: "33 UI/UX tasarım akımını keşfet — referans, örnek ve kullanım rehberleriyle.",
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+}: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="tr">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+    <html lang="tr" className={geistSans.variable}>
+      <body className="min-h-screen bg-[#F8F7F4]">
         <Navbar />
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-6xl mx-auto px-5 sm:px-8 lg:px-10 py-10">
           {children}
         </main>
       </body>

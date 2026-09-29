@@ -1,29 +1,27 @@
-import { Suspense } from "react";
-import { getAllTrends } from "@/lib/trends";
-import { TrendFilters } from "@/components/TrendFilters";
+import { Suspense } from 'react';
+import { getAllTrends } from '@/lib/trends';
+import { TrendFilters } from '@/components/TrendFilters';
 
-/**
- * Homepage — Server Component.
- *
- * Fetches the full sorted trend list at build time (SSG) and passes it to the
- * client-side TrendFilters coordinator. TrendFilters is wrapped in a Suspense
- * boundary because it calls useSearchParams(), which requires a Suspense
- * fallback during static generation in Next.js 14.
- *
- * Requirements: 1.1, 1.2, 1.6, 14.1, 15.2
- */
 export default async function HomePage() {
   const allTrends = await getAllTrends();
 
   return (
     <>
-      <h1 className="text-4xl font-bold text-gray-900 mb-8">
-        Tasarım Akımları
-      </h1>
+      {/* Page header */}
+      <header className="mb-10 pb-8 border-b border-[#E6E3DC]">
+        <h1 className="text-2xl font-semibold text-[#111110] mb-2 tracking-tight">
+          UI/UX Tasarım Akımları
+        </h1>
+        <p className="text-[14px] text-[#6B6860] max-w-xl leading-relaxed">
+          {allTrends.length} farklı tasarım akımı — her biri için görsel önizleme,
+          tarihsel bağlam ve projelerinizde nasıl uygulayacağınıza dair rehber.
+        </p>
+      </header>
 
-      <Suspense
-        fallback={<div className="text-gray-500 text-sm">Yükleniyor...</div>}
-      >
+      {/* Filters + grid */}
+      <Suspense fallback={
+        <div className="text-[13px] text-[#A8A49C]">Yükleniyor…</div>
+      }>
         <TrendFilters allTrends={allTrends} />
       </Suspense>
     </>
