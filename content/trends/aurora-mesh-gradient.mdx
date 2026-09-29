@@ -1,0 +1,89 @@
+---
+title: "Aurora / Mesh Gradient"
+slug: "aurora-mesh-gradient"
+category: "modern-populer"
+tags: ["gradient", "aurora", "mesh", "atmospheric", "color"]
+description: "Birden fazla radial gradient katmanını harmanlayarak kuzey ışıklarını andıran atmosferik renk geçişleri sunan tasarım stili."
+publishedAt: "2024-02-05"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Aurora / Mesh Gradient akımı, 2021–2023 yılları arasında dijital tasarım dünyasında belirgin biçimde öne çıkmıştır. Bu akımın temelleri; Apple'ın Retina ekran teknolojisiyle birlikte gündeme gelen yüksek kaliteli renk geçişlerine, Figma'nın mesh gradient aracının yayılmasına ve Stripe, Linear gibi öncü teknoloji şirketlerinin arka planlarında bu estetiği benimsemesine dayanmaktadır. "Aurora" adı, Kuzey Avrupa ve Arktika bölgelerinde gözlemlenen aurora borealis (kuzey ışıkları) doğa olayından gelir; gökyüzünde birbirine geçen mor, yeşil, mavi ve pembe ışık bantlarını andıran renk paletleri bu tasarım dilinin özüdür. Teknik olarak; CSS'in `radial-gradient` fonksiyonu birden fazla kez üst üste uygulanarak ya da SVG/canvas tabanlı mesh gradient araçlarıyla oluşturulabilir. Figma'nın yerleşik mesh gradient özelliği ve çeşitli çevrimiçi gradient üreticilerinin yaygınlaşması, bu stilin tasarımcılar arasında hızla benimsenmesini kolaylaştırmıştır.
+
+### Çok Katmanlı Radial Gradient Tekniği
+
+Mesh gradient'in CSS ile uygulanmasının temel yöntemi, birden fazla `radial-gradient` katmanını `background` özelliğinde virgülle ayırarak üst üste dizmektir. Her gradient farklı bir renk, konum ve boyuta sahip olduğundan katmanlar birbirini yumuşak biçimde örter ve karmaşık renk haritaları oluşturur. Gradient kaynakları genellikle bileşen alanının %30'undan fazlasını kaplayan geniş ve yumuşak geçişlerle tanımlanır; bu sayede sert sınır çizgileri yerine organik renk akışları elde edilir.
+
+### Renk Seçimi ve Atmosferik Bütünlük
+
+Aurora estetik için renk seçimi kritiktir. Mor (`#7c3aed`, `#a855f7`), pembe (`#ec4899`, `#f472b6`), mavi (`#3b82f6`, `#60a5fa`) ve yeşil (`#10b981`, `#34d399`) tonlarının belirli oranlarla bir arada kullanılması, dünyanın en etkili aurora görüntülerini andıran bir palet oluşturur. Renklerin birbirine geçişi, sert değil yumuşak bir mix blendiyle sağlanır; zaman zaman `mix-blend-mode: screen` veya `opacity` ayarı da bu yumuşaklığa katkıda bulunur. Arka plan genellikle koyu (`#0a0015` veya `#04001a`) tutularak renk geçişlerinin parlaklığı ve derinliği artırılır.
+
+### Animasyon ve Hareket Potansiyeli
+
+Statik gradient arka planlar güzel görünse de Aurora stilinin asıl büyüsü, gradient noktalarının yavaşça hareket ettirilmesiyle ortaya çıkar. CSS `@keyframes` animasyonuyla her gradient noktasının konumu ve boyutu zamanla değiştirildiğinde, kullanıcı gerçek bir aurora akışını izliyormuş gibi hisseder. Bu animasyonlar düşük kare hızlı (10–20 saniye döngü) ve `prefers-reduced-motion` medya sorgusuyla kolayca devre dışı bırakılabilir biçimde tasarlandığında hem etkileyici hem de erişilebilir olur.
+
+## Pratik Kullanım Senaryoları
+
+### Senaryo 1: SaaS Ürün ve Teknoloji Şirketi Açılış Sayfası
+
+Stripe, Vercel ve Linear gibi önde gelen teknoloji şirketleri, aurora mesh gradient arka planlarını açılış sayfalarında güçlü bir marka ifadesi olarak benimsemiştir. Hero bölümünde tam ekran kaplayan bir mesh gradient, üzerine konumlandırılmış ürün önizleme ekran görüntüsü ve kısa bir başlıkla birleştirildiğinde yüksek dönüşüm sağlayan estetik bir sayfa oluşur. Özellikle yapay zeka, kripto ve web3 ürünleri için bu estetik "gelecekçi ve sofistike" çağrışım yapmaktadır.
+
+### Senaryo 2: Uygulama Onboarding ve Splash Ekranları
+
+Mobil uygulamalarda ilk açılış ekranı (splash screen) ve onboarding adımlarının arka planında aurora gradient kullanımı, kullanıcıya premium ve özenli bir izlenim verir. Özellikle fintech, sağlık ve meditasyon uygulamalarında bu atmosferik arka planlar, uygulamanın duygusal tonunu belirler ve kullanıcının uygulamayla duygusal bir bağ kurmasına zemin hazırlar.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, CSS `radial-gradient` katmanlarıyla oluşturulmuş bir Aurora / Mesh Gradient arka planını göstermektedir:
+
+```html
+<!-- Aurora Mesh Gradient Arka Plan -->
+<div
+  class="min-h-screen relative overflow-hidden"
+  style="background-color: #04001a;"
+>
+  <!-- Çok Katmanlı Radial Gradient (inline style ile) -->
+  <div
+    class="absolute inset-0"
+    style="
+      background:
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(124, 58, 237, 0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(236, 72, 153, 0.5) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 70% at 50% 80%, rgba(59, 130, 246, 0.55) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 70% 60%, rgba(16, 185, 129, 0.4) 0%, transparent 60%);
+    "
+    aria-hidden="true"
+  ></div>
+
+  <!-- İçerik Katmanı -->
+  <div class="relative z-10 flex flex-col items-center justify-center min-h-screen text-center px-6">
+    <h1 class="text-5xl font-bold text-white mb-4 tracking-tight">
+      Aurora Gradient
+    </h1>
+    <p class="text-white/70 text-lg max-w-md mb-8">
+      Birden fazla radial gradient katmanıyla kuzey ışıklarını andıran atmosferik arka planlar oluşturun.
+    </p>
+    <button class="bg-white/15 backdrop-blur-sm border border-white/30 text-white font-semibold px-8 py-3 rounded-full hover:bg-white/25 transition-all duration-300">
+      Keşfet
+    </button>
+  </div>
+</div>
+```
+
+Tailwind'in `bg-gradient-to-*` yardımcı sınıfları basit doğrusal geçişler için yeterliyken mesh gradient için inline `style` veya özel Tailwind eklentisi kullanımı önerilir:
+
+```css
+/* tailwind.config.ts — özel gradient arka plan */
+theme: {
+  extend: {
+    backgroundImage: {
+      'aurora': `
+        radial-gradient(ellipse 80% 60% at 20% 30%, rgba(124,58,237,0.6) 0%, transparent 70%),
+        radial-gradient(ellipse 70% 50% at 80% 20%, rgba(236,72,153,0.5) 0%, transparent 65%),
+        radial-gradient(ellipse 60% 70% at 50% 80%, rgba(59,130,246,0.55) 0%, transparent 65%)
+      `,
+    },
+  },
+}
+```

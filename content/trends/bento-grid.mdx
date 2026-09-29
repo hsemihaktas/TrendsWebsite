@@ -1,0 +1,98 @@
+---
+title: "Bento Grid"
+slug: "bento-grid"
+category: "modern-populer"
+tags: ["grid", "layout", "tiles", "apple", "dashboard"]
+description: "Apple'dan ilham alan tile tabanlı grid düzeni; farklı boyutlardaki içerik kutularını estetik bir bütünlükte bir araya getirir."
+publishedAt: "2024-02-10"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Bento Grid adını, Japonya'nın geleneksel bento kutularından alır; bento kutusu bölmelere ayrılmış bir yemek kabıdır ve her bölme farklı bir yiyeceği barındırır. Tasarım dünyasındaki karşılığı olan Bento Grid, farklı boyutlardaki dikdörtgen "tile"ların tek bir CSS grid düzlemi üzerinde dengeli biçimde bir araya getirildiği bir sayfa düzeni yaklaşımıdır. Bu akımı ana akıma taşıyan etken, Apple'ın 2023 WWDC sunumlarında özellik sayfalarını ve ürün tanıtım sayfalarını Bento Grid düzeniyle tasarlamaya başlamasıdır. Apple'ın bu tercihi, tasarım camiasında hızla yankı uyandırdı; Dribbble, Behance ve Twitter/X'te "Bento UI" anahtar kelimesiyle binlerce tasarım paylaşıldı. Stripe, Vercel ve Linear gibi şirketler de pazarlama sayfalarında bu düzeni benimsedi. Teknik olarak CSS Grid'in `grid-column-span` ve `grid-row-span` özellikleri üzerine kurulu olan Bento Grid, içeriklerin estetik bir bütünlük içinde sunulmasını sağlarken sayfaya ritmik ve organize bir görünüm katar.
+
+### Değişken Tile Boyutları ve Grid Span
+
+Bento Grid'in temel kuralı, sayfanın ilgi çekiciliğini koruyabilmek için tek tip boyutlu kareler yerine farklı oranlarda tile'lar kullanmaktır. Standart tile tipolojisi: 1×1 (kare), 2×1 (yatay dikdörtgen), 1×2 (dikey dikdörtgen) ve 2×2 (büyük kare) olarak sınıflandırılır. Tile boyutları, içeriğin önemine göre belirlenir; örneğin bir ürünün en kritik özelliği 2×2 tile içine yerleştirilirken yardımcı özellikler 1×1 kutulara sığdırılır. CSS Grid'in `grid-column: span 2` ve `grid-row: span 2` direktifleri, Tailwind'deki `col-span-2` ve `row-span-2` sınıflarıyla eşdeğerdir.
+
+### Yuvarlak Köşeler ve Görsel Ritim
+
+Bento Grid bileşenlerinin köşeleri genellikle `rounded-xl` veya `rounded-2xl` (12–16px border-radius) ile yuvarlatılır. Bu yuvarlaklık, grid sisteminin sert dikdörtgen dokusunu yumuşatır ve modern, sıcak bir görünüm kazandırır. Tile'lar arasındaki boşluk (gap) tutarlı tutulmalıdır; çoğunlukla 12–16px önerilir. Her tile farklı bir arka plan rengi veya gradient içerebildiğinden renk paleti tutarlılığı kritik önem taşır; genellikle 3–5 renk kombinasyonu seçilir.
+
+### İçerik Çeşitliliği ve Bilgi Yoğunluğu
+
+Bento Grid'in güçlü yönlerinden biri, heterojen içerikleri (metin, istatistik, ikon, ekran görüntüsü, video önizleme, kısa alıntı) aynı düzlem üzerinde organize etme yeteneğidir. Her tile bağımsız bir "içerik kartı" olarak tasarlanır; büyük tile'lar zengin içerik (özellik açıklaması + görsel) barındırırken küçük tile'lar tek bir sayıyı veya ikonu ön plana çıkarır. Bu çeşitlilik, kullanıcının sayfayı tarama hızını artırır ve dikkatini doğal biçimde kritik noktalara yönlendirir.
+
+## Pratik Kullanım Senaryoları
+
+### Senaryo 1: Ürün Özellik Tanıtım Sayfası
+
+SaaS ürünlerinin pazarlama sayfalarında, tüm özelliklerin geleneksel listeler veya eşit büyüklükte kartlar yerine Bento Grid içinde sunulması görsel anlatımı güçlendirmektedir. Örneğin bir proje yönetim aracının "Gerçek Zamanlı İşbirliği" özelliği 2×2 büyük tile içinde animasyonlu bir ekran görüntüsüyle sunulurken "Koyu Mod Desteği", "Klavye Kısayolları" ve "API Erişimi" gibi ikincil özellikler 1×1 kutularda ikonlarıyla gösterilir. Bu düzen hem sayfa hiyerarşisini netleştirir hem de görsel olarak zengin bir deneyim sunar.
+
+### Senaryo 2: Kişisel Portföy ve Hakkımda Sayfaları
+
+Tasarımcı ve geliştirici portföylerinde "Hakkımda" sayfası yerine Bento Grid düzeniyle oluşturulan dinamik bir tanıtım bölümü giderek yaygınlaşmaktadır. Büyük tile üzerinde kişinin fotoğrafı veya avatarı; orta tile'da kısa biyografi; küçük tile'larda sosyal medya bağlantıları, favori araçlar, mevcut çalışma durumu ("Şu an açık iş için müsaitim") ve bir istatistik (toplam proje sayısı) yer alır. Tüm bu bilgiler tek bir bakışta kavranabilir ve sayfa kişilik odaklı bir anlatı kurar.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, farklı tile boyutlarından oluşan bir Bento Grid düzenini göstermektedir:
+
+```html
+<!-- Bento Grid Düzeni -->
+<div class="bg-gray-100 min-h-screen p-8">
+  <div class="grid grid-cols-4 grid-rows-3 gap-4 max-w-4xl mx-auto h-[500px]">
+
+    <!-- 2×2 Büyük Tile: Ana Özellik -->
+    <div class="col-span-2 row-span-2 bg-indigo-600 rounded-2xl p-6 flex flex-col justify-between text-white">
+      <div>
+        <span class="text-4xl" aria-hidden="true">🚀</span>
+        <h2 class="text-2xl font-bold mt-4">Hızlı Dağıtım</h2>
+        <p class="text-indigo-200 mt-2 text-sm">Tek tıkla production'a alın. Sıfır yapılandırma gerektirir.</p>
+      </div>
+      <button class="bg-white text-indigo-600 font-semibold px-4 py-2 rounded-xl text-sm w-fit hover:bg-indigo-50 transition-colors">
+        Başla →
+      </button>
+    </div>
+
+    <!-- 2×1 Yatay Tile -->
+    <div class="col-span-2 row-span-1 bg-emerald-500 rounded-2xl p-5 flex items-center gap-4 text-white">
+      <span class="text-3xl" aria-hidden="true">⚡</span>
+      <div>
+        <h3 class="font-bold text-lg">Gerçek Zamanlı Sync</h3>
+        <p class="text-emerald-100 text-xs">Ekibinizle anlık senkronizasyon</p>
+      </div>
+    </div>
+
+    <!-- 1×1 Küçük Tile: İstatistik -->
+    <div class="col-span-1 row-span-1 bg-orange-400 rounded-2xl p-5 flex flex-col justify-center items-center text-white">
+      <span class="text-3xl font-black">99%</span>
+      <span class="text-xs text-orange-100 mt-1">Uptime</span>
+    </div>
+
+    <!-- 1×1 Küçük Tile: İkon -->
+    <div class="col-span-1 row-span-1 bg-pink-400 rounded-2xl p-5 flex flex-col justify-center items-center text-white">
+      <span class="text-3xl" aria-hidden="true">🔒</span>
+      <span class="text-xs text-pink-100 mt-1">Güvenli</span>
+    </div>
+
+    <!-- 2×1 Alt Tile -->
+    <div class="col-span-2 row-span-1 bg-violet-500 rounded-2xl p-5 flex items-center justify-between text-white">
+      <div>
+        <h3 class="font-bold">API Erişimi</h3>
+        <p class="text-violet-200 text-xs">REST & GraphQL desteği</p>
+      </div>
+      <span class="text-3xl" aria-hidden="true">🔌</span>
+    </div>
+
+    <!-- 2×1 Alt Tile: Karanlık -->
+    <div class="col-span-2 row-span-1 bg-gray-900 rounded-2xl p-5 flex items-center justify-between text-white">
+      <div>
+        <h3 class="font-bold">Koyu Mod</h3>
+        <p class="text-gray-400 text-xs">Otomatik sistem tercihi</p>
+      </div>
+      <span class="text-3xl" aria-hidden="true">🌙</span>
+    </div>
+
+  </div>
+</div>
+```

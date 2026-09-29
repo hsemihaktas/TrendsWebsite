@@ -1,0 +1,119 @@
+---
+title: "Pixel Art"
+slug: "pixel-art"
+category: "retro-nostalgic"
+tags: ["pixel", "retro", "gaming", "8bit", "limited-palette"]
+description: "8-bit ve 16-bit oyun döneminden ilham alan sınırlı palet ve piksel grid karakterleriyle oluşturulan nostaljik dijital grafik stili."
+publishedAt: "2024-05-20"
+---
+
+## Tarihsel Bağlam
+
+Pixel art, dijital sanatın en köklü formlarından biridir. 1970'lerin sonu ve 1980'lerin başında, erken video oyun konsolları ve kişisel bilgisayarların sınırlı grafik kapasitesi nedeniyle zorunluluktan doğdu. Atari 2600, Nintendo Entertainment System (NES), Commodore 64 ve Sega Genesis gibi sistemler, yalnızca birkaç renk ve belirli bir çözünürlükle çalışabiliyordu; bu kısıtlamalar, piksel sanatın kendine özgü estetik kimliğini oluşturdu.
+
+Shigeru Miyamoto'nun tasarladığı Mario ve Zelda karakterleri, Konami'nin Castlevania ve Metal Gear serileri ve SNK'nın Neo Geo oyunları pixel art'ın en etkileyici örnekleri arasında yer alır. Sanatçılar, her pikseli tek tek yerleştirerek, renk geçişlerini "dithering" tekniğiyle simüle ederek ve sınırlı palet içinde mükemmellik arayarak benzersiz eserler yarattılar.
+
+2010'lardan itibaren pixel art, indie oyun devriminin lokomotifi haline geldi: Minecraft, Terraria, Celeste, Stardew Valley ve Undertale bu sanat formunu modern oyunculara yeniden tanıttı. Günümüzde pixel art, oyunların ötesinde illüstrasyon, animasyon, marka kimliği ve UI tasarımında bilinçli bir estetik tercih olarak kullanılmaktadır.
+
+## Temel Özellikler
+
+### 1. Sınırlı Renk Paleti
+
+Pixel art'ın temel kısıtlaması ve aynı zamanda estetik gücü, sınırlı renk paletinden gelir. Geleneksel 8-bit sistemler yalnızca 16-64 renk desteklerken, sanatçılar bu kısıtlama içinde olağanüstü detaylar yarattı. Günümüz pixel art'ında da bu kısıtlama bilinçli olarak korunur: genellikle 4-32 renk kullanılır ve her renk seçimi kritik önem taşır.
+
+### 2. CSS Box-Shadow Piksel Tekniği
+
+Web'de pixel art oluşturmanın en güçlü yöntemi, CSS `box-shadow` özelliğinin birden fazla değeriyle tek bir `div` veya `span` elementinden tüm piksel karakterini üretmektir. Her piksel, `x_offset y_offset 0 renk` formatındaki bir gölge değeriyle tanımlanır. Bu teknik, HTML etiket sayısını minimumda tutarken karmaşık karakterler oluşturmayı mümkün kılar.
+
+### 3. Görüntü Pikselleştirmesi
+
+Pixel art görüntülerin ölçeklendirilirken bulanıklaşmaması için CSS `image-rendering: pixelated` (Chromium) ve `image-rendering: crisp-edges` (Firefox) özellikleri kullanılır. Bu özellikler, tarayıcının görüntüyü ölçeklendirirken interpolasyon uygulamasını engeller ve her pikselin net kenarlıklarla korunmasını sağlar.
+
+### 4. Grid Tabanlı Tasarım Sistemi
+
+Pixel art, sıkı bir ızgara disiplini gerektirir: her element 8, 16 veya 32 piksellik grid'e hizalanır. Web tasarımında bu prensip, `8px` katlarında boşluklar, piksel mükemmelliğinde kenarlıklar ve keskin olmayan hiçbir elementin kullanılmaması biçiminde yansıtılır.
+
+## Pratik Kullanım Senaryoları
+
+### Bağımsız Oyun Stüdyoları ve Oyun Web Siteleri
+
+Indie oyun geliştiricileri için web siteleri ve oyun tanıtım sayfaları, pixel art estetiğiyle oyunun görsel dilini doğrudan web ortamına taşıyabilir. Karakter sprite'ları, animasyonlu menüler ve piksel sanat arka planlar kullanıcıda oyunun atmosferini önceden deneyimletir. Bu yaklaşım, oyunun pazarlama aracı olarak da son derece etkilidir.
+
+### NFT ve Dijital Sanat Platformları
+
+Pixel art, NFT koleksiyonları ve dijital sanat pazaryerleri için son derece popüler bir format haline geldi. CryptoPunks ve Bored Ape Yacht Club bu alanda referans noktası oluşturdu. Galeri siteleri ve sanatçı portföyleri, pixel art eserleri sergilerken bu estetiği web arayüzüne de yansıtarak tutarlı bir atmosfer yaratabilir.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, CSS `box-shadow` tekniğiyle basit bir piksel karakter ve piksel buton bileşenini oluşturur:
+
+```tsx
+// CSS box-shadow ile piksel karakter
+export function PixelCharacter() {
+  // Her piksel: "x y blur renk" — blur her zaman 0
+  // 1 birim = 8px grid
+  const px = (x: number, y: number, color: string) =>
+    `${x * 8}px ${y * 8}px 0 ${color}`;
+
+  // Basit smiley face piksel deseni
+  const pixels = [
+    // Yüz
+    px(1, 0, "#f5c518"), px(2, 0, "#f5c518"), px(3, 0, "#f5c518"),
+    px(0, 1, "#f5c518"), px(1, 1, "#f5c518"), px(2, 1, "#f5c518"),
+    px(3, 1, "#f5c518"), px(4, 1, "#f5c518"),
+    // Gözler
+    px(1, 2, "#1a1a1a"), px(3, 2, "#1a1a1a"),
+    // Gülümseme
+    px(1, 3, "#1a1a1a"), px(2, 3, "#f5c518"), px(3, 3, "#1a1a1a"),
+  ].join(", ");
+
+  return (
+    <div className="p-8 bg-gray-900 rounded-xl flex flex-col items-center gap-6">
+      {/* Piksel karakter — tek div, tüm pikseller box-shadow ile */}
+      <div
+        style={{
+          width: "8px",
+          height: "8px",
+          boxShadow: pixels,
+          imageRendering: "pixelated",
+          marginBottom: "32px", // karakter yüksekliği kadar boşluk
+        }}
+      />
+
+      {/* Piksel sanat butonu */}
+      <button
+        className="font-mono text-sm uppercase tracking-widest px-4 py-2"
+        style={{
+          background: "#e83b3b",
+          color: "#ffffff",
+          imageRendering: "pixelated",
+          // Pixel-perfect kenarlık: sadece düz renkler, gölge yok
+          outline: "3px solid #000",
+          outlineOffset: "-3px",
+          boxShadow: "4px 4px 0 #000",
+          // Active durumda gölge kayar → basma hissi
+        }}
+      >
+        START GAME
+      </button>
+
+      {/* HP çubuğu — piksel blokları */}
+      <div className="flex gap-1">
+        {Array.from({ length: 8 }).map((_, i) => (
+          <div
+            key={i}
+            className="w-4 h-4"
+            style={{
+              background: i < 5 ? "#3cb34a" : "#333",
+              outline: "2px solid #000",
+              imageRendering: "pixelated",
+            }}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+```
+
+Bu örnekte `box-shadow` zinciri ile piksel karakter oluşturma, `imageRendering: pixelated` ile keskin ölçekleme ve `outline` ile pixel-perfect kenarlıklar gösterilmektedir. Tailwind'in `gap-1` ve `w-4 h-4` sınıfları grid disiplinini destekler.

@@ -1,0 +1,93 @@
+---
+title: "Kolaj Tasarımı"
+slug: "collage-design"
+category: "artistic-creative"
+tags: ["collage", "mixed-media", "layered", "texture", "artistic"]
+description: "Farklı açılarda döndürülmüş renk blokları ve üst üste gelen katmanlarla geleneksel kolaj sanatını dijital arayüzlere taşıyan yaratıcı yaklaşım."
+publishedAt: "2024-06-25"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Kolaj sanatı, 20. yüzyılın başında Pablo Picasso ve Georges Braque'ın "papier collé" tekniğiyle resmi bir sanat formu hâline geldi. Gazete kupürleri, kumaş parçaları ve farklı malzemelerin tuval üzerine yapıştırılmasıyla oluşturulan bu yaratıcı form; Dada hareketi, Bauhaus okulu ve Pop Art aracılığıyla katmanlı, çoğulcu ve sürpriz dolu bir görsel dil geliştirdi. Dijital tasarımda kolaj estetiği özellikle 2018–2023 yılları arasında güçlü bir yükseliş yaşadı. Pinterst'ten, Behance'a büyük kreatif ajansların portföylerinde; WeTransfer, Apple Music editöryal görsellerinde ve Vogue Italia'nın dijital yayınlarında kolaj tasarımı geniş kitlelere ulaştı. Bu akım; grid sistemlerini kasıtlı olarak ihlal eden, mükemmelliği reddeden ve "kazara güzel" gören bir yaklaşımı benimser. CSS `transform` özellikleri (`rotate`, `skew`, `translate`) ve `z-index` yönetimi, geleneksel kolajın "üst üste koyma" eylemini dijital ortama aktarmanın temel araçları hâline geldi.
+
+### Döndürülmüş ve Eğimlendirilmiş Öğeler
+
+Kolaj tasarımının en belirgin özelliği, hiçbir öğenin tam yatay ya da dikey eksende durmadığıdır. CSS `transform: rotate()` ve `skew()` değerleri, kartları, görsel bloklarını ve metin kutularını hafifçe eğimlendirir. 3–8 derecelik dönme açıları gerçekçi bir "elyeşle yerleştirilmiş" hissi yaratırken daha büyük açılar (15–30°) dramatik bir kompozisyon etkisi üretir. Tailwind'de `rotate-2`, `-rotate-3`, `rotate-6` gibi yardımcı sınıflar bu efekti hızla uygulamayı sağlar. Önemli olan, bir sayfadaki tüm öğelerin aynı açıda dönmemesidir; farklı açılar kaotik ama dengeli bir ritim kurar.
+
+### Katmanlı Kompozisyon ve Z-Index Yönetimi
+
+Kolaj tasarımında öğeler birbirinin üstüne gelir; bu kesişmeler kasıtlı ve anlamlıdır. CSS `z-index` sistemiyle yönetilen bu katmanlar; renk blokları, metin kutuları ve görsel şeritler arasında görsel öncelik hiyerarşisi kurar. `mix-blend-mode: multiply` veya `mix-blend-mode: screen` ile üst üste gelen iki renk bloğu, karışık bir boya efekti yaratır. `clip-path` ile düzensiz şekillerde kesilen öğeler, kolaj kâğıdının kenarlarının düzensizliğini anımsatır. `box-shadow` veya `drop-shadow` kullanmak ise her katmanın birbirinden bağımsız bir yüzey olduğu illüzyonunu güçlendirir.
+
+### Renkli Bloklar ve Tekstür Katmanları
+
+Kolaj tasarımında güçlü, katı renk blokları birer içerik alanı değil birer "nesne" gibi davranır. Sarı, kırmızı, siyah ve beyaz gibi yüksek kontrastlı kombinasyonlar baskı kolaj geleneğine atıfta bulunurken daha pastelleştirilmiş tonlar çağdaş dijital yorumu yansıtır. Kağıt dokusu PNG'sini `mix-blend-mode: multiply` ile üst katmana eklemek tüm kompozisyona basılı bir yüzey hissi katar; bu efekt CSS `background-image` ile yarı saydam bir doku görseli uygulanarak elde edilir. Farklı beyazlık değerlerindeki arka planlar (kırık beyaz, krem, hafif sarı) kolaj baskılarında kâğıdın solmasını anımsatır.
+
+## Pratik Kullanım Senaryoları
+
+### Senaryo 1: Yaratıcı Ajans ve Portföy Siteleri
+
+Tasarım ajansları, fotoğrafçılar, modacılar ve sanatçılar için kolaj tasarımı; çalışmaların kendisi kadar yaratıcı ve sanatsal bir çerçeve sunar. Hero bölümünde farklı açılarda konumlandırılmış proje görselleri ve renk blokları, portföyü statik bir galeri olmaktan çıkarıp sanatsal bir ifadeye dönüştürür. Bu yaklaşım sayesinde içerik ile kap bütünleşir; ziyaretçi henüz projelere bakmadan ajansın kimliğini hisseder.
+
+### Senaryo 2: Editöryal Medya ve Dergi Platformları
+
+Online dergi, kültür yayını ve editoryal içerik platformları için kolaj tasarımı, dijital okuma deneyimini baskı yayının zenginliğine yaklaştırır. Makale kapak görselleri renk blokları ve metin katmanlarıyla çerçevelendiğinde her sayfa özgün bir baskı kapağını andırır. "Öne Çıkan Yazı" kartlarını 2–4 derece eğimle yerleştirmek, ana feed'i standart içerik sıralamasından çıkarır ve taramayı teşvik eden görsel bir gerilinim yaratır.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, kolaj tasarımı stilinde bir hero bölümü ve kart düzenini göstermektedir:
+
+```html
+<!-- Kolaj Hero Bölümü -->
+<section class="relative min-h-screen bg-amber-50 overflow-hidden flex items-center justify-center px-8">
+
+  <!-- Renk blokları (dekoratif kolaj öğeleri) -->
+  <div class="absolute top-8 left-4 w-48 h-64 bg-red-500 rotate-6 opacity-90 z-0" aria-hidden="true"></div>
+  <div class="absolute top-16 left-20 w-40 h-48 bg-yellow-300 -rotate-3 z-10" aria-hidden="true"></div>
+  <div class="absolute bottom-12 right-8 w-56 h-40 bg-black rotate-2 z-0" aria-hidden="true"></div>
+  <div class="absolute bottom-24 right-24 w-44 h-32 bg-white border-2 border-black -rotate-5 z-10 shadow-lg" aria-hidden="true"></div>
+
+  <!-- Ana içerik -->
+  <div class="relative z-20 max-w-xl">
+    <!-- Eğimli başlık kutusu -->
+    <div class="bg-white border-2 border-black p-6 -rotate-1 shadow-[6px_6px_0px_0px_#000] mb-6">
+      <h1 class="text-5xl font-black text-black leading-tight uppercase tracking-tight">
+        Kolaj<br/>Tasarımı
+      </h1>
+    </div>
+
+    <!-- Metin bloğu farklı açıyla -->
+    <div class="bg-yellow-300 border-2 border-black p-4 rotate-1 shadow-[4px_4px_0px_0px_#000]">
+      <p class="text-black font-bold text-sm">
+        Geleneksel sanat, dijital yüzeyde hayat buluyor.
+      </p>
+    </div>
+  </div>
+</section>
+```
+
+Kolaj kart bileşeni:
+
+```html
+<!-- Kolaj Kart Düzeni -->
+<div class="relative w-72 h-80 cursor-pointer group">
+  <!-- Arka katman (renk bloğu) -->
+  <div
+    class="absolute inset-0 bg-red-400 rotate-3 rounded-sm transition-transform duration-200 group-hover:rotate-6"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Orta katman -->
+  <div
+    class="absolute inset-0 bg-yellow-200 -rotate-1 rounded-sm border-2 border-black transition-transform duration-200 group-hover:-rotate-2"
+    aria-hidden="true"
+  ></div>
+
+  <!-- Ön içerik katmanı -->
+  <div class="absolute inset-0 bg-white rounded-sm border-2 border-black p-5 shadow-[4px_4px_0px_0px_#000]">
+    <div class="w-full h-36 bg-zinc-900 rounded-sm mb-4" aria-label="Proje görseli" role="img"></div>
+    <h3 class="font-black text-black text-lg uppercase">Proje Adı</h3>
+    <p class="text-zinc-600 text-sm mt-1">Editöryal tasarım projesi</p>
+  </div>
+</div>
+```

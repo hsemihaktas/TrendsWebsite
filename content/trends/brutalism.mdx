@@ -1,0 +1,96 @@
+---
+title: "Brutalizm"
+slug: "brutalism"
+category: "bold-expressive"
+tags: ["brutalism", "raw", "typography", "contrast", "unpolished"]
+description: "Dekorasyon reddedip ham tipografiyi ve yüksek kontrastı ön plana çıkaran, kasıtlı olarak 'cilalanmamış' görünen radikal tasarım hareketi."
+publishedAt: "2024-04-05"
+---
+
+## Tarihsel Bağlam
+
+Web Brutalizmi (Web Brutalism), 1950–1970'lerin mimari brutalizm akımından ilham alır. Mimaride brutalizm; beton, çelik ve cam gibi ham malzemeleri görünürde tutmayı, yapının iskeletini ve strüktürünü gizlememek yerine onu tasarımın parçası haline getirmeyi savunuyordu. Le Corbusier, Paul Rudolph ve Marcel Breuer bu akımın öncü mimarlarıdır.
+
+Web tasarımında bu anlayış, HTML'in ve CSS'in "ham" yapısını gizlememek anlamına gelir: varsayılan tarayıcı stilleri, metin bağlantıları, keskin kenarlar ve form elemanları olduğu gibi kullanılır ya da yalnızca minimum müdahaleyle biçimlendirilir. 2010'ların ortasında Bootstrap ve benzeri tasarım çerçevelerinin getirdiği homojen ve "aşırı cilalanmış" estetiğe bir tepki olarak brutalist web tasarımı yeniden ilgi gördü.
+
+Bloomberg Businessweek web sitesi, Balenciaga'nın tasarım anlayışı, Craigslist ve eski dönem kişisel web siteleri bu estetiğin hem ilhamı hem de başvuru kaynağı oldu. Brutalizm; tasarımın kendini aşırı cilalamak yerine içeriğe dürüstçe hizmet etmesi gerektiğini, biçimin işlevin önüne geçmemesi gerektiğini savunur.
+
+## Temel Özellikler
+
+### 1. Ham ve Cilalanmamış Tipografi
+
+Serif yazı tipleri (Times New Roman, Georgia) veya sistem varsayılan fontlar brutalist estetiğin tercihidir. Dekoratif yazı stilleri yerine, ham ve "kastedildiği gibi görünen" tipografi ön plandadır. Büyük, ağır ve doğrudan: brutalist tipografi söylediklerini tam olarak söyler.
+
+### 2. Yüksek Kontrast ve Siyah/Beyaz Baskınlığı
+
+Renk paleti siyah, beyaz ve sıklıkla tek bir keskin vurgu renginden oluşur. Pastel tonlara, gradientlere veya gölgelere yer yoktur. Bu yüksek kontrast oranı, içeriğin yorumsuz ve doğrudan iletilmesini sağlar; tasarım aradan çekilir.
+
+### 3. Kasıtlı Asimetri ve Bozuk Düzen
+
+Brutalist kompozisyonlar öğelerin hizalı, organize veya düzenli görünmesini amaçlamaz. Elemanlar kasıtlı olarak yerinden edilmiş, görmezden gelinmiş veya birbirinin üstüne bindirilmiş olabilir. Bu "bozukluk" bir hata değil, bilinçli bir tasarım kararıdır.
+
+### 4. Minimal veya Sıfır Dekorasyon
+
+Box shadow, gradient, border-radius ve arka plan görselleri brutalist tasarımda kullanılmaz. Çıplak border çizgileri, düz tek renkli arka planlar ve basit çizgiler tasarımın görsel dilini oluşturur. Her unsur "neden buradayım?" sorusunu yanıtlayabilmelidir.
+
+### 5. Bilerek Kırılmış Görsel Alışkanlıklar
+
+Alışılageldik UI desenleri — hover efektleri, yumuşak geçişler, tutarlı boşluklar — bilerek çiğnenir. Beklenmedik bir link rengi, garip bir margin değeri ya da üst üste binen metinler kullanıcının dikkatini çeker ve tasarımın amaçlı tutumuyla yüzleşmesini sağlar.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Sanat Galerileri ve Kültür Kurumları
+
+Deneysel sanat galerileri, editoryal yayınlar ve avangard kültür kurumları, brutalist estetiği kurumsal görünmekten kaçınmak ve sanatsal dürüstlüğü vurgulamak amacıyla kullanır. Ham yapı, içeriğin ağırlığını ve ciddiyetini güçlendirir; ziyaretçi tasarımla değil içerikle yüzleşir.
+
+### Senaryo 2: Geliştirici Araçları ve Teknik Dokümantasyon
+
+Bazı geliştirici araçları ve yazılım projeleri, "sıfır saçmalık" bir estetikle kullanıcıya içeriğin kendisine odaklanmasını söyleyen brutalist bir dil benimser. Bu yaklaşım teknik otorite, güvenilirlik ve gösteriş yapmayan bir dürüstlük hissi yaratır.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, brutalist bir makale kartı bileşenini göstermektedir:
+
+```tsx
+export function BrutalistCard({
+  title,
+  excerpt,
+  date,
+}: {
+  title: string;
+  excerpt: string;
+  date: string;
+}) {
+  return (
+    <article className="border-2 border-black bg-white p-6 hover:bg-black hover:text-white transition-colors duration-100 group cursor-pointer">
+      {/* Tarih */}
+      <time
+        className="block text-xs font-mono uppercase tracking-widest text-gray-500 group-hover:text-gray-400 mb-3"
+        dateTime={date}
+      >
+        {date}
+      </time>
+
+      {/* Başlık — serif ve büyük punto */}
+      <h2 className="text-3xl font-bold font-serif leading-tight mb-4">
+        {title}
+      </h2>
+
+      {/* Ayırıcı çizgi */}
+      <div className="w-16 h-0.5 bg-black group-hover:bg-white mb-4 transition-colors duration-100" />
+
+      {/* Özet */}
+      <p className="text-base font-mono leading-relaxed text-gray-700 group-hover:text-gray-300">
+        {excerpt}
+      </p>
+
+      {/* Alt bağlantı */}
+      <span className="block mt-6 text-sm font-mono font-bold uppercase underline group-hover:text-white">
+        Devamını Oku →
+      </span>
+    </article>
+  );
+}
+```
+
+`font-serif` ve `font-mono` kombinasyonu brutalist dil tonunu oluşturur: serif başlık geleneksel ağırlığı, mono içerik teknik dürüstlüğü temsil eder. Hover'da tüm kartın siyah arka plana geçmesi (`hover:bg-black`) beklenmedik ve agresif bir etkileşim deneyimi sunar — brutalizmin "kuralları çiğnemek" anlayışının doğrudan uygulaması.

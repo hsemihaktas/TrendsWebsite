@@ -1,0 +1,74 @@
+---
+title: "Neumorphism"
+slug: "neumorphism"
+category: "modern-populer"
+tags: ["soft-ui", "shadows", "monochrome", "depth", "skeuomorphism"]
+description: "Tek renkli yüzeyden yükselen veya batan elemanlarla yumuşak, gerçekçi bir derinlik hissi veren UI tasarım stili."
+publishedAt: "2024-01-25"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Neumorphism (Soft UI olarak da bilinir), 2019 yılının sonlarında tasarımcı Alexander Plyuto'nun Dribbble'a yüklediği bir konseptle gündeme geldi. Skeuomorphism'in fiziksel dokunuşundan ve minimalizmin sadeliğinden ilham alan bu hibrit yaklaşım, kısa sürede tasarım topluluğunun gündemine girdi. "Neomorphism" veya "New Skeuomorphism" olarak da adlandırılan akım; renk yerine ışık ve gölgeyi temel görsel araç olarak kullanır. Tek bir arka plan rengine yakın tonda iki gölge — biri daha koyu (karanlık taraf), diğeri daha açık (ışık taraf) — kullanılarak elemanların yüzeyden "çıktığı" ya da "içine battığı" izlenimi yaratılır. Bu teknik, tamamen CSS ile uygulanabildiğinden web ve mobil arayüzlerde hızla yayıldı. Erişilebilirlik uzmanları düşük kontrast problemi nedeniyle akımı eleştirse de Neumorphism, özellikle premium ses oynatıcı, saat ve sigorta uygulaması gibi ürünlerde estetik tercihi olarak yerini korumaktadır.
+
+### İkili Box-Shadow Tekniği
+
+Neumorphism'in özü, aynı elemana aynı anda iki farklı gölge uygulamaktır. Pozitif yönlü gölge (sağ-alt) arka plandan biraz daha koyu; negatif yönlü gölge (sol-üst) ise biraz daha açık bir tondadır. Bu kombinasyon, elemanın köşegen yönünden gelen sanal bir ışık kaynağından aydınlanıyormuş gibi görünmesini sağlar. Standart `#e0e0e0` gri tonu için örnek: `box-shadow: 5px 5px 10px #bebebe, -5px -5px 10px #ffffff`. Tailwind'de bu etki `shadow-[5px_5px_10px_#bebebe,-5px_-5px_10px_#ffffff]` özel değer söz dizimiyle uygulanır.
+
+### Raised ve Pressed Durumları
+
+Neumorphism'de iki temel durum vardır: "raised" (yüzeyden yükselen) ve "pressed" (yüzeye basan). Raised durum, standart dışa doğru gölge çiftiyle sağlanır ve pasif elemanlar (kart, panel) için kullanılır. Pressed durum ise gölgelerin ters çevrilip elemana `inset` olarak uygulanmasıyla elde edilir (`box-shadow: inset 5px 5px 10px #bebebe, inset -5px -5px 10px #ffffff`); bu durum aktif veya seçili elemanları simgeler. Toggle, switch ve tab bileşenlerinde raised↔pressed geçişi kullanıcıya görsel geri bildirim sağlar.
+
+### Monokromatik Renk Kısıtlaması
+
+Neumorphism, teknik açıdan yalnızca tek bir arka plan rengi üzerinde tutarlı biçimde çalışır. Çoklu arka plan renkleri gölge hesaplamalarını karmaşıklaştırır ve efekti bozar. Bu nedenle gri tonları (`#e0e0e0`, `#d9d9d9`, `#eeeeee`) veya pastel tekli renkler (soluk mavi, soluk bej) tercih edilir. Eleman ile arka plan rengi özdeş olduğundan renk kontrastı minimuma iner; bu tasarımcıları tipografide daha büyük punto veya bold ağırlık kullanmaya zorlar.
+
+## Pratik Kullanım Senaryoları
+
+### Senaryo 1: Ses Oynatıcı ve Medya Kontrolleri
+
+Neumorphism'in en iyi uygulama alanlarından biri ses oynatıcı ve medya kontrol arayüzleridir. Oynat/Duraklat düğmeleri, ileri/geri sarmalar ve ses seviyesi ayarı gibi kontroller raised → pressed geçiş efektiyle fiziksel düğmeler gibi davranır. Döngüsel ilerleme çubuğu yüzeyden hafifçe çukurlaşmış pressed bir oluk şeklinde tasarlanırken içindeki dolum çubuğu yükseltilmiş bir şerit olarak sunulur. Bu yaklaşım, kullanıcıya alışılmadık biçimde tatmin edici ve somut bir etkileşim deneyimi sunar.
+
+### Senaryo 2: Hesap Makinesi ve Sayısal Girdi Arayüzleri
+
+Hesap makinesi, termostat kontrol paneli veya dijital kronometre gibi sayısal arayüzlerde Neumorphism güçlü bir görsel kimlik oluşturur. Sayı düğmeleri her biri bağımsız yükseltilmiş kartlar olarak tasarlanır; basıldıklarında pressed efektiyle içeriye "iter" gibi görünür. Ekran alanı ise daha derin bir çukur (pressed) olarak konumlandırılır; bu sayede arka plandan farklılaşmadan görsel hiyerarşi kurulur.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, Neumorphism tekniğiyle raised ve pressed durum bileşenlerini göstermektedir:
+
+```html
+<!-- Neumorphism Arka Plan Konteyneri -->
+<div class="min-h-screen bg-[#e0e0e0] flex items-center justify-center gap-8 p-12">
+
+  <!-- Raised Kart (Yüzeyden Yükselen) -->
+  <div
+    class="bg-[#e0e0e0] rounded-2xl p-8 w-48 h-48 flex flex-col items-center justify-center"
+    style="box-shadow: 8px 8px 16px #bebebe, -8px -8px 16px #ffffff;"
+  >
+    <span class="text-4xl" aria-hidden="true">🎵</span>
+    <p class="text-gray-600 font-medium mt-3 text-sm">Raised</p>
+  </div>
+
+  <!-- Pressed Kart (Yüzeye Basan) -->
+  <div
+    class="bg-[#e0e0e0] rounded-2xl p-8 w-48 h-48 flex flex-col items-center justify-center"
+    style="box-shadow: inset 8px 8px 16px #bebebe, inset -8px -8px 16px #ffffff;"
+  >
+    <span class="text-4xl" aria-hidden="true">⏸️</span>
+    <p class="text-gray-600 font-medium mt-3 text-sm">Pressed</p>
+  </div>
+
+  <!-- Toggle Düğmesi -->
+  <button
+    class="bg-[#e0e0e0] rounded-full w-16 h-8 relative transition-all duration-200"
+    style="box-shadow: 4px 4px 8px #bebebe, -4px -4px 8px #ffffff;"
+    aria-label="Toggle"
+  >
+    <div
+      class="absolute top-1 left-1 w-6 h-6 rounded-full bg-[#e0e0e0]"
+      style="box-shadow: 2px 2px 5px #bebebe, -2px -2px 5px #ffffff;"
+    ></div>
+  </button>
+</div>
+```

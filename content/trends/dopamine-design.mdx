@@ -1,0 +1,95 @@
+---
+title: "Dopamin Tasarımı"
+slug: "dopamine-design"
+category: "bold-expressive"
+tags: ["dopamine", "joyful", "vibrant", "emotional", "color"]
+description: "Yüksek doygunluklu renkler ve organik formlarla mutluluk hormonu dopamini tetikleyen, kullanıcıda anında pozitif his oluşturan tasarım yaklaşımı."
+publishedAt: "2024-03-20"
+---
+
+## Tarihsel Bağlam
+
+Dopamin Tasarımı (Dopamine Design), 2020'li yılların başında pandemi sonrası dönemin getirdiği genel kaygı ve dijital yorgunlukla birlikte ortaya çıkan bir tepkidir. Uzun süreli ekran başında geçirilen süre, kullanıcıların soğuk ve minimalist tasarımlardan sıkılmasına yol açtı. Bu durum, renk psikolojisi üzerine kurulu, kullanıcıda anlık pozitif duygu tepkileri üreten yeni bir estetik arayışını doğurdu.
+
+Nörobilim araştırmaları, belirli renklerin ve görsel uyaranların beyin tarafından ödüllendirici biçimde işlendiğini ortaya koymaktadır. Canlı sarı, sıcak mercan ve parlak yeşil gibi renkler, görsel kortekste daha güçlü bir aktivasyon yaratır ve pozitif çağrışımları tetikler. Dopamin Tasarımı bu bulguları doğrudan kullanıcı deneyimi tasarımına uygular: canlı tonlar, yuvarlak organik formlar ve neşeli animasyonlar bir araya gelerek görsel bir "iyi hissettirme" efekti oluşturur.
+
+## Temel Özellikler
+
+### 1. Yüksek Doygunluklu Renk Paleti
+
+Dopamin Tasarımının temel taşı, HSL değerindeki doygunluk (saturation) bileşeninin %80 ve üzerinde tutulduğu canlı renk paleti kullanımıdır. Canlı sarı, mercan, parlak pembe ve nane yeşili bu estetiğin ikonik renkleridir. Bu renkler tekil veya birbirleriyle kombinlenmiş şekilde yüksek enerjili bir atmosfer oluşturur.
+
+### 2. Organik ve Yuvarlak Formlar
+
+Keskin köşeler yerine dairesel ve organik şekiller tercih edilir. Baloncuklar, damla formları, blob şekiller ve aşırı yuvarlatılmış dikdörtgenler hem görsel yumuşaklık hem de davetkar bir his yaratır. Bu formlar, kullanıcının sezgisel olarak "dokunmak istediği" bir atmosfer kurar.
+
+### 3. Neşeli Mikro Animasyonlar
+
+Hoverda hafifçe zıplayan kartlar, tıklamada "fırlayan" düğme animasyonları ve geçişlerde kullanılan eğlenceli ease eğrileri tasarımın ruhunu tamamlar. Her etkileşim kullanıcıya küçük bir ödül hissi yaşatır ve devam etme motivasyonu yaratır.
+
+### 4. Kontrastlı Renk Kombinasyonları
+
+Dopamin Tasarımı, benzer tonları değil, birbirini tamamlayan ya da karşı kutuplarda yer alan renkleri bir araya getirir. Sarı + mor, pembe + yeşil, turuncu + lacivert gibi zıt çiftler görsel enerjiyi artırır ve tasarımın "canlılık" hissini pekiştirir.
+
+### 5. Pozitif ve Kapsayıcı Görsel Dil
+
+Bu estetik yalnızca renkten ibaret değildir: ikonlar yuvarlak, metinler sıcak ve samimi, illüstrasyonlar çeşitlilik içerir. Tüm bu tercihler bir arada kullanıcıda "buraya aitim" hissi uyandırır.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Sağlık ve Wellness Uygulamaları
+
+Meditasyon, fitness veya ruh sağlığı uygulamaları, kullanıcıda başlangıç motivasyonu oluşturmak için Dopamin Tasarımının pozitif görsel dilini kullanır. Onboarding ekranları, tamamlama kutlamaları ve streak göstergeleri bu estetiğe özellikle uygundur. Kullanıcı hedefine ulaştığında ekranda patlayan konfeti animasyonu bu anlayışın ikonik bir örneğidir.
+
+### Senaryo 2: E-Ticaret ve Kampanya Sayfaları
+
+Neşeli bir alışveriş deneyimi yaratmak isteyen markalar, kampanya sayfaları, ürün kartları ve sepet akışında Dopamin Tasarımını uygular. Canlı renkler ve yuvarlak bileşenler alım kararını kolaylaştıran duygusal sıcaklık yaratır. "Sepete Ekle" gibi eylem düğmeleri, bu estetikte özellikle belirgin ve davetkar bir görünüm alır.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, dopamin tasarımı prensiplerini yansıtan bir kart bileşenini göstermektedir:
+
+```tsx
+export function DopamineCard({
+  title,
+  emoji,
+}: {
+  title: string;
+  emoji: string;
+}) {
+  return (
+    <div className="group relative bg-yellow-300 rounded-[2rem] p-6 shadow-[0_8px_32px_rgba(255,200,0,0.4)] hover:-translate-y-2 transition-transform duration-300 cursor-pointer overflow-hidden">
+      {/* Dekoratif blob — sağ üst */}
+      <div
+        aria-hidden="true"
+        className="absolute -top-8 -right-8 w-32 h-32 bg-pink-400 rounded-full opacity-60 group-hover:scale-125 transition-transform duration-500"
+      />
+      {/* Dekoratif blob — sol alt */}
+      <div
+        aria-hidden="true"
+        className="absolute -bottom-6 -left-6 w-24 h-24 bg-green-400 rounded-full opacity-50 group-hover:scale-110 transition-transform duration-700"
+      />
+
+      {/* İçerik */}
+      <div className="relative z-10">
+        <span className="text-4xl block mb-3" aria-hidden="true">
+          {emoji}
+        </span>
+        <h3 className="text-xl font-black text-yellow-900 leading-tight">
+          {title}
+        </h3>
+        <div className="mt-4 flex items-center gap-2">
+          <span className="inline-block px-4 py-1.5 bg-pink-500 text-white rounded-full text-sm font-bold">
+            Keşfet
+          </span>
+          <span className="text-yellow-800 text-lg font-black group-hover:translate-x-1 transition-transform duration-200">
+            →
+          </span>
+        </div>
+      </div>
+    </div>
+  );
+}
+```
+
+`group-hover` sınıfları ebeveyn bileşenin hover durumunda çocuk elementlerin animasyonunu tetikler. `rounded-[2rem]` ile özelleştirilmiş büyük yuvarlak köşeler organik his yaratır. `shadow-[0_8px_32px_rgba(255,200,0,0.4)]` renkli gölge, kartın altında bir ışık hüzmesi illüzyonu oluşturur.

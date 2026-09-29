@@ -1,0 +1,94 @@
+---
+title: "Minimalizm"
+slug: "minimalism"
+category: "clean-professional"
+tags: ["minimal", "whitespace", "focus", "clean", "simple"]
+description: "Gereksizi elemek ve tek bir odak noktasına yönlendirmek temel ilkesiyle çalışan, boşluk ve sadeliği ön plana çıkaran tasarım felsefesi."
+publishedAt: "2024-02-15"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Minimalizm, 1960'larda Amerikan sanat sahnesinde ortaya çıktı; Donald Judd, Dan Flavin ve Frank Stella gibi sanatçıların, gereksiz her unsuru eserden uzaklaştırarak biçimi ve malzemeyi olduğu gibi sunma anlayışı üzerine kuruluydu. "Less is more" ilkesini popülerleştiren Mies van der Rohe sayesinde mimarlığa sıçradı, ardından 1990'ların sonunda Swiss web tasarım ekolüyle birlikte dijital arayüzlere taşındı. Apple'ın 2007 sonrası ürün tasarım dili bu anlayışı tüketici elektroniğinde ana akıma taşıdı.
+
+Dijital minimalizm, ekranın sınırlı dikkat kaynağını kullanıcıya geri vermek amacıyla gereksiz öğeleri sistemli biçimde eleyerek tek bir odak noktası oluşturur. Bu yaklaşım yalnızca estetik tercih değil, bilişsel yük teorisine dayanan işlevsel bir karar alma sürecidir.
+
+## Temel Özellikler
+
+### 1. Boşluk (White Space)
+
+Negatif alan, pasif bir dolgu değil aktif bir tasarım öğesidir. Geniş boşluklar içeriğe nefes aldırır, hiyerarşiyi netleştirir ve kullanıcının gözünü odak noktasına yönlendirir. Web'de bu genellikle büyük `padding`/`margin` değerleriyle ve 8px tabanlı bir aralık skalasıyla sağlanır.
+
+### 2. Sınırlı Renk Paleti
+
+Minimalist tasarımlarda renk sayısı ikiden üçe kısıtlanır: bir arka plan, bir metin rengi ve opsiyonel tek bir vurgu tonu. Bu kısıtlama görsel gürültüyü azaltır ve her renge ayrı bir anlam yükler.
+
+### 3. Tek Odak Noktası
+
+Her sayfa veya bileşen yalnızca bir birincil eylemi veya mesajı iletir. İkincil içerik ya tamamen kaldırılır ya da görsel hiyerarşi aracılığıyla arka plana çekilir. Kullanıcı herhangi bir anda ne yapması gerektiğini tereddütsüz anlayabilmelidir.
+
+### 4. Tipografik Netlik
+
+Tek bir yazı ailesi, iki veya en fazla üç ağırlık seviyesiyle kullanılır. Font boyutu hiyerarşisi belirgin ama abartısızdır; dekoratif yazı tiplerinden kaçınılır.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: SaaS Onboarding Akışı
+
+Kullanıcıyı ilk kullanıma yönlendiren adım adım ekranlarda minimalizm, her adımda tek görev sunarak bilişsel yorgunluğu engeller. Geniş bir görsel alan içinde tek bir form alanı veya tek bir aksiyon düğmesi, kullanıcının ilerlemesini kolaylaştırır ve hata oranını düşürür.
+
+### Senaryo 2: Portfolyo ve Kişisel Marka Sitesi
+
+Tasarımcı ya da yaratıcıların kişisel sitelerinde minimalizm, içeriğin (fotoğraf, metin, proje) öne çıkmasını sağlar. Site sahibinin işi yerine sitenin kendisi odağı çalmaz; ziyaretçi doğrudan çalışmalarla yüzleşir.
+
+## Tailwind CSS ile Uygulama
+
+```tsx
+// Minimalist hero bölümü — tek odak, geniş boşluk
+export function MinimalHero() {
+  return (
+    <section className="min-h-screen bg-white flex items-center justify-center px-6">
+      <div className="max-w-xl text-center space-y-8">
+        {/* Tek odak başlık */}
+        <h1 className="text-5xl font-light tracking-tight text-gray-900">
+          Az, daha fazladır.
+        </h1>
+
+        {/* İkincil metin — soluk, hiyerarşik */}
+        <p className="text-lg text-gray-400 leading-relaxed">
+          Gereksiz olan her şey elendikten sonra kalan, özün kendisidir.
+        </p>
+
+        {/* Tek aksiyon düğmesi */}
+        <button className="px-10 py-4 bg-gray-900 text-white text-sm tracking-widest uppercase hover:bg-gray-700 transition-colors duration-200">
+          Keşfet
+        </button>
+      </div>
+    </section>
+  );
+}
+```
+
+```tsx
+// Minimalist kart bileşeni — ince ayırıcı, neredeyse renksiz
+export function MinimalCard({ title, body }: { title: string; body: string }) {
+  return (
+    <article className="border-t border-gray-100 py-10 grid grid-cols-3 gap-8">
+      <h2 className="col-span-1 text-sm font-medium text-gray-500 uppercase tracking-wider">
+        {title}
+      </h2>
+      <p className="col-span-2 text-base text-gray-700 leading-loose">{body}</p>
+    </article>
+  );
+}
+```
+
+## Tasarım İlkeleri Özeti
+
+| İlke            | Minimalist Yaklaşım                        |
+| --------------- | ------------------------------------------ |
+| Renk            | 1 arka plan + 1 metin + 0–1 vurgu          |
+| Tipografi       | 1 font ailesi, ≤3 ağırlık                  |
+| Boşluk          | Büyük margin/padding, 8px tabanlı skala    |
+| Bileşen sayısı  | Her görünümde tek birincil öğe             |
+| Dekorasyon      | Sıfır veya neredeyse sıfır                 |

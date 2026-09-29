@@ -1,0 +1,121 @@
+---
+title: "Skeuomorfizm"
+slug: "skeuomorphism"
+category: "retro-nostalgic"
+tags: ["skeuomorphism", "realistic", "texture", "material", "apple"]
+description: "Gerçek dünya nesnelerinin dokusunu ve fiziksel özelliklerini dijital arayüzlere aktaran, kullanıcının anında anlayabileceği arayüz tasarım felsefesi."
+publishedAt: "2024-05-01"
+---
+
+## Tarihsel Bağlam
+
+Skeuomorfizm, fiziksel nesnelerin görsel ve dokunsal özelliklerini dijital ortama taşıma pratiğidir. Kavramın kökleri, endüstriyel tasarıma kadar uzanır; ancak dijital arayüz tasarımında popüler hale gelmesi 2000'li yılların başında Apple'ın iOS platformuyla birlikte gerçekleşti.
+
+Steve Jobs ve tasarım direktörü Scott Forstall liderliğinde geliştirilen iOS 6 ve öncesi macOS arayüzleri, deri dokulu takvimler, ahşap raflı kitaplıklar, yeşil çuha yüzeyli oyun masaları ve gerçek not defterini andıran not uygulamalarıyla tanındı. Bu felsefenin temel motivasyonu, bilgisayar kullanmaya yeni başlayan kullanıcıların arayüzleri sezgisel olarak anlamasını sağlamaktı: bir düğme basılabilirdi, bir klasör açılabilirdi, bir kaydırıcı sürüklenebilirdi.
+
+2013'te Apple'ın iOS 7 ile flat tasarıma geçişi ve Jony Ive'ın tasarım vizyonu skeuomorfizmi ana akımdan uzaklaştırdı. Ancak bu estetik, bugün nostaljik bir yeniden değerlendirmeyle birlikte özellikle analog deneyimleri dijitale taşıyan uygulamalarda yeniden keşfedilmektedir.
+
+## Temel Özellikler
+
+### 1. Gerçekçi Doku ve Malzeme Simülasyonu
+
+Skeuomorfik tasarımın kalbi, yüzeylerde gerçek malzemeleri taklit eden CSS gradientleri ve gölgelerdir. Deri dokular `repeating-linear-gradient` ile oluşturulurken, ahşap görünümü farklı kahve tonlarının katmanlanmasıyla elde edilir. Metal yüzeyler ise parlak ve mat gradient geçişlerinin birleşimiyle simüle edilir.
+
+### 2. Emboss ve Deboss Efektleri
+
+Yüzeyden yükselen ya da gömülen elementler, `box-shadow` özelliğinin çoklu değerleriyle oluşturulur. Pozitif offset'li açık gölge ve negatif offset'li koyu gölge birlikte kullanıldığında, element gerçekten baskılı ya da kabartmalı bir görünüm kazanır. Bu teknik, özellikle düğmeler ve panel kenarlıkları için vazgeçilmezdir.
+
+### 3. Fiziksel Nesne Metaforları
+
+Her UI bileşeni, karşılık geldiği fiziksel nesneyi anlatır: ses kontrolü bir kaydırıcı koluna, takvim bir masa takvimine, not defteri gerçek bir spiralli deftere benzer. Bu metaforlar sayesinde kullanıcı, yeni bir arayüzde bile nasıl etkileşime geçeceğini içgüdüsel olarak bilir.
+
+### 4. Detaylara Aşırı Dikkat
+
+Skeuomorfizm, dikkat çekici ayrıntılarla ayırt edilir: deri dikişlerin CSS `border-radius` ve gradient ile taklit edilmesi, kâğıt sayfasının kıvrılan köşesi, cam yüzeydeki parlaklık yansıması. Bu ayrıntılar mükemmellik algısı yaratsa da sayfa performansını ve bakım kolaylığını olumsuz etkileyebilir.
+
+## Pratik Kullanım Senaryoları
+
+### Müzik ve Ses Uygulamaları
+
+Dijital enstrüman simülatörleri, podcast oynatıcılar ve müzik düzenleyiciler skeuomorfizmden büyük yarar sağlar. Kullanıcılar, fiziksel bir karıştırıcı masasına (mixer) benzeyen bir arayüzde kaydırıcıları sürükleyerek ses seviyesini ayarlarken, gerçek bir aleti kullandıklarını hissederler. Bu bağ, öğrenme eğrisini dramatik biçimde kısaltır.
+
+### E-Ticaret Ürün Sunumu
+
+Yüksek kaliteli fiziksel ürünler satan platformlar — deri çanta, lüks saat, mobilya — skeuomorfik kartlar ve arka planlarla ürünün kalite algısını pekiştirebilir. Ahşap bir raf üzerinde duran bir çanta görseli, steril beyaz bir arka plandan çok daha güçlü bir atmosfer yaratır.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, deri doku efektini ve emboss gölgelerini Tailwind ile birlikte kullanarak gerçekçi bir kart bileşeni oluşturur:
+
+```tsx
+// Skeuomorfik deri panel bileşeni
+export function SkeuomorphicCard() {
+  return (
+    <div
+      className="relative rounded-xl p-6 overflow-hidden"
+      style={{
+        // Deri doku: iki katmanlı gradient ile oluşturulur
+        background: `
+          repeating-linear-gradient(
+            45deg,
+            transparent,
+            transparent 2px,
+            rgba(0,0,0,0.03) 2px,
+            rgba(0,0,0,0.03) 4px
+          ),
+          linear-gradient(135deg, #8B4513 0%, #A0522D 30%, #6B3410 60%, #8B4513 100%)
+        `,
+        // Emboss efekti: üst-sol açık, alt-sağ koyu
+        boxShadow: `
+          inset 0 1px 0 rgba(255,255,255,0.25),
+          inset 0 -1px 0 rgba(0,0,0,0.3),
+          0 8px 32px rgba(0,0,0,0.4),
+          0 2px 4px rgba(0,0,0,0.2)
+        `,
+      }}
+    >
+      {/* Dikiş efekti — iç kenarlık */}
+      <div
+        className="absolute inset-2 rounded-lg pointer-events-none"
+        style={{
+          border: "1px dashed rgba(255,255,255,0.2)",
+        }}
+      />
+
+      {/* İçerik */}
+      <h2
+        className="text-xl font-bold mb-2"
+        style={{
+          color: "#F5DEB3",
+          textShadow: "0 1px 2px rgba(0,0,0,0.5)",
+        }}
+      >
+        Not Defteri
+      </h2>
+      <p className="text-sm" style={{ color: "rgba(245,222,179,0.7)" }}>
+        Bugünün notları...
+      </p>
+
+      {/* Basılabilir düğme */}
+      <button
+        className="mt-4 px-4 py-2 rounded-lg text-sm font-semibold transition-all active:scale-95"
+        style={{
+          background:
+            "linear-gradient(180deg, #C8A84B 0%, #A0822A 50%, #8B6914 100%)",
+          boxShadow: `
+            0 2px 4px rgba(0,0,0,0.4),
+            inset 0 1px 0 rgba(255,255,255,0.3),
+            inset 0 -1px 0 rgba(0,0,0,0.2)
+          `,
+          color: "#FFF8E1",
+          border: "1px solid rgba(0,0,0,0.3)",
+        }}
+      >
+        Kaydet
+      </button>
+    </div>
+  );
+}
+```
+
+Bu örnek, `box-shadow`'un `inset` değeriyle emboss efekti, `repeating-linear-gradient` ile doku simülasyonu ve `active:scale-95` Tailwind sınıfıyla basma animasyonunu bir arada göstermektedir.

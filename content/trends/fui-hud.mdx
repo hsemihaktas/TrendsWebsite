@@ -1,0 +1,115 @@
+---
+title: "FUI / HUD"
+slug: "fui-hud"
+category: "dark-atmospheric"
+tags: ["fui", "hud", "sci-fi", "interface", "cinematic"]
+description: "Film ve oyunlardan ilham alan kurgusal kullanıcı arayüzleri; telemetri verileri, dairesel göstergeler ve katmanlı paneller içerir."
+publishedAt: "2024-04-15"
+---
+
+## Tarihsel Köken ve Bağlam
+
+FUI (Fictional User Interface / Kurgusal Kullanıcı Arayüzü), sinemadaki bilim kurgu filmlerinin ihtiyacından doğan bir tasarım disiplinidir. *Minority Report* (2002), *Iron Man* (2008) ve *Prometheus* (2012) gibi yapımlarda sahnelenen hayali arayüzler, gerçek bir yazılım ürünü gibi çalışması gerekmeyen ancak görsel olarak inandırıcı ve ileri teknoloji hissi veren simülasyonlardır. Bu projelerde çalışan tasarımcılar — örneğin Mark Coleran ve Ash Thorp — "FUI tasarımcısı" kimliğiyle özel bir uzmanlık alanı oluşturdu.
+
+HUD (Heads-Up Display) ise kökenlerini askeri uçak kokpit teknolojilerinde bulur; pilot gözlerini gösterge panelinden ayırmadan uçuş bilgilerine erişebilsin diye geliştirildi. Zamanla otomotiv endüstrisine de transfer olan bu sistem, dijital arayüz dünyasına "bilgi katmanlaması" kavramını taşıdı. 2010 sonrasında dashboard uygulamaları, veri görselleştirme platformları ve oyun arayüzleri FUI/HUD estetiğini benimseleyerek bu sinematik görsel dili gerçek ürünlere dönüştürdü.
+
+## Temel Özellikler
+
+### 1. Dairesel Gauge ve Radyal Göstergeler
+
+FUI'nin en ikonik elementi dairesel ilerleme göstergeleridir. SVG `stroke-dasharray` ve `stroke-dashoffset` kombinasyonuyla oluşturulan bu göstergeler, hız, yüzde, sıcaklık ve güç gibi metrikleri radyal biçimde görselleştirir. İnce çizgi ağırlığı (`strokeWidth: 1–3`) ve yarı saydam arka plan halkası bu göstergelerin karakteristik görünümünü tanımlar.
+
+### 2. Vektörel Çizgi Diyagramları ve Arka Plan Izgaraları
+
+Radar desenleri, coğrafi koordinat ızgaraları, sinyal dalga formları ve anten diyagramları FUI atmosferini güçlendiren temel unsurlardır. CSS `background-image` ile `linear-gradient` kombinasyonu veya SVG path'leriyle oluşturulan ince ızgara çizgileri arayüze "taranmış gerçeklik" hissi katar.
+
+### 3. Telemetri Veri Akışları
+
+Gerçek zamanlı güncelleme hissi veren sayısal veri akışları — koordinatlar, zaman damgaları, bağlantı durumları, sinyal güçleri — monospace fontlarla görüntülenir. Rakamların sürekli değişiyor gibi görünmesi için CSS `counter` animasyonları veya JavaScript `setInterval` ile simüle edilebilir; bu dinamizm arayüze "canlı sistem" karakteri kazandırır.
+
+### 4. Yarı Saydam Katmanlı Panel Sistemi
+
+FUI arayüzleri genellikle bilgi derinliği illüzyonu yaratmak için üst üste yarı saydam panellerden oluşur. `bg-color/alpha` Tailwind sözdizimi ile `backdrop-blur` kombinasyonu bu katmanlı derinlik etkisini sağlar. Her panelin farklı opaklık seviyesi görsel hiyerarşiyi belirler.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Veri Görselleştirme ve Analiz Panoları
+
+Finansal piyasa izleme, ağ trafik analizi, sunucu sağlığı takibi ve IoT cihaz yönetimi gibi kritik verileri görselleştiren dashboard uygulamaları FUI estetiğinden güçlü biçimde yararlanır. Karmaşık veri kümelerini yönetici düzeyinde etkileyici biçimde sunmak için dairesel göstergeler ve telemetri panelleri idealdir; hem işlevsel hem de prezantabl bir sonuç verir.
+
+### Senaryo 2: Kurumsal Teknoloji Tanıtımları ve Ürün Lansmanları
+
+Teknoloji şirketleri, savunma sanayi firmaları, havacılık-uzay startupları ve yapay zeka şirketleri için hazırlanan tanıtım siteleri FUI estetiğini markanın ileri teknoloji kimliğini güçlendirmek amacıyla kullanır. "Bu ürün geleceği bugüne taşıyor" mesajını görsel olarak aktarmanın en güçlü yollarından biridir.
+
+## Tailwind CSS ile Uygulama
+
+```tsx
+// FUI Dairesel Gauge Bileşeni
+export function FUIGauge({ value = 67 }: { value?: number }) {
+  const radius = 40;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (value / 100) * circumference;
+
+  return (
+    <div className="relative flex flex-col items-center justify-center bg-[#050d18] border border-[#1a4a6e] p-8">
+      {/* Arka plan ızgara deseni */}
+      <div
+        className="absolute inset-0 opacity-10"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(0,200,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0,200,255,0.3) 1px, transparent 1px)",
+          backgroundSize: "20px 20px",
+        }}
+      />
+
+      {/* SVG Dairesel Gösterge */}
+      <svg width="120" height="120" className="relative z-10 -rotate-90">
+        <circle
+          cx="60"
+          cy="60"
+          r={radius}
+          fill="none"
+          stroke="rgba(0,200,255,0.15)"
+          strokeWidth="3"
+        />
+        <circle
+          cx="60"
+          cy="60"
+          r={radius}
+          fill="none"
+          stroke="#00c8ff"
+          strokeWidth="3"
+          strokeDasharray={circumference}
+          strokeDashoffset={offset}
+          strokeLinecap="round"
+        />
+      </svg>
+
+      {/* Merkez değer */}
+      <div className="absolute flex flex-col items-center">
+        <span className="text-[#00c8ff] font-mono text-2xl font-bold">
+          {value}%
+        </span>
+        <span className="text-[#00c8ff]/50 font-mono text-[9px] tracking-widest uppercase">
+          THRUST
+        </span>
+      </div>
+
+      {/* Alt etiket */}
+      <p className="relative z-10 mt-2 text-[#00c8ff]/40 font-mono text-xs tracking-widest uppercase">
+        ENGINE_CORE_01
+      </p>
+    </div>
+  );
+}
+```
+
+## Renk Paleti
+
+| Renk Adı          | Hex Kodu  | Kullanım Amacı                 |
+| ----------------- | --------- | ------------------------------ |
+| Derin Lacivert    | `#050d18` | Ana arka plan                  |
+| HUD Mavisi        | `#00c8ff` | Aktif göstergeler, vurgular    |
+| Panel Kenarlığı   | `#1a4a6e` | Panel çerçeveleri              |
+| Telemetri Yeşili  | `#00ff88` | Başarı durumu, pozitif metrik  |
+| Uyarı Turuncusu   | `#ff8c00` | Uyarı metrikleri               |

@@ -1,0 +1,67 @@
+---
+title: "Glassmorphism"
+slug: "glassmorphism"
+category: "modern-populer"
+tags: ["glass", "blur", "transparency", "backdrop-filter", "layers"]
+description: "Buzlu cam efekti, arka plan bulanıklığı ve yarı saydam katmanlarla derinlik hissi veren modern bir UI tasarım akımı."
+publishedAt: "2024-01-20"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Glassmorphism'in popülaritesi, Apple'ın 2013 yılında iOS 7 ile tanıttığı bulanıklık ve şeffaflık odaklı yeniden tasarımına dayanır; ancak akımın adını ve kurallarını netleştiren ise Ján Losert'in 2020'de yayımladığı kapsamlı makaledir. Microsoft'un Windows 11 ve macOS'un Yosemite güncellemesiyle işletim sistemi arayüzlerine taşınan bu estetik, `backdrop-filter: blur()` CSS özelliğinin modern tarayıcılarda yaygın destek kazanmasıyla birlikte web dünyasına da hız kazandı. Glassmorphism; derinlik algısı, görsel hiyerarşi ve katmanlı içerik sunumu için çarpıcı bir çerçeve sunarken aynı zamanda kullanıcıya "içeride ne olduğunu hissettiren" bir şeffaflık sağlar. 2021–2023 yılları arasında tasarım topluluklarında yoğun ilgi gören bu akım, günümüzde özellikle dashboard, kart bileşeni ve modal tasarımlarında sıkça kullanılmaktadır.
+
+### Backdrop Blur ve Şeffaflık
+
+Glassmorphism'in temel teknik bileşeni `backdrop-filter: blur()` CSS özelliğidir. Elemanın arkasındaki içeriği belirli bir piksel değerinde bulanıklaştıran bu özellik, gerçek bir buzlu cam görünümü yaratır. Arka plan opaklığı genellikle `rgba(255, 255, 255, 0.15)` ile `rgba(255, 255, 255, 0.25)` arasında tutulur; bu dar aralık cam efektini sağlarken içeriğin okunabilirliğini korur. Tailwind'de `bg-white/20` ve `backdrop-blur-md` sınıflarıyla pratik biçimde uygulanabilir.
+
+### Katmanlı Derinlik Kompozisyonu
+
+Glassmorphism, tek bir cam karttan çok birden fazla katmanın üst üste bindirilmesiyle anlam kazanır. Arka planda canlı bir gradient veya görselin üzerine konumlanan cam kartlar, derinlik algısı oluşturur. Her ek katman hafif bir şeffaflık farkıyla (örneğin %20 ve %30) ayrıştırılır; bu sayede kullanıcı katmanlar arasındaki uzamsal ilişkiyi sezgisel olarak kavrar. Kartların kenarlarında 1px beyaz yarı saydam border (`border border-white/30`) cam yüzeyindeki ışık yansımasını simüle eder.
+
+### Renk ve Arka Plan Uyumu
+
+Glassmorphism yalnızca koyu veya gradient arka planlar üzerinde düzgün çalışır; sade beyaz veya açık gri arka planlarda blur efekti görünmez hâle gelir. En iyi sonuç; mor, mavi, pembe tonlarında canlı radial gradient veya mesh gradient arka planların üzerinde elde edilir. Kart içi metin ve ikonlar için yeterli kontrast sağlamak amacıyla metin rengi çoğunlukla beyaz veya çok açık tonlarda tutulur, gerekirse `text-shadow` eklenir.
+
+## Pratik Kullanım Senaryoları
+
+### Senaryo 1: Dashboard Veri Kartları
+
+Analitik veya yönetim paneli arayüzlerinde glassmorphism kartlar, koyu veya gradient bir arka plan üzerinde KPI değerlerini, grafikleri ve istatistikleri sunar. Her kart hafif cam dokusuyla arka plandan görsel olarak ayrışırken sayfa genel bütünlüğünü korur. Kullanıcılar, kartların altındaki içeriği çok az da olsa görebildiklerinden veri yoğunluğunu hisseder ve arayüz yüzeysel görünmez.
+
+### Senaryo 2: Giriş Ekranı ve Modal Bileşenleri
+
+Uygulama giriş formları ve onay diyalogları için glassmorphism, kullanıcının dikkatini arka planı tamamen kapatmadan toplar. Giriş formu, canlı bir arka plan görseli veya gradient önünde konumlanmış bir cam kartla sunulur. Bu yöntem özellikle mobil uygulamaların açılış ekranlarında ve web uygulamalarının modal pencerelerinde sıkça tercih edilmektedir.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, glassmorphism efektli bir kart bileşenini göstermektedir:
+
+```html
+<!-- Glassmorphism Kart — Gradient Arka Plan Gerektirir -->
+<div class="relative min-h-screen bg-gradient-to-br from-purple-600 via-pink-500 to-indigo-700 flex items-center justify-center p-8">
+  
+  <!-- Cam Kart -->
+  <div class="backdrop-blur-md bg-white/20 border border-white/30 rounded-2xl p-8 max-w-sm w-full shadow-xl">
+    <h2 class="text-2xl font-bold text-white mb-2">Hoş Geldiniz</h2>
+    <p class="text-white/80 text-sm mb-6">
+      Hesabınıza giriş yaparak devam edin.
+    </p>
+    
+    <!-- Form Alanı -->
+    <input
+      type="email"
+      placeholder="E-posta adresiniz"
+      class="w-full bg-white/10 border border-white/20 rounded-lg px-4 py-3 text-white placeholder-white/50 focus:outline-none focus:border-white/60 mb-4 backdrop-blur-sm"
+    />
+    
+    <!-- Giriş Düğmesi -->
+    <button class="w-full bg-white/30 hover:bg-white/40 border border-white/50 text-white font-semibold py-3 rounded-lg transition-all duration-200 backdrop-blur-sm">
+      Giriş Yap
+    </button>
+  </div>
+
+  <!-- İkincil Cam Katmanı (arka planda) -->
+  <div class="absolute top-12 right-12 w-48 h-48 backdrop-blur-sm bg-white/10 border border-white/20 rounded-3xl -rotate-12" aria-hidden="true"></div>
+</div>
+```

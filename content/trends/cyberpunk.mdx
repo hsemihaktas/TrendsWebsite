@@ -1,0 +1,98 @@
+---
+title: "Cyberpunk"
+slug: "cyberpunk"
+category: "dark-atmospheric"
+tags: ["cyberpunk", "neon", "dark", "hud", "sci-fi"]
+description: "Koyu arka planlar, neon aksanlar ve HUD elementleriyle distopik gelecek estetiğini dijital arayüzlere taşıyan etkileyici tasarım akımı."
+publishedAt: "2024-04-10"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Cyberpunk estetiği, 1980'lerin bilim kurgu edebiyatından — özellikle William Gibson'ın *Neuromancer* (1984) romanından — beslenir. "Yüksek teknoloji, düşük yaşam" diye özetlenen bu distopik gelecek vizyonu, Ridley Scott'ın *Blade Runner* (1982) filmiyle güçlü bir görsel dile kavuştu. *Ghost in the Shell* (1995) anime filmi ve *The Matrix* (1999) estetiği daha da olgunlaştırdı.
+
+Dijital tasarım dünyasında cyberpunk akımı, 2010'ların sonlarında oyun arayüzleri ve uygulama tasarımlarında belirgin biçimde hissettirmeye başladı. CD Projekt Red'in *Cyberpunk 2077* oyunu (2020), bu estetiği ana akıma taşıdı ve UI/UX tasarımcıları için yeni bir referans noktası oluşturdu. Aşırı koyu arka plan, parlak neon aksanlar ve işlevselliği ön plana çıkaran HUD elementleri bu akımın temel görsel imzasıdır.
+
+## Temel Özellikler
+
+### 1. Koyu Zemin ve Neon Kontrastı
+
+Cyberpunk tasarımının omurgasını `#0a0a0f` ile `#1a1a2e` arasındaki aşırı koyu zeminler oluşturur. Bu koyu yüzeyler üzerinde neon pembe (`#ff00ff`), neon cyan (`#00ffff`) ve neon sarı-yeşil (`#ccff00`) renkleri ezici bir kontrast yaratır. Yüksek kontrast, distopik şehir atmosferini ekranda yeniden üretir ve kullanıcının dikkatini anında çeker.
+
+### 2. HUD (Heads-Up Display) Elementleri
+
+Askeri uçuş simülasyonlarından ödünç alınan HUD dili; köşe dekorasyonları, telemetri verileri, hedef çerçeveleri ve açı göstergeleriyle arayüzlere entegre edilir. Köşelerdeki kesik açılar ve ince çizgi çerçeveler UI'ı sanki taranmış bir gerçeklikten geliyor gibi hissettirir. Bu elementler saf dekorasyon değil, bilgi yoğunluğunu artıran yapısal unsurlardır.
+
+### 3. Tarama Çizgileri (Scanlines) ve Glitch Efektleri
+
+CRT monitör dönemi estetiğini anımsatan tarama çizgileri CSS `repeating-linear-gradient` ile simüle edilir. Glitch efektleri, metin titremesi (`text-shadow` offset'i) ve sinyal paraziti görsel öğeleri arayüze bozuk, geleceğin hacker kültüründen fışkıran özgün bir atmosfer katar.
+
+### 4. Monospace Tipografi ve Kod Kimliği
+
+Courier New, JetBrains Mono ve Fira Code gibi monospace fontlar terminal ve kod kimliğiyle örtüşür. Büyük harf kodlamalar, sayısal koordinatlar ve kısa alfanümerik diziler arayüzü gerçek bir bilgisayar terminali gibi hissettirir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Oyun ve E-spor Platformları
+
+Oyuncu profillerini, turnuva tablolarını ve maç istatistiklerini sergileyen e-spor web siteleri ile oyun uygulamaları için cyberpunk estetiği güçlü bir çekim yaratır. Neon vurgular önemli metrikleri öne çıkarırken koyu zemin uzun oturumlar için göz yorgunluğunu azaltır. Leaderboard, match history ve inventory ekranları bu estetikle hem işlevsel hem de dramatik biçimde sunulabilir.
+
+### Senaryo 2: Siber Güvenlik ve Teknoloji Ürünleri
+
+Güvenlik izleme panoları, sızma testi araçları, ağ görselleştirme platformları ve yapay zeka ürünleri gibi "ileri teknoloji" imajı taşıyan uygulamalar için cyberpunk estetiği profesyonel bir güç hissi yaratır. Terminal benzeri arayüzler uzmanlaşmış bilgi algısını pekiştirir ve kullanıcıda ürünün yeteneklerine karşı özgüven duygusu oluşturur.
+
+## Tailwind CSS ile Uygulama
+
+```tsx
+// Cyberpunk HUD Paneli
+export function CyberpunkPanel() {
+  return (
+    <div className="relative bg-[#0a0a0f] border border-[#00ffff]/30 p-6 overflow-hidden">
+      {/* Köşe dekorasyonları */}
+      <div className="absolute top-0 left-0 w-4 h-4 border-t-2 border-l-2 border-[#00ffff]" />
+      <div className="absolute top-0 right-0 w-4 h-4 border-t-2 border-r-2 border-[#00ffff]" />
+      <div className="absolute bottom-0 left-0 w-4 h-4 border-b-2 border-l-2 border-[#00ffff]" />
+      <div className="absolute bottom-0 right-0 w-4 h-4 border-b-2 border-r-2 border-[#00ffff]" />
+
+      {/* HUD başlık */}
+      <div className="flex items-center gap-2 mb-4">
+        <div className="w-2 h-2 rounded-full bg-[#00ffff] animate-pulse" />
+        <span className="text-[#00ffff] font-mono text-xs tracking-widest uppercase">
+          SYS.MONITOR_v2.4.1
+        </span>
+      </div>
+
+      {/* Telemetri verileri */}
+      <div className="grid grid-cols-2 gap-4">
+        <div className="border border-[#ff00ff]/20 p-3 bg-[#ff00ff]/5">
+          <p className="text-[#ff00ff]/60 font-mono text-xs">CPU_LOAD</p>
+          <p className="text-[#ff00ff] font-mono text-2xl font-bold">74.3%</p>
+        </div>
+        <div className="border border-[#ccff00]/20 p-3 bg-[#ccff00]/5">
+          <p className="text-[#ccff00]/60 font-mono text-xs">NET_LATENCY</p>
+          <p className="text-[#ccff00] font-mono text-2xl font-bold">12ms</p>
+        </div>
+      </div>
+
+      {/* Tarama çizgisi efekti */}
+      <div
+        className="absolute inset-0 pointer-events-none opacity-5"
+        style={{
+          backgroundImage:
+            "repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,255,255,0.1) 2px, rgba(0,255,255,0.1) 4px)",
+        }}
+      />
+    </div>
+  );
+}
+```
+
+## Renk Paleti
+
+| Renk Adı        | Hex Kodu  | Kullanım Amacı               |
+| --------------- | --------- | ---------------------------- |
+| Derin Siyah     | `#0a0a0f` | Ana arka plan                |
+| Neon Cyan       | `#00ffff` | Birincil vurgu, başlıklar    |
+| Neon Pembe      | `#ff00ff` | İkincil vurgu, uyarılar      |
+| Neon Sarı-Yeşil | `#ccff00` | Üçüncül vurgu, başarı durumu |
+| Koyu Lacivert   | `#1a1a2e` | Kart ve panel yüzeyleri      |

@@ -1,0 +1,64 @@
+---
+title: "Neubrutalism"
+slug: "neubrutalism"
+category: "modern-populer"
+tags: ["brutalism", "bold", "borders", "shadows", "typography"]
+description: "Kalın siyah kenarlıklar, sert offset gölgeler ve düz renklerle cesur, dikkat çekici arayüzler oluşturan modern bir tasarım akımı."
+publishedAt: "2024-01-15"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Neubrutalism (Yeni Brutalizm), 1950'lerin ve 60'ların mimari brutalizm akımından ilham alarak dijital tasarım dünyasına uyarlanmış çağdaş bir estetik harekettir. Orijinal mimari brutalizm; çıplak beton, sert geometrik formlar ve dekorasyon karşıtı bir tutumla öne çıkıyordu. Bu anlayış, 2020'li yıllarda web ve mobil arayüz tasarımında yeniden keşfedildi. Tasarımcılar, aşırı parlak ve "steril" görünen minimal tasarımların yarattığı tekdüzeliğe tepki olarak kasıtlı biçimde ham, kaba ve cesur görsel öğeler kullanmaya başladı. Figma ve Dribbble gibi platformlarda hızla viral olan Neubrutalism; Gumroad, Linear ve çeşitli SaaS ürünlerinde uygulamalarını bulmakta gecikmedi. Akımın ayırt edici özelliği, "mükemmeliyetçilikten" bilinçli olarak uzaklaşarak özgün ve akılda kalıcı bir kişilik yaratmasıdır.
+
+### Kalın Kenarlıklar ve Offset Gölgeler
+
+Neubrutalism'in en tanımlayıcı özelliği, en az 2px kalınlığındaki siyah solid kenarlıklar ve bu kenarlıklarla birlikte kullanılan sert offset box-shadow'lardır. Gölge, elemanın tam altında değil 4–6px sağa ve aşağıya kaydırılmış konumda yer alır; bu da elemanın yüzeyden "zıplamış" gibi görünmesini sağlar. Hover durumunda gölge sıfıra çekilirken eleman gölge yönünde kayar; bu sayede basılabilir bir fiziksel düğme hissi yaratılır.
+
+### Düz ve Canlı Renk Paleti
+
+Gradient veya şeffaflık kullanılmaz; bunun yerine sarı (#FFDD00), kırmızı (#FF4545), mavi (#0066FF) ve beyaz gibi saf, düz renkler tercih edilir. Renk, genellikle kartın veya düğmenin arka planında kullanılırken metin ve kenarlıklar siyah olarak tutulur. Bu yüksek kontrast kombinasyon, herhangi bir görsel hiyerarşi açıklamasına gerek kalmadan gözü doğrudan odak noktasına yönlendirir.
+
+### Cesur ve İşlevsel Tipografi
+
+Sans-serif yazı tipleri (genellikle Inter, Space Grotesk veya özelleştirilmiş groteskler) kalın ağırlıkta (700–900) kullanılır. Başlıklar büyük punto ve yoğun harf aralıklarıyla yerleştirilir. Tipografi, sıradan bir bilgi taşıyıcısı olmaktan çıkıp tasarımın görsel kimliğini oluşturan ana bileşen hâline gelir.
+
+## Pratik Kullanım Senaryoları
+
+### Senaryo 1: SaaS Ürün Açılış Sayfası
+
+Bir proje yönetim aracı veya geliştirici aracı, Neubrutalism stilini benimseyerek kalabalık SaaS pazarında dikkat çekici bir kimlik oluşturabilir. CTA düğmeleri sarı arka plan ve sert offset gölgeyle tasarlanır; hover'da gölgenin sıfıra çekilmesiyle gerçekçi bir basma hissi yaratılır. Fiyatlandırma kartları kalın çerçevelerle birbirinden ayrılır; bu yaklaşım, kullanıcının sayfayı tarayarak seçenekleri hızla karşılaştırmasına olanak tanır.
+
+### Senaryo 2: Portföy ve Kişisel Marka Sitesi
+
+Tasarımcı veya geliştirici portföy sitelerinde Neubrutalism, özgün ve kendine güvenen bir kişilik sergilemenin etkili bir yoludur. Proje kartları kenarlıklı grid kutular içinde sunulur; her kart hover durumunda hafifçe hareket ederek etkileşim davetini görsel olarak iletir. Renk vurguları tutarlı bir palet içinde seçilir ve bu renkler hem navigasyonda hem de proje etiketlerinde tekrar kullanılarak markanın tanınırlığını pekiştirir.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, Neubrutalism stilinde bir kart bileşeninin nasıl oluşturulacağını göstermektedir:
+
+```html
+<!-- Neubrutalism Kart Bileşeni -->
+<div class="border-2 border-black bg-yellow-300 shadow-[4px_4px_0px_0px_#000] p-6 rounded-none transition-all duration-150 hover:shadow-none hover:translate-x-1 hover:translate-y-1 cursor-pointer">
+  <h3 class="text-xl font-black text-black mb-2 uppercase tracking-tight">
+    Proje Başlığı
+  </h3>
+  <p class="text-sm font-medium text-black mb-4">
+    Projenin kısa açıklaması buraya gelir. Düz, doğrudan bir dil kullanılır.
+  </p>
+  <button class="border-2 border-black bg-black text-white px-4 py-2 font-bold text-sm hover:bg-white hover:text-black transition-colors duration-150">
+    İncele →
+  </button>
+</div>
+```
+
+Düğme bileşeni için interaktif gölge efekti:
+
+```html
+<!-- Neubrutalism Düğme -->
+<button
+  class="border-2 border-black bg-red-400 text-black font-bold px-6 py-3 shadow-[4px_4px_0px_0px_#000] hover:shadow-none hover:translate-x-1 hover:translate-y-1 transition-all duration-100 active:shadow-none active:translate-x-1 active:translate-y-1"
+>
+  Hemen Başla
+</button>
+```

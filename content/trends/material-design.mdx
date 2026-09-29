@@ -1,0 +1,116 @@
+---
+title: "Material Design"
+slug: "material-design"
+category: "clean-professional"
+tags: ["google", "material", "elevation", "motion", "components"]
+description: "Google'ın elevation tabanlı tasarım sistemi; katmanlı yüzeyler, dinamik renk ve tutarlı bileşenlerle güvenilir ve erişilebilir arayüzler kurar."
+publishedAt: "2024-02-25"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Material Design, Google tarafından 2014 Google I/O konferansında tanıtıldı. Matias Duarte liderliğindeki ekip, o dönemde her Android uygulamasının farklı görünüp farklı davranmasından doğan tutarsızlığa çözüm arıyordu. Yanıt, fizik dünyasından ilham alan bir metafor oldu: **kağıt ve mürekkep**.
+
+Tasarım sistemi, dijital arayüzlerin fiziksel kağıt gibi üst üste yığılabilen, kesilip biçimlendirilebilen yüzeylerden oluştuğunu öne sürdü. Her yüzeyin gerçek dünya ışığını yansıtan bir gölgesi olmalıydı. Bu tutarlı metafor sayesinde ekipler aynı dili kullanmaya başladı.
+
+2021'de Material You (Material Design 3) duyuruldu. Dinamik renk algoritması kullanıcının duvar kağıdından renk üreterek tamamen kişiselleştirilmiş bir palet oluşturuyordu. Erişilebilirlik kılavuzları güncellendi, bileşenler yeniden tasarlandı ve sistem Android 12+ ile entegre oldu.
+
+## Temel Özellikler
+
+### 1. Elevation ve Gölge Sistemi
+
+Material Design'da her bileşen bir **elevation** değerine sahiptir (0dp – 24dp). Elevation ne kadar yüksekse gölge o kadar yumuşak ve geniş yayılır. Bu sistem ekran üzerinde gerçek bir derinlik algısı yaratır ve bileşenler arasındaki hiyerarşiyi görsel olarak iletir.
+
+```
+dp0  → box-shadow: none              (arka plan yüzeyleri)
+dp1  → box-shadow: 0 1px 2px rgba(0,0,0,.12)   (kartlar)
+dp4  → box-shadow: 0 4px 6px rgba(0,0,0,.14)   (FAB)
+dp8  → box-shadow: 0 8px 12px rgba(0,0,0,.16)  (bottom sheet)
+```
+
+### 2. Dinamik Renk (Material You)
+
+Material Design 3, beş ton rolüne dayalı bir renk şeması kullanır: **Primary**, **Secondary**, **Tertiary**, **Error** ve **Neutral**. Her rol aydınlık ve koyu tema için otomatik kontrast değerleri üretir. WCAG AA uyumluluğu renk üretim algoritmasına entegre edilmiştir.
+
+### 3. Bileşen Kütüphanesi
+
+Buton, kart, diyalog, gezinme çubuğu, chip, metin alanı — bunların tamamı belirlenmiş boyut, boşluk ve durum (rest, hover, focused, disabled, pressed) kurallarına sahiptir. Bu tutarlılık, büyük ürün ekiplerinin farklı sayfalar üretirken dil birliğini korumasını sağlar.
+
+### 4. Hareket ve Geçiş Dili
+
+Material Design, geçişler için doğrusal olmayan easing eğrileri kullanır. Bir öğenin ekrana girip çıkması, kaynaklandığı yüzeyden "maddesel olarak" dönüşür gibi hissettirmelidir. Bileşenler ekranda sürüklenen kağıtlar gibi davranır.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Kurumsal Android Uygulaması
+
+Material Design, Android ekosisteminin tasarım dilidir. Kurumsal e-posta, CRM veya proje yönetim uygulamaları için Material bileşenleri kullanmak, uygulama içinde sistem genelindeki kullanıcı beklentilerini karşılar. Kullanıcı, uygulama açıkken de sistem ayarlarındaki düğmelere benzer bir davranış görür; öğrenme maliyeti düşer.
+
+### Senaryo 2: Cross-Platform Web + Mobil Ürün
+
+Hem web hem mobil kanalda hizmet veren ürünlerde Material Design kullanmak, iki platform arasında görsel tutarlılık sağlar. Geliştiriciler MUI (Material UI for React) veya Angular Material gibi hazır kütüphaneler sayesinde tekrarlayan bileşen kodunu yazmaktan kurtulur; tasarımcılar ise her ekranda aynı tasarım dilini konuşur.
+
+## Tailwind CSS ile Uygulama
+
+```tsx
+// Material Design elevation skalası — Tailwind shadow sınıflarıyla
+const elevationMap = {
+  dp0: "shadow-none",
+  dp1: "shadow-sm",   // 0 1px 2px rgba(0,0,0,.12)
+  dp4: "shadow-md",   // 0 4px 6px rgba(0,0,0,.14)
+  dp8: "shadow-lg",   // 0 8px 12px rgba(0,0,0,.16)
+  dp16: "shadow-xl",
+  dp24: "shadow-2xl",
+} as const;
+
+// Material kart bileşeni (dp1 elevation)
+export function MaterialCard({
+  title,
+  body,
+  elevation = "dp1",
+}: {
+  title: string;
+  body: string;
+  elevation?: keyof typeof elevationMap;
+}) {
+  return (
+    <div
+      className={`bg-white rounded-xl p-6 ${elevationMap[elevation]}
+                  hover:${elevationMap["dp4"]} transition-shadow duration-200`}
+    >
+      <h3 className="text-base font-medium text-gray-900 mb-2">{title}</h3>
+      <p className="text-sm text-gray-600 leading-relaxed">{body}</p>
+    </div>
+  );
+}
+```
+
+```tsx
+// Material FAB (Floating Action Button) — dp6 elevation
+export function MaterialFAB({ icon, label }: { icon: string; label: string }) {
+  return (
+    <button
+      aria-label={label}
+      className="fixed bottom-6 right-6
+                 w-16 h-16 rounded-2xl
+                 bg-violet-600 text-white
+                 shadow-lg hover:shadow-xl
+                 hover:bg-violet-500
+                 active:shadow-md active:scale-95
+                 transition-all duration-200
+                 flex items-center justify-center text-2xl"
+    >
+      {icon}
+    </button>
+  );
+}
+```
+
+## Material Design 2 vs Material You (MD3)
+
+| Özellik         | Material Design 2          | Material You (MD3)               |
+| --------------- | -------------------------- | -------------------------------- |
+| Renk            | Sabit marka rengi          | Dinamik, duvar kağıdından türetme |
+| Köşe yarıçapı   | 4px–8px                    | 12px–28px (daha yuvarlak)        |
+| Bileşen stili   | Düz, minimal               | Dolu, ekspresif                  |
+| Erişilebilirlik | Rehber bazlı               | Algoritmik WCAG AA kontrolü      |

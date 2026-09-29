@@ -1,0 +1,102 @@
+---
+title: "Tipografi Öncelikli Tasarım"
+slug: "type-first-design"
+category: "bold-expressive"
+tags: ["typography", "type", "bold", "expressive", "text"]
+description: "Tipografiyi ana görsel unsur olarak kullanan yaklaşım; büyük ve güçlü harfler tüm tasarımın odak noktası ve hikaye anlatıcısıdır."
+publishedAt: "2024-03-25"
+---
+
+## Tarihsel Bağlam
+
+Tipografi öncelikli tasarım yaklaşımı, grafik tasarım ve baskı tasarımının köklü bir geleneğinden beslenir. Josef Müller-Brockmann ve Jan Tschichold gibi İsviçre grafik tasarım ustalarının "metin kendi tasarımıdır" anlayışı bu felsefenin öncülüdür. Bauhaus hareketi de tipografiyi yalnızca işlevsel bir araç olarak değil, biçimsel ve estetik bir element olarak ele almıştır.
+
+Dijital tasarımda ise bu yaklaşım 2010'ların ortasından itibaren yeniden önem kazandı. Variable font teknolojisinin yaygınlaşması, web tarayıcılarının gelişmiş tipografi rendering kapasitesi kazanması ve Google Fonts ile Adobe Fonts gibi platformların ücretsiz kaliteli font erişimi sağlaması, tasarımcılara eskiye kıyasla çok daha geniş bir tipografik araç seti sundu.
+
+Görsel ağırlıklı içerik tüketiminin hâkim olduğu bir dönemde, yalnızca tipografiye dayalı güçlü bir tasarım aynı zamanda karşıt bir tutum olarak da anlam kazanır: sözcüklerin ve anlamların ön plana çıkarılması, görsel kirlilikten arınılmış saf bir iletişim biçimidir.
+
+## Temel Özellikler
+
+### 1. Büyük Ölçekli Ekran Tipografisi
+
+Font boyutları 64px'den başlar, çoğu zaman 120px, 160px hatta daha büyük değerlere ulaşır. Viewport'un tamamını kaplayan başlıklar, yalnızca billboard tasarımında görülen ölçeği ekrana taşır. CSS `clamp()` fonksiyonu bu büyük başlıkları her ekran boyutuna uyumlu kılar.
+
+### 2. Minimal Destekleyici Görsel Öğeler
+
+Tipografi öncelikli tasarımda diğer görsel öğeler — eğer varsa — tipografiye yardımcı olmak için vardır. Çizgiler, renkli şeritler veya geometrik bloklar tipografinin ritmini destekler ama asla onu gölgelemez. Bir illüstrasyon veya fotoğraf varsa, tipografinin okunabilirliğini tehlikeye atmaz.
+
+### 3. Çok Ağırlıklı Tipografik Hiyerarşi
+
+Ultra-light (100) ile ultra-bold (900) arasında geniş bir ağırlık aralığı kullanılarak güçlü kontrast yaratılır. Aynı yazı ailesinin farklı ağırlıkları arasındaki gerilim, hiyerarşiyi ve bilgi akışını görsel olarak iletir. Variable font kullanımı bu spektrumun ara değerlerine de erişim imkânı sağlar.
+
+### 4. Kinetik Tipografi İmkânları
+
+Bazı uygulamalarda tipografi hareket eder, döner ya da maskeleme teknikleri ile arka planla iç içe geçer. `clip-path` ve `mask-image` CSS özellikleri, tipografiye üç boyutlu bir derinlik ve kinetik enerji katar. Scroll-bağlantılı animasyonlar başlıkların sahneye girişini dramatik hale getirir.
+
+### 5. Renk ve Kontrastın Tipografik Kullanımı
+
+Renk, tipografi öncelikli tasarımda bir dekoratif öğe değil, hiyerarşiyi ve vurguyu güçlendiren bir tipografik araçtır. Bir sözcüğü farklı renkte göstermek, tüm bir bölümü kalın yapmaktan daha güçlü etki yaratabilir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Ürün Lansmanı ve Kampanya Sayfaları
+
+Yeni bir ürün veya hizmetin tanıtım sayfaları, güçlü bir slogan veya değer önerisi etrafında inşa edilmiş tipografi öncelikli bir hero alanı ile anlık etki yaratır. Metin ana kahraman olunca mesaj kaçırılamaz hale gelir. Apple ve Nike gibi markalar bu yaklaşımı onlarca yıldır başarıyla kullanmaktadır.
+
+### Senaryo 2: Editoryal ve Medya Siteleri
+
+Gazete, dergi ve editoryal web sitelerinde tipografi öncelikli başlıklar hem içeriğin özünü hem de yayın organının sesini aktarır. Güçlü bir manşet görsel bir kancadır: okuyucu henüz birinci cümleyi okumadan, başlığın büyüklüğü ve ağırlığı içeriğin önemi hakkında güçlü bir sinyal gönderir.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, viewport genişliğini dolduran responsive tipografi öncelikli bir hero bölümü göstermektedir:
+
+```tsx
+export function TypeFirstHero() {
+  return (
+    <section className="relative min-h-[60vh] bg-white flex flex-col justify-center px-8 py-16 overflow-hidden">
+      {/* Dekoratif yatay çizgi */}
+      <div
+        aria-hidden="true"
+        className="absolute left-0 top-1/2 -translate-y-1/2 w-full h-px bg-gray-200"
+      />
+
+      <div className="relative z-10 max-w-7xl mx-auto">
+        <p className="text-sm font-medium tracking-[0.3em] uppercase text-gray-400 mb-6">
+          Tasarım Manifestosu — 2024
+        </p>
+
+        {/*
+          Fluid typography: font boyutu 4rem (64px) ile 10rem (160px) arasında
+          viewport genişliğine göre dinamik olarak ölçeklenir.
+        */}
+        <h1
+          className="font-black leading-[0.9] tracking-tight text-gray-950"
+          style={{ fontSize: "clamp(4rem, 12vw, 10rem)" }}
+        >
+          <span className="block">SÖZCÜKLER</span>
+          {/* Konturlu (outline) metin efekti */}
+          <span
+            className="block text-transparent"
+            style={{ WebkitTextStroke: "3px #111" }}
+          >
+            TASARLAR
+          </span>
+        </h1>
+
+        <div className="mt-10 flex items-end justify-between flex-wrap gap-6">
+          <p className="text-lg text-gray-500 max-w-sm font-light leading-relaxed">
+            Görsel değil, anlam. Süsleme değil, öz.
+            Tipografi bir araç değil; bizzat tasarımın kendisidir.
+          </p>
+          <button className="px-8 py-3 border-2 border-gray-950 text-gray-950 font-bold text-sm tracking-widest uppercase hover:bg-gray-950 hover:text-white transition-colors duration-200">
+            Keşfet
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+```
+
+`-webkit-text-stroke` ile konturlu (outline) metin efekti oluşturulur; metin rengi `transparent` yapılıp yalnızca kontur gösterilir. `clamp(4rem, 12vw, 10rem)` ile `fontSize` style prop'u, büyük tipografinin tüm ekran boyutlarında orantılı görünmesini sağlar.

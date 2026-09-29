@@ -1,0 +1,120 @@
+---
+title: "Dark Mode UI"
+slug: "dark-mode-ui"
+category: "dark-atmospheric"
+tags: ["dark", "oled", "elevation", "accessibility", "night"]
+description: "OLED uyumlu koyu zeminler ve elevation tabanlı yüzeylerle göz yorgunluğunu azaltan, gece kullanımına uygun modern arayüz tasarımı."
+publishedAt: "2024-04-25"
+---
+
+## Tarihsel Köken ve Bağlam
+
+Karanlık mod, aslında bilgisayar tarihinin en eski arayüz konseptlerinden biridir: ilk CRT monitörler zaten koyu zeminde açık metin gösteriyordu. Ancak 1980'lerde grafik kullanıcı arayüzlerinin (GUI) benimsenmesiyle beyaz arka plan, kağıt-kalem metaforundan ilham alınarak standart haline geldi ve onlarca yıl boyunca egemenliğini sürdürdü.
+
+Modern karanlık mod rönesansı 2016'da macOS Sierra ile başladı. Apple'ın 2018'de iOS 13 ve macOS Mojave'de "Sistem Genelinde Karanlık Mod" desteği eklemesi endüstri için kırılma noktası oldu. Android 10 (2019) ve Windows 10 (2019) da aynı yıl resmi desteği sağladı. Bu gelişmeler web ve mobil uygulama tasarımcılarını Dark Mode UI'ı birincil bir tasarım sistemi unsuru olarak ciddiye almaya yöneltti.
+
+OLED ekranların yaygınlaşması karanlık modun pratik faydasını somutlaştırdı: OLED panellerde tam siyah pikseller (`#000000`) tamamen kapatılır, böylece batarya ömrü uzar. Samsung Galaxy, iPhone ve modern laptop ekranları bu avantajı ölçülebilir biçimde sunmaktadır.
+
+## Temel Özellikler
+
+### 1. OLED Uyumlu Ton Skalası ve Elevation Sistemi
+
+Material Design'ın Dark Theme rehberine göre koyu arayüzler katmanlı yüzey sistemi kullanır. `#121212` ana zemin, `#1e1e1e` birinci yüzey (elevation 1), `#242424` ikinci yüzey (elevation 2), `#2c2c2c` üçüncü yüzey (elevation 3) olarak tanımlanır. Bu kademeli ton artışı her yüzeyin görsel katmanını belirler. Beyaz modda derinlik gölgelerle sağlanırken Dark Mode'da daha açık renk = daha yüksek elevation mantığı işler.
+
+### 2. Düşük Kontrastlı Metin Hiyerarşisi
+
+Saf beyaz metin (`#ffffff`) koyu arka plan üzerinde aşırı parlaklık yaratır ve göz yorgunluğuna neden olur. Material Dark Theme yüksek önem metni için `rgba(255,255,255,0.87)`, orta önem için `rgba(255,255,255,0.60)`, düşük önem için `rgba(255,255,255,0.38)` önerir. Tailwind'de bu değerler `text-white/87`, `text-white/60`, `text-white/38` ile karşılanır; kullanıcı gözü için dengeli bir okunabilirlik hiyerarşisi oluşturur.
+
+### 3. Renk Doygunluğunu Azaltma
+
+Parlak renkler koyu zeminde aşırı vibrans yaratarak görsel gerginliğe yol açar. Dark Mode tasarımda tüm marka renkleri biraz daha soluk, daha az doygun ve hafif daha açık tonlara kaydırılır. Örneğin Material Design mavi tonu `#1976D2` (açık mod) → `#90CAF9` (Dark Mode) olarak dönüşür. Bu prensip tüm vurgu renkleri için uygulanır.
+
+### 4. Uyarlanabilir Bileşen Stilleri
+
+Dark Mode yalnızca renk değiştirmekten ibaret değildir. Gölgeler koyu zeminde görünmez hale gelir; bu nedenle elevation hissi renk tonu farklılığıyla sağlanır. Kenarlık renkleri yeniden hesaplanmalı, ikonlar renk uyumu için yeniden değerlendirilmeli, fotoğraflar bazen daha az doygun gösterilmelidir. Tailwind'in `dark:` varyantı bu uyarlamayı bileşen düzeyinde yönetir.
+
+## Kullanım Senaryoları
+
+### Senaryo 1: Geliştirici Araçları ve Kod Editörleri
+
+VS Code, GitHub, GitLab ve JetBrains IDE'leri Dark Mode'u birincil mod olarak sunar. Uzun saat kod yazan geliştiriciler için göz yorgunluğunu azaltan koyu arayüzler mavi ışık filtresi uygulamaları gibi çalışır ve gece çalışma verimliliğini artırır. Kullanıcı alışkanlığı ve iş ortamı beklentileri bu araçlar için Dark Mode'u neredeyse zorunlu kılar.
+
+### Senaryo 2: Medya ve Eğlence Uygulamaları
+
+Netflix, YouTube, Spotify ve Apple Music gibi medya tüketim uygulamaları içeriği ön plana çıkarmak için koyu arayüzler kullanır. Koyu arka plan üzerinde thumbnail ve poster görselleri daha parlak ve çekici görünür; kullanıcının dikkatini içeriğe odaklar. Sinema salonu karanlığını simüle eden bu yaklaşım, medya deneyimini güçlü biçimde destekler.
+
+## Tailwind CSS ile Uygulama
+
+```tsx
+// Dark Mode Elevation Kart Sistemi
+export function DarkModeElevationCard() {
+  return (
+    <div className="bg-[#121212] p-6 min-h-[300px]">
+      {/* Elevation seviyesi etiketi */}
+      <p className="text-white/38 text-xs font-mono mb-4 uppercase tracking-wider">
+        Elevation Sistemi
+      </p>
+
+      {/* Elevation 1 — Kart yüzeyi */}
+      <div className="bg-[#1e1e1e] rounded-xl p-4 mb-3">
+        <p className="text-white/60 text-xs mb-2">
+          Elevation 1 — bg-[#1e1e1e]
+        </p>
+
+        {/* Elevation 2 — İç kart */}
+        <div className="bg-[#242424] rounded-lg p-3 mb-2">
+          <p className="text-white/60 text-xs mb-2">
+            Elevation 2 — bg-[#242424]
+          </p>
+
+          {/* Elevation 3 — En üst yüzey */}
+          <div className="bg-[#2c2c2c] rounded-lg p-3">
+            <p className="text-white/60 text-xs">
+              Elevation 3 — bg-[#2c2c2c]
+            </p>
+          </div>
+        </div>
+
+        {/* Metin opaklık hiyerarşisi */}
+        <div className="mt-3 space-y-1">
+          <p className="text-white/87 text-sm font-medium">
+            Yüksek önem metni (87%)
+          </p>
+          <p className="text-white/60 text-sm">
+            Orta önem metni (60%)
+          </p>
+          <p className="text-white/38 text-xs">
+            Düşük önem / devre dışı (38%)
+          </p>
+        </div>
+      </div>
+
+      {/* Bölen çizgi */}
+      <div className="h-px bg-white/12 my-3" />
+
+      {/* Aksiyon düğmeleri */}
+      <div className="flex gap-3">
+        <button className="px-4 py-2 bg-indigo-400/20 text-indigo-300 rounded-lg text-sm hover:bg-indigo-400/30 transition-colors">
+          Birincil
+        </button>
+        <button className="px-4 py-2 text-white/60 rounded-lg text-sm hover:bg-white/8 transition-colors">
+          İkincil
+        </button>
+      </div>
+    </div>
+  );
+}
+```
+
+## Renk Paleti
+
+| Renk Adı          | Değer           | Kullanım Amacı                          |
+| ----------------- | --------------- | --------------------------------------- |
+| Ana Zemin         | `#121212`       | Sayfa arka planı                        |
+| Elevation 1       | `#1e1e1e`       | Kart ve panel yüzeyleri                 |
+| Elevation 2       | `#242424`       | İç kart ve dropdown yüzeyleri           |
+| Elevation 3       | `#2c2c2c`       | Tooltip ve üst katman yüzeyleri         |
+| Yüksek Önem Metin | `#ffffffde`     | Başlıklar ve birincil içerik (87%)      |
+| Orta Önem Metin   | `#ffffff99`     | Açıklamalar ve etiketler (60%)          |
+| Düşük Önem Metin  | `#ffffff61`     | İpuçları ve pasif elemanlar (38%)       |
+| Bölen Çizgi       | `rgba(255,255,255,0.12)` | Yüzey ayırıcıları              |

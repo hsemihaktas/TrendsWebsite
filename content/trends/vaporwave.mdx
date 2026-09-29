@@ -1,0 +1,122 @@
+---
+title: "Vaporwave"
+slug: "vaporwave"
+category: "retro-nostalgic"
+tags: ["vaporwave", "retro", "neon", "80s", "aesthetic"]
+description: "80-90'ların dijital nostaljisini pastel neon renkler, pikselleşmiş grafikler ve glitch efektleriyle yeniden yorumlayan sanatsal internet estetiği."
+publishedAt: "2024-05-10"
+---
+
+## Tarihsel Bağlam
+
+Vaporwave, 2010-2012 yılları arasında Bandcamp ve Tumblr gibi platformlarda ortaya çıkan bir internet müzik türü ve görsel estetiktir. James Ferraro'nun "Far Side Virtual" (2011) albümü ve Macintosh Plus'ın "Floral Shoppe" (2011) albümü türün kurucu eserleri olarak kabul edilir.
+
+Estetik olarak vaporwave; 1980'lerin sonu ve 1990'ların başındaki kurumsal video estetiğini, Japonca kelimeler ve karakterlerin kasıtlı kullanımını, yavaşlatılmış R&B/new age müzik örneklerini ve erken internet kültürünün görsel kütüphanesini birleştirir. İtalik Yunan heykelleri, eski Windows yazı tipleri, şehir silüetleri ve güneş batımı gökyüzü vaporwave'in ikonik görsel dilidir.
+
+Zamanla vaporwave, kapsamlı bir alt kültüre dönüştü: lo-fi, chillwave, mallsoft ve synthwave gibi türleri etkiledi. Günümüzde bu estetik, özellikle müzik kapak tasarımları, sosyal medya içerikleri ve dijital sanat alanında büyük ilgi görmeye devam etmektedir.
+
+## Temel Özellikler
+
+### 1. Pastel Neon Renk Paleti
+
+Vaporwave'in en tanımlayıcı özelliği, pastel ve neon renklerin bir arada kullanıldığı kendine özgü renk dünyasıdır: pastel pembe (`#ff71ce`), mor (`#b967ff`), aqua mavi (`#01cdfe`), nane yeşili (`#05ffa1`) ve sarı (`#fffb96`). Bu renkler, gradient arka planlarda birbiriyle kaynaşarak güneş batımını andıran bir atmosfer yaratır.
+
+### 2. Glitch ve Retro Grafik Efektler
+
+Piksel bozulması, renk kanalı kayması (RGB offset) ve CRT tarama çizgileri vaporwave tasarımının vazgeçilmez unsurlarıdır. CSS'te glitch efekti, `@keyframes` animasyonları ve `text-shadow` özelliğinin kırmızı-mavi renk offsetleriyle oluşturulur. Bu efektler arayüzde kasıtlı bir "bozulma" hissi yaratır.
+
+### 3. Perspektifli Grid ve Geometrik Formlar
+
+Sonsuzluğa uzanan ızgara çizgileri — özellikle perspektifle deformasyona uğratılmış yatay çizgiler — vaporwave ikonografisinin temel unsurudur. CSS `transform: perspective()` ve `rotateX()` değerleriyle bu etki yaratılabilir. Güneş ufku siluetleri ve daire/yarım daire formları bu grid'in üzerine konumlandırılır.
+
+### 4. Retro Tipografi ve Semboller
+
+VHS kaseti etiketlerini andıran bold italic tipografi, Japonca harf dizileri ve Windows 95 döneminin bitmap benzeri fontlar vaporwave'in yazı dilidir. İtalik metin ve yüksek `letter-spacing` değerleri bu estetiğin temel tipoğrafik kimliğini oluşturur.
+
+## Pratik Kullanım Senaryoları
+
+### Müzik Sanatçıları ve Albüm Yayınları
+
+Müzisyenler ve DJ'ler için kişisel web siteleri ve albüm tanıtım sayfaları, vaporwave estetiğiyle güçlü bir görsel kimlik oluşturabilir. Özellikle lo-fi, chillwave veya synthwave türünde müzik üretenler için bu estetik, hedef kitleyle anında bağ kurar. Gradient arka planlar, animasyonlu glitch başlıklar ve perspektif grid efektleri, sayfaya sinematik bir atmosfer katar.
+
+### Yaratıcı Ajanslar ve Portfolyo Siteleri
+
+Tasarım ajansları ve kreatif direktörler, vaporwave estetiğini portföy sitelerinde kullanarak akılda kalıcı bir ilk izlenim bırakabilir. Sıradışı renk paleti ve beklenmedik görsel efektler, yaratıcılık ve özgünlük mesajını doğrudan iletir. Bu estetik, özellikle sanat direktörlüğü veya marka kimliği alanında çalışan profesyonellerin kimliğini güçlendirir.
+
+## Tailwind CSS Kod Örneği
+
+Aşağıdaki örnek, vaporwave arka planını ve perspektif grid efektini Tailwind CSS ile nasıl oluşturabileceğinizi göstermektedir:
+
+```tsx
+// Vaporwave Hero Bölümü
+export function VaporwaveHero() {
+  return (
+    <section
+      className="relative overflow-hidden min-h-[400px] flex flex-col items-center justify-center"
+      style={{
+        // Pastel pembe → mor gradient arka plan
+        background: "linear-gradient(180deg, #ff71ce 0%, #b967ff 50%, #1a0533 100%)",
+      }}
+    >
+      {/* Perspektif ızgara tabanı */}
+      <div
+        className="absolute bottom-0 left-0 right-0 h-48"
+        style={{
+          backgroundImage: `
+            linear-gradient(rgba(255,113,206,0.5) 1px, transparent 1px),
+            linear-gradient(90deg, rgba(255,113,206,0.5) 1px, transparent 1px)
+          `,
+          backgroundSize: "40px 40px",
+          transform: "perspective(300px) rotateX(60deg)",
+          transformOrigin: "bottom center",
+        }}
+      />
+
+      {/* Güneş simgesi */}
+      <div
+        className="absolute bottom-24 w-32 h-16 rounded-t-full overflow-hidden"
+        style={{
+          background: "linear-gradient(180deg, #ff9900 0%, #ff0066 100%)",
+          boxShadow: "0 0 40px rgba(255,100,0,0.6)",
+        }}
+      >
+        {/* Güneş yatay çizgileri */}
+        {[20, 40, 60, 80].map((top) => (
+          <div
+            key={top}
+            className="absolute left-0 right-0 h-px"
+            style={{
+              top: `${top}%`,
+              background: "rgba(26,5,51,0.6)",
+            }}
+          />
+        ))}
+      </div>
+
+      {/* Glitch başlık */}
+      <h1
+        className="relative z-10 text-5xl font-black italic uppercase tracking-widest mb-4"
+        style={{
+          color: "#fff",
+          textShadow: `
+            2px 0 #ff71ce,
+            -2px 0 #01cdfe,
+            0 0 30px rgba(185,103,255,0.8)
+          `,
+        }}
+      >
+        VAPORWAVE
+      </h1>
+
+      <p
+        className="text-sm tracking-[0.3em] uppercase"
+        style={{ color: "#01cdfe" }}
+      >
+        ア エ ス テ テ ィ ク
+      </p>
+    </section>
+  );
+}
+```
+
+Bu örnekte `perspective()` ve `rotateX()` ile perspektif ızgara efekti, `text-shadow` ile RGB offset glitch efekti ve pastel neon gradient arka plan Vaporwave estetiğinin temel unsurlarını oluşturmaktadır.
