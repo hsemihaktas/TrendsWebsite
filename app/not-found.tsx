@@ -2,15 +2,37 @@ import Link from 'next/link';
 
 export default function NotFound() {
   return (
-    <div className="min-h-[50vh] flex flex-col items-center justify-center text-center">
-      <p className="text-[72px] font-semibold text-[#E6E3DC] dark:text-[#2C2A27] leading-none mb-4 select-none">404</p>
-      <h1 className="text-lg font-semibold text-[#111110] dark:text-[#EDEDE8] mb-2">Sayfa bulunamadı</h1>
-      <p className="text-[14px] text-[#6B6860] dark:text-[#9B9890] mb-6">Aradığınız sayfa mevcut değil.</p>
+    <div className="min-h-[60vh] flex flex-col items-center justify-center text-center px-6">
+      {/* Büyük numara */}
+      <p
+        className="text-[120px] sm:text-[160px] font-black leading-none select-none mb-2"
+        style={{ color: 'var(--bdr)' }}
+      >
+        404
+      </p>
+
+      {/* Başlık */}
+      <h1 className="text-xl font-semibold text-[#111110] dark:text-[#EDEDE8] mb-3">
+        Sayfa bulunamadı
+      </h1>
+
+      {/* Açıklama */}
+      <p className="text-[14px] text-[#6B6860] dark:text-[#9B9890] max-w-xs mb-8 leading-relaxed">
+        Bu URL'de bir sayfa yok. Yanlış bir adres girmiş olabilirsiniz.
+      </p>
+
+      {/* CTA */}
       <Link
         href="/"
-        className="text-[13px] font-medium text-[#111110] dark:text-[#EDEDE8] underline underline-offset-2 decoration-[#C4BFB4] dark:decoration-[#3D3A36] hover:decoration-[#111110] dark:hover:decoration-[#EDEDE8] transition-colors"
+        className="inline-flex items-center gap-2 px-5 py-2.5
+                   text-[13px] font-medium
+                   bg-[#111110] dark:bg-[#EDEDE8]
+                   text-white dark:text-[#111110]
+                   rounded-lg
+                   hover:opacity-80 transition-opacity
+                   focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#111110] dark:focus-visible:ring-[#EDEDE8] focus-visible:ring-offset-2"
       >
-        Ana sayfaya dön
+        ← Tüm akımlara dön
       </Link>
     </div>
   );
