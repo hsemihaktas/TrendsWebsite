@@ -11,7 +11,7 @@ const geistSans = localFont({
 
 export const metadata: Metadata = {
   title: "Design Trends",
-  description: "33 UI/UX tasarım akımını keşfet — referans, örnek ve kullanım rehberleriyle.",
+  description: "54 UI/UX tasarım akımını keşfet — referans, örnek ve kullanım rehberleriyle.",
 };
 
 export default function RootLayout({
